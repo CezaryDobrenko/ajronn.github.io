@@ -15,6 +15,10 @@
 	margin: 5px 0 5px 0;
 }
 
+.stickynotefield .stickynote{
+	width: 23%;
+}
+
 .delnote
 {
 	margin-top:5px;
@@ -58,5 +62,9 @@ textarea:focus
 	overflow: hidden;
 }
 
-
+@media only screen and (max-width: 575px) {
+	.stickynotefield .stickynote{
+		width: 100%;
+	}
+}
 
