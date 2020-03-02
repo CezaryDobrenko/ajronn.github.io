@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>TABLICA KANBAN</title>
+    <meta name="author" content="UNITEAM">
+    <meta name="keywords" content="tablica, kanban">
+    <meta name="description" content="TABLICA KANBAN">
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <!-- WTYCZKA DO BOOTSTRAPA -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
+
+    <!-- PALETĘ KOLORÓW BRAŁEM Z https://mdbootstrap.com/docs/jquery/css/colors/ -->
+
+
+</head>
+<body class="indigo lighten-5">
+<!-- MENU -->
+<nav class="navbar navbar-expand-lg navbar-dark info-color-dark">
+    <a class="navbar-brand" href="#">TABLICA KANBAN</a>
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo02">
+        <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+
+            <li class="dropdown order-1">
+                <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-info dropdown-toggle">
+                    Login <span class="caret"></span></button>
+                <ul class="dropdown-menu dropdown-menu-right mt-2">
+                    <li class="px-3 py-2">
+                        <form class="form" role="form">
+                            <div class="form-group">
+                                <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
+                                       type="text" required="">
+                            </div>
+                            <div class="form-group">
+                                <input id="passwordInput" placeholder="Password" class="form-control form-control-sm"
+                                       type="text" required="">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info btn-block">Login</button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+<!-- MENU -->
+
+<!-- MAIN -->
+<section>
+    <div class="container-fluid py-5 my-5 ">
+        <div class="lists">
+            <div class="row flex-row flex-sm-nowrap py-5">
+                <div class="col-sm-4 col-md-3 list">
+                    <div class="card">
+                        <div class="card-block red lighten-4 py-3">
+                            <a href="" data-toggle="dismiss" class="close">&times;</a>
+                            <h4 class="card-title text-center py-2 ">Jeden</h4>
+
+                            <!-- KARTKI -->
+							
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-3 list">
+
+                    <div class="card">
+                        <div class="card-block deep-purple lighten-4 py-3">
+                            <a href="" data-toggle="dismiss" class="close">&times;</a>
+                            <h4 class="card-title text-center py-2">Dwa</h4>
+                            
+							<!-- KARTKI -->
+							
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-4 col-md-3 list">
+                    <div class="card">
+                        <div class="card-block green lighten-4 py-3">
+                            <a href="" data-toggle="dismiss" class="close">&times;</a>
+                            <h4 class="card-title text-center py-2">Trzy</h4>
+                            
+							<!-- KARTKI -->
+							
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-3 list">
+                    <div class="card">
+                        <div class="card-block deep-orange lighten-4 py-3">
+                            <a href="" data-toggle="dismiss" class="close">&times;</a>
+                            <h4 class="card-title text-center py-2">Cztery</h4>
+                            
+							<!-- KARTKI -->
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		
+		<!-- SEKCJA DODAWANIA KARTEK -->
+		<div style="width: 100%; height: 200px; background-color: #cccccc;  padding:15px;">
+			
+			<div class="card p-2 deep-orange darken-1 mx-2 list-item" draggable="true" style="width: 290px; height:100px; position: relative;">
+                <div style="position: absolute; width: 20px; height:20px; top:0; right:0;"><img src="images/minus.png"/></div>
+				<h5 class="card-title">Tytuł</h5>
+				<p>Treść</p>
+            </div>
+			
+			
+		</div>
+
+    </div>
+	
+</section>
+
+<!-- MAIN -->
+
+
+
+
+<!-- FOOTER -->
+<footer class="page-footer font-small info-color-dark darken-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 py-5">
+                <div class="mb-5 flex-center">
+                    <a class="fb-ic">
+                        <em class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
+                    </a>
+                    <a class="tw-ic">
+                        <em class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
+                    </a>
+                    <a class="gplus-ic">
+                        <em class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
+                    </a>
+                    <a class="ins-ic">
+                        <em class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright text-center py-3">TABLICA KANBAN - PROJEKT ZESPOŁOWY</div>
+</footer>
+<!-- FOOTER -->
+<script src="main.js"></script>
+</body>
+</html>
