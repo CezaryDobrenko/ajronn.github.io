@@ -46,5 +46,8 @@ for (let i = 0; i < list_items.length; i++) {
     }
 }
 
-
+$('.delnote').click(function(){
+    $(this).parent().remove();
+    return;
+});
 

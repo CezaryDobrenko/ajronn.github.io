@@ -13,6 +13,26 @@
 	position: relative;
 }
 
+.delnote
+{
+	margin-top:5px;
+	position: absolute;
+	width: 20px;
+	height:20px;
+	top:0;
+	right:0;
+	background-image: url("images/minus.png");
+	background-repeat: no-repeat;
+}
+
+.delnote:hover
+{
+	margin-top:5px;
+	cursor: pointer;
+	background-image: url("images/minushover.png");
+	background-repeat: no-repeat;
+}
+
 textarea
 {
 	margin-left: auto;
