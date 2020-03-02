@@ -1,0 +1,42 @@
+.stickynotefield
+{
+	 width: 100%;
+	 height: 200px;
+	 background-color: #cccccc; 
+	 padding:15px;
+}
+
+.stickynote
+{
+	width: 290px;
+	height:100px;
+	position: relative;
+}
+
+textarea
+{
+	margin-left: auto;
+	margin-right: auto;
+	width: 270px;
+	height: 70px;
+	background-color: transparent;
+	border: none;
+	text-align: left;
+	vertical-align: text-top;
+	resize: none;
+	overflow: hidden;
+}
+
+textarea:focus
+{
+	width: 270px;
+	height: 70px;
+	background-color: transparent;
+	outline: none;
+	text-align: left;
+	vertical-align: text-top;
+	resize: none;
+	overflow: hidden;
+}
+
+
