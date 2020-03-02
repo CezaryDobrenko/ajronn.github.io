@@ -71,11 +71,10 @@
     <div class="container-fluid py-5 my-5 ">
         <div class="lists">
             <div class="row flex-row flex-sm-nowrap py-5">
-                <div class="col-sm-4 col-md-3 list">
-                    <div class="card">
+                <div class="col-sm-4 col-md-3 list">            
+					<div class="card">
                         <div class="card-block red lighten-4 py-3">
-                            <a href="" data-toggle="dismiss" class="close">&times;</a>
-                            <h4 class="card-title text-center py-2 ">Jeden</h4>
+                            <h4 class="card-title text-center py-2 ">Backlog</h4>
 
                             <!-- KARTKI -->
 							
@@ -86,8 +85,7 @@
 
                     <div class="card">
                         <div class="card-block deep-purple lighten-4 py-3">
-                            <a href="" data-toggle="dismiss" class="close">&times;</a>
-                            <h4 class="card-title text-center py-2">Dwa</h4>
+                            <h4 class="card-title text-center py-2">In Progress</h4>
                             
 							<!-- KARTKI -->
 							
@@ -98,8 +96,7 @@
                 <div class="col-sm-4 col-md-3 list">
                     <div class="card">
                         <div class="card-block green lighten-4 py-3">
-                            <a href="" data-toggle="dismiss" class="close">&times;</a>
-                            <h4 class="card-title text-center py-2">Trzy</h4>
+                            <h4 class="card-title text-center py-2">Peer Review</h4>
                             
 							<!-- KARTKI -->
 							
@@ -109,8 +106,7 @@
                 <div class="col-sm-4 col-md-3 list">
                     <div class="card">
                         <div class="card-block deep-orange lighten-4 py-3">
-                            <a href="" data-toggle="dismiss" class="close">&times;</a>
-                            <h4 class="card-title text-center py-2">Cztery</h4>
+                            <h4 class="card-title text-center py-2">In Test</h4>
                             
 							<!-- KARTKI -->
 							
@@ -121,13 +117,17 @@
         </div>
 		
 		<!-- SEKCJA DODAWANIA KARTEK -->
-		<div class="stickynotefield">
+		<div class="stickynotefield cyan lighten-5">
 			
-			<div class="card p-2 deep-orange darken-1 mx-2 list-item stickynote" draggable="true">
+			<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true">
                 <div class="delnote"></div>
 				<h5 class="card-title">Tytuł</h5>
-				<textarea>
-				</textarea>
+				<textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea>
+            </div>
+			<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true">
+                <div class="delnote"></div>
+				<h5 class="card-title">Tytuł</h5>
+				<textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea>
             </div>
 			
 			

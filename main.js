@@ -51,3 +51,9 @@ $('.delnote').click(function(){
     return;
 });
 
+function textAreaAdjust(o) {
+  o.style.height = "1px";
+  o.style.height = (25+o.scrollHeight)+"px";
+  o.style.width = "100%";
+  document.getElementsByClassName(xd)[0].style.width="100%";
+}
