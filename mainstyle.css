@@ -74,6 +74,11 @@ textarea:focus
 	overflow: hidden;
 }
 
+footer
+{
+	position: relative;
+}
+
 @media only screen and (max-width: 575px) {
 	.stickynotefield .stickynote{
 		width: 100%;
