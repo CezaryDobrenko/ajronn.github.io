@@ -1,59 +1,46 @@
-const list_items = document.querySelectorAll('.list-item');
-const lists = document.querySelectorAll('.list');
-let draggedItem = null;
-for (let i = 0; i < list_items.length; i++) {
-    const item = list_items[i];
+$( document ).ready(makenote());
 
-    item.addEventListener('dragstart', function () {
-        draggedItem = item;
-        setTimeout(function () {
-            item.style.display = 'none';
+function makenote()
+{
+	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
+	
+	$('.delnote').on("click",function(){
+		$(this).parent().remove();
+		return;
+	});
 
-        },0)
+	function textAreaAdjust(o) {
+	  o.style.height = "1px";
+	  o.style.height = (25+o.scrollHeight)+"px";
+	  o.style.width = "100%";
+	  document.getElementsByClassName(xd)[0].style.width="100%";
+	}
+	$(".stickynote").draggable({
+		appendTo: "body",
+		cursor: "move",
+		helper: 'clone',
+		revert: "invalid"
+	});
 
-    });
-    item.addEventListener('dragend',function () {
-        setTimeout(function () {
-            draggedItem.style.display = 'block';
-            draggedItem = null;
+	$("#launchPad").droppable({
+		tolerance: "intersect",
+		accept: ".stickynote",
+		activeClass: "ui-state-default",
+		hoverClass: "ui-state-hover",
+		drop: function(event, ui) {
+			$("#launchPad").append($(ui.draggable));
+		}
+		
+	});
 
-        },0);
-
-    })
-    for(let j = 0; j < lists.length; j++){
-        const list = lists[j];
-        list.addEventListener('dragover',function (e) {
-            e.preventDefault();
-            this.style.backgroundColor='rgba(0,0,0,0.1)';
-
-        });
-        list.addEventListener('dragenter',function (e) {
-            e.preventDefault();
-            this.style.backgroundColor='rgba(0,0,0,0)';
-        });
-
-        list.addEventListener('dragleave',function (e) {
-            this.style.backgroundColor='rgba(0,0,0,0)';
-
-        });
-
-        list.addEventListener('drop',function (e) {
-            console.log('drop');
-            this.append(draggedItem);
-            this.style.backgroundColor='rgba(0,0,0,0)';
-
-        });
-    }
+	$(".list").droppable({
+		tolerance: "intersect",
+		accept: ".stickynote",
+		activeClass: "ui-state-default",
+		hoverClass: "ui-state-hover",
+		drop: function(event, ui) {
+			$(this).append($(ui.draggable));
+		}
+	});
 }
 
-$('.delnote').click(function(){
-    $(this).parent().remove();
-    return;
-});
-
-function textAreaAdjust(o) {
-  o.style.height = "1px";
-  o.style.height = (25+o.scrollHeight)+"px";
-  o.style.width = "100%";
-  document.getElementsByClassName(xd)[0].style.width="100%";
-}

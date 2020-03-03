@@ -6,6 +6,11 @@
 
 }
 
+.cardblock .stickynote
+{
+	width: 100%
+}
+
 .stickynote
 {
 	width: auto;
@@ -18,6 +23,11 @@
 .stickynotefield .stickynote{
 	width: 23%;
 }
+.stickynotefield .stickynote .delnote
+{
+	display:none;
+}
+
 
 .delnote
 {
