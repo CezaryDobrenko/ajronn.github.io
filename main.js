@@ -12,10 +12,12 @@ function makenote()
 	
 	
 	$('.delnote').on("click",function(){
-		var tmp = parseInt($(this).parent().parent().attr("id"));
-		counts[tmp]--;
-		alert(counts[tmp]);
+		var parentid = parseInt($(this).parent().parent().attr("id"));
 		$(this).parent().remove();
+		
+		var count = $(this).parent().parent().children().length;
+		counts[parentid] = count;
+		
 		return;
 	});
 
@@ -27,27 +29,14 @@ function makenote()
 		revert: "invalid"
 	});
 
-	$("#launchPad").droppable({
-		tolerance: "intersect",
-		accept: ".stickynote",
-		activeClass: "ui-state-default",
-		hoverClass: "ui-state-hover",
-		drop: function(event, ui) {
-			$("#launchPad").append($(ui.draggable));
-		}
-
-	});
-
 	$(".backlog").droppable({
 		tolerance: "intersect",
 		accept: ".stickynote",
 		activeClass: "ui-state-default",
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
-			$(".backlog").append($(ui.draggable));
-			counts[0]++;
-			alert(counts[0]);
-			
+				$(".backlog").append($(ui.draggable));
+				counts[0]=$(".backlog").children().length-1;				
 		}
 	});
 	
@@ -58,6 +47,7 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".inprogress").append($(ui.draggable));
+			counts[1]=$(".inprogress").children().length-1;
 		}
 	});
 	
@@ -68,6 +58,7 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".peerreview").append($(ui.draggable));
+			counts[2]=$(".peerreview").children().length-1;
 		}
 	});
 	
@@ -78,6 +69,7 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".intest").append($(ui.draggable));
+			counts[3]=$(".intest").children().length-1;
 		}
 	});
 }
