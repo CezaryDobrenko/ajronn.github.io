@@ -1,23 +1,30 @@
 .stickynotefield
 {
-	 width: 100%;
-	 height: auto;
-	 background-color: #cccccc; 
+	width: 100%;
+	height: auto;
+	background-color: #cccccc;
 
 }
 
 .stickynote
 {
-	width: auto;
-	height: auto;
 	position: relative;
 	display: inline-block;
 	margin: 5px 0 5px 0;
 }
 
 .stickynotefield .stickynote{
-	width: 23%;
+	width: 23.5%;
 }
+
+.list .card{
+	width: 100%;
+}
+
+.ml-2, .mx-2 {
+	margin-left: 0!important;
+}
+
 .stickynotefield .stickynote .delnote
 {
 	display:none;
@@ -72,4 +79,6 @@ textarea:focus
 		width: 100%;
 	}
 }
+
+
 

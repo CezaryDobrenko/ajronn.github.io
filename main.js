@@ -1,20 +1,21 @@
 $( document ).ready(makenote());
 
+function textAreaAdjust(o) {
+	o.style.height = "1px";
+	o.style.height = (25+o.scrollHeight)+"px";
+	o.style.width = "100%";
+}
+
 function makenote()
 {
 	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
-	
+
 	$('.delnote').on("click",function(){
 		$(this).parent().remove();
 		return;
 	});
 
-	function textAreaAdjust(o) {
-	  o.style.height = "1px";
-	  o.style.height = (25+o.scrollHeight)+"px";
-	  o.style.width = "100%";
-	  document.getElementsByClassName(xd)[0].style.width="100%";
-	}
+
 	$(".stickynote").draggable({
 		appendTo: "body",
 		cursor: "move",
@@ -30,7 +31,7 @@ function makenote()
 		drop: function(event, ui) {
 			$("#launchPad").append($(ui.draggable));
 		}
-		
+
 	});
 
 	$(".list").droppable({
@@ -42,5 +43,5 @@ function makenote()
 			$(this).append($(ui.draggable));
 		}
 	});
-}
 
+}
