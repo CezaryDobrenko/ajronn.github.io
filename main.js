@@ -9,7 +9,7 @@ var counts = [0,0,0,0];
 function makenote()
 {
 	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
-	
+		
 	
 	$('.delnote').on("click",function(){
 		var parentid = parseInt($(this).parent().parent().attr("id"));
