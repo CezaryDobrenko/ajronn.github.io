@@ -14,7 +14,6 @@ function checkCounters(){
 	document.getElementById("counteri").innerHTML = counts[1]+"/"+block;
 	document.getElementById("counterp").innerHTML = counts[2]+"/"+block;
 	document.getElementById("counterin").innerHTML = counts[3]+"/"+block;
-	
 	var i;
 	for(i = 0; i<4;i++)
 	{
@@ -23,11 +22,12 @@ function checkCounters(){
 			$("."+names[i]+" h4").css("color","red");
 			$("."+names[i]+" h4").css("font-weight","bold");
 		}
-		else
-			$(names[i]).droppable("enable");
+		else{
+			$("."+names[i]).droppable("enable");
 			$("."+names[i]+" h4").css("color","black");
 			$("."+names[i]+" h4").css("font-weight","300");
 		}
+	}
 	
 }
 
