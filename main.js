@@ -1,6 +1,12 @@
 var colors = ["#b3e6ff","#b3ff99","#ffb3cc","#ffff66","#b3e6ff","#b3ff99","#ffb3cc","#ffff66"];
 $( document ).ready(makenote());
-
+function insertnote()
+{
+	var random = parseInt(Math.floor(Math.random()*5));	
+	var color = colors[random];
+	document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:'+color+';"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
+	makenote();
+}
 
 
 function textAreaAdjust(o) {
@@ -33,17 +39,21 @@ function checkCounters(){
 		}
 	}
 	
+	if($(".stickynotefield").children().length == 0)
+	{
+		insertnote();
+	}
+	
 }
 
 
 function makenote()
 {
-	var random = parseInt(Math.floor(Math.random()*5));	
-	var color = colors[random];
+	
 	//var check1 = $(".stickynotefield").children();
-	
-	document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:'+color+';"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
-	
+	//document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:'+color+';"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
+	if($(".stickynotefield").children().length<1)
+		insertnote();
 
 	
 	
@@ -61,6 +71,8 @@ function makenote()
 		
 		
 	});
+
+
 	
 	$(".backlog").on("drop",function(){
 		
