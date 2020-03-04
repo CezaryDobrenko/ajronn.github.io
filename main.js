@@ -7,6 +7,31 @@ function textAreaAdjust(o) {
 }
 var counts = [0,0,0,0];
 var draganddropflag = 0;
+var block = 4;
+var names = ["backlog","inprogress","peerreview","intest"];
+function checkCounters(){
+	document.getElementById("counterb").innerHTML = counts[0]+"/"+block;
+	document.getElementById("counteri").innerHTML = counts[1]+"/"+block;
+	document.getElementById("counterp").innerHTML = counts[2]+"/"+block;
+	document.getElementById("counterin").innerHTML = counts[3]+"/"+block;
+	
+	var i;
+	for(i = 0; i<4;i++)
+	{
+		if(counts[i]>=block){
+			$("."+names[i]).droppable("disable");
+			$("."+names[i]+" h4").css("color","red");
+			$("."+names[i]+" h4").css("font-weight","bold");
+		}
+		else
+			$(names[i]).droppable("enable");
+			$("."+names[i]+" h4").css("color","black");
+			$("."+names[i]+" h4").css("font-weight","300");
+		}
+	
+}
+
+
 function makenote()
 {
 	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
@@ -21,6 +46,7 @@ function makenote()
 		var parentid = parseInt($(this).parent().attr("id"));
 		var count = $(this).parent().children().length;	
 		counts[parentid] = count-2;
+		checkCounters();
 		}
 		draganddropflag = 1;
 		return;
@@ -35,6 +61,7 @@ function makenote()
 		var parentid = parseInt($(this).attr("id"));
 		var count = $(this).children().length;
 		counts[parentid] = count;
+		checkCounters();
 		}
 		draganddropflag = 0;
 		return;
@@ -82,10 +109,10 @@ function makenote()
 	
 	$('.delnote').on("click",function(){
 		var parentid = parseInt($(this).parent().parent().attr("id"));
+		var count = $(this).parent().parent().children().length-2;
 		$(this).parent().remove();
-		var count = $(this).parent().parent().children().length;
 		counts[parentid] = count;
-		return;
+		checkCounters();
 	});
 
 
@@ -98,6 +125,7 @@ function makenote()
 			var parentid = parseInt($(this).parent().attr("id"));
 		var count = $(this).parent().children().length;	
 		counts[parentid] = count-1;
+		checkCounters();
 		}
 	});
 
@@ -106,8 +134,10 @@ function makenote()
 		accept: ".stickynote",
 		activeClass: "ui-state-default",
 		hoverClass: "ui-state-hover",
-		drop: function(event, ui) {
-				$(".backlog").append($(ui.draggable));			
+		drop: function(event, ui) {		
+		
+			$(".backlog").append($(ui.draggable));
+								
 		}
 	});
 	
