@@ -21,7 +21,6 @@ function makenote()
 		var parentid = parseInt($(this).parent().attr("id"));
 		var count = $(this).parent().children().length;	
 		counts[parentid] = count-2;
-		console.log("ondrag "+parentid);
 		}
 		draganddropflag = 1;
 		return;
@@ -36,7 +35,6 @@ function makenote()
 		var parentid = parseInt($(this).attr("id"));
 		var count = $(this).children().length;
 		counts[parentid] = count;
-		console.log("ondrop "+parentid);
 		}
 		draganddropflag = 0;
 		return;
@@ -50,7 +48,6 @@ function makenote()
 		var parentid = parseInt($(this).attr("id"));
 		var count = $(this).children().length;
 		counts[parentid] = count;
-		console.log("ondrop "+parentid);
 		}
 		draganddropflag = 0;
 		return;
@@ -64,7 +61,6 @@ function makenote()
 		var parentid = parseInt($(this).attr("id"));
 		var count = $(this).children().length;
 		counts[parentid] = count;
-		console.log("ondrop "+parentid);
 		}
 		draganddropflag = 0;
 		return;
@@ -78,7 +74,6 @@ function makenote()
 		var parentid = parseInt($(this).attr("id"));
 		var count = $(this).children().length;
 		counts[parentid] = count;
-		console.log("ondrop "+parentid);
 		}
 		draganddropflag = 0;
 		return;
@@ -88,10 +83,8 @@ function makenote()
 	$('.delnote').on("click",function(){
 		var parentid = parseInt($(this).parent().parent().attr("id"));
 		$(this).parent().remove();
-		
 		var count = $(this).parent().parent().children().length;
 		counts[parentid] = count;
-		
 		return;
 	});
 
