@@ -6,10 +6,84 @@ function textAreaAdjust(o) {
 	o.style.width = "100%";
 }
 var counts = [0,0,0,0];
+var draganddropflag = 0;
 function makenote()
 {
 	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
+
+
+	
+	
+	$(".stickynote").on("drag",function(){
 		
+		if(draganddropflag == 0)
+		{
+		var parentid = parseInt($(this).parent().attr("id"));
+		var count = $(this).parent().children().length;	
+		counts[parentid] = count-2;
+		console.log("ondrag "+parentid);
+		}
+		draganddropflag = 1;
+		return;
+		
+		
+	});
+	
+	$(".backlog").on("drop",function(){
+		
+		if(draganddropflag == 1)
+		{
+		var parentid = parseInt($(this).attr("id"));
+		var count = $(this).children().length;
+		counts[parentid] = count;
+		console.log("ondrop "+parentid);
+		}
+		draganddropflag = 0;
+		return;
+		
+	});
+	
+	$(".inprogress").on("drop",function(){
+		
+		if(draganddropflag == 1)
+		{
+		var parentid = parseInt($(this).attr("id"));
+		var count = $(this).children().length;
+		counts[parentid] = count;
+		console.log("ondrop "+parentid);
+		}
+		draganddropflag = 0;
+		return;
+		
+	});
+
+	$(".peerreview").on("drop",function(){
+		
+		if(draganddropflag == 1)
+		{
+		var parentid = parseInt($(this).attr("id"));
+		var count = $(this).children().length;
+		counts[parentid] = count;
+		console.log("ondrop "+parentid);
+		}
+		draganddropflag = 0;
+		return;
+		
+	});		
+	
+	$(".intest").on("drop",function(){
+		
+		if(draganddropflag == 1)
+		{
+		var parentid = parseInt($(this).attr("id"));
+		var count = $(this).children().length;
+		counts[parentid] = count;
+		console.log("ondrop "+parentid);
+		}
+		draganddropflag = 0;
+		return;
+		
+	});
 	
 	$('.delnote').on("click",function(){
 		var parentid = parseInt($(this).parent().parent().attr("id"));
@@ -26,7 +100,12 @@ function makenote()
 		appendTo: "body",
 		cursor: "move",
 		helper: 'clone',
-		revert: "invalid"
+		//revert: "invalid",
+		revert: function(event, ui){
+			var parentid = parseInt($(this).parent().attr("id"));
+		var count = $(this).parent().children().length;	
+		counts[parentid] = count-1;
+		}
 	});
 
 	$(".backlog").droppable({
@@ -35,8 +114,7 @@ function makenote()
 		activeClass: "ui-state-default",
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
-				$(".backlog").append($(ui.draggable));
-				counts[0]=$(".backlog").children().length-1;				
+				$(".backlog").append($(ui.draggable));			
 		}
 	});
 	
@@ -47,7 +125,6 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".inprogress").append($(ui.draggable));
-			counts[1]=$(".inprogress").children().length-1;
 		}
 	});
 	
@@ -58,7 +135,6 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".peerreview").append($(ui.draggable));
-			counts[2]=$(".peerreview").children().length-1;
 		}
 	});
 	
@@ -69,7 +145,6 @@ function makenote()
 		hoverClass: "ui-state-hover",
 		drop: function(event, ui) {
 			$(".intest").append($(ui.draggable));
-			counts[3]=$(".intest").children().length-1;
 		}
 	});
 }
