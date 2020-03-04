@@ -1,4 +1,7 @@
+var colors = ["#b3e6ff","#b3ff99","#ffb3cc","#ffff66","#b3e6ff","#b3ff99","#ffb3cc","#ffff66"];
 $( document ).ready(makenote());
+
+
 
 function textAreaAdjust(o) {
 	o.style.height = "1px";
@@ -8,6 +11,7 @@ function textAreaAdjust(o) {
 var counts = [0,0,0,0];
 var draganddropflag = 0;
 var block = 4;
+
 var names = ["backlog","inprogress","peerreview","intest"];
 function checkCounters(){
 	document.getElementById("counterb").innerHTML = counts[0]+"/"+block;
@@ -34,8 +38,12 @@ function checkCounters(){
 
 function makenote()
 {
-	document.getElementById("field").innerHTML = '<div class="card p-2 cyan lighten-4 darken-1 mx-2 list-item stickynote" draggable="true"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea class="cyan lighten-4 form-control xd" onkeydown="textAreaAdjust(this)"></textarea></div>';
-
+	var random = parseInt(Math.floor(Math.random()*5));	
+	var color = colors[random];
+	//var check1 = $(".stickynotefield").children();
+	
+	document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:'+color+';"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
+	
 
 	
 	
