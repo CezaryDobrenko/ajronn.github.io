@@ -2,7 +2,6 @@ $(document).ready(makenote());
 
 //Globar variables
 var counts = [0, 0, 0, 0];
-var draganddropflag = 0;
 var block = 4;
 var names = ["backlog", "inprogress", "peerreview", "done"];
 var globalparentid = -1;
@@ -22,7 +21,6 @@ function insertnote()
     makenote();
 }
 
-
 function textAreaAdjust(o)
 {
     o.style.height = "1px";
@@ -30,15 +28,12 @@ function textAreaAdjust(o)
     o.style.width = "100%";
 }
 
-
-
 function checkCounters()
 {
     document.getElementById("counterb").innerHTML = counts[0];
     document.getElementById("counteri").innerHTML = counts[1] + "/" + block;
     document.getElementById("counterp").innerHTML = counts[2] + "/" + block;
     document.getElementById("counterin").innerHTML = counts[3];
-	
 	
     var i;
     for (i = 1; i < 3; i++)
@@ -61,7 +56,6 @@ function checkCounters()
     
 
 }
-
 
 function makenote() {
 
@@ -106,22 +100,13 @@ function makenote() {
         drop: function (event, ui) {
             $(".backlog").append($(ui.draggable));
 			return;
-
         }
     });
 	
     $(".backlog").on("drop", function () {
-        if (draganddropflag == 1) {
-            var parentid = parseInt($(this).attr("id"));
-            var count = $(this).children().length;
-            counts[parentid] = count;
-            checkCounters();
-        }
-        draganddropflag = 0;		
 		counts[globalparentid]--;
 		globalparentid = -1;
         return;
-
     });
 
     $(".inprogress").droppable({
@@ -136,17 +121,9 @@ function makenote() {
     });
 	
     $(".inprogress").on("drop", function () {
-
-        if (draganddropflag == 1) {
-            var parentid = parseInt($(this).attr("id"));
-            var count = $(this).children().length;
-            counts[parentid] = count;
-        }
-        draganddropflag = 0;
 		counts[globalparentid]--;
 		globalparentid = -1;
         return;
-
     });
 
     $(".peerreview").droppable({
@@ -161,17 +138,9 @@ function makenote() {
     });
 	
     $(".peerreview").on("drop", function () {
-
-        if (draganddropflag == 1) {
-            var parentid = parseInt($(this).attr("id"));
-            var count = $(this).children().length;
-            counts[parentid] = count;
-        }
-        draganddropflag = 0;
 		counts[globalparentid]--;
 		globalparentid = -1;
         return;
-
     });
 
     $(".done").droppable({
@@ -186,16 +155,8 @@ function makenote() {
     });
 	
     $(".done").on("drop", function () {
-
-        if (draganddropflag == 1) {
-            var parentid = parseInt($(this).attr("id"));
-            var count = $(this).children().length;
-            counts[parentid] = count;
-        }
-        draganddropflag = 0;
 		counts[globalparentid]--;
 		globalparentid = -1;
         return;
-
     });
 }
