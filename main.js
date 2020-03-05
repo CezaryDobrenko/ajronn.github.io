@@ -1,71 +1,86 @@
-var colors = ["#b3e6ff", "#b3ff99", "#ffb3cc", "#ffff66", "#b3e6ff", "#b3ff99", "#ffb3cc", "#ffff66"];
 $(document).ready(makenote());
 
-function insertnote() {
-    //var random = parseInt(Math.floor(Math.random() * 5));
-    //var color = colors[random];
-    document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:' + "#b3e6ff" + ';"><div class="delnote"></div><h5 class="card-title"> <input type="text" class="form-control" placeholder="TITLE" id="cardtitle"></h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
+//Globar variables
+var counts = [0, 0, 0, 0];
+var draganddropflag = 0;
+var block = 4;
+var names = ["backlog", "inprogress", "peerreview", "done"];
+var globalparentid = -1;
+//----------------
+
+function insertnote()
+{
+    document.getElementById("field").innerHTML = 
+		'<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:#b3e6ff;">'+
+			'<div class="delnote"></div>'+
+			'<h5 class="card-title">'+
+				'<input type="text" class="form-control" placeholder="TITLE" id="cardtitle">'+
+			'</h5>'+
+			'<textarea onkeydown="textAreaAdjust(this)"></textarea>'+
+		'</div>';
+
     makenote();
 }
 
 
-function textAreaAdjust(o) {
+function textAreaAdjust(o)
+{
     o.style.height = "1px";
     o.style.height = (25 + o.scrollHeight) + "px";
     o.style.width = "100%";
 }
 
-var counts = [0, 0, 0, 0];
-var draganddropflag = 0;
-var block = 4;
 
-var names = ["backlog", "inprogress", "peerreview", "intest"];
 
-function checkCounters() {
+function checkCounters()
+{
     document.getElementById("counterb").innerHTML = counts[0];
     document.getElementById("counteri").innerHTML = counts[1] + "/" + block;
     document.getElementById("counterp").innerHTML = counts[2] + "/" + block;
-    document.getElementById("counterin").innerHTML = counts[3] + "/" + block;
+    document.getElementById("counterin").innerHTML = counts[3];
+	
+	
     var i;
-    for (i = 1; i < 4; i++) {
-        if (counts[i] >= block) {
+    for (i = 1; i < 3; i++)
+	{
+        if (counts[i] >= block)
+		{
             $("." + names[i]).droppable("disable");
             $("." + names[i] + " h4").css("color", "red");
             $("." + names[i] + " h4").css("font-weight", "bold");
-        } else {
+        }
+		else
+		{
             $("." + names[i]).droppable("enable");
             $("." + names[i] + " h4").css("color", "black");
             $("." + names[i] + " h4").css("font-weight", "300");
         }
     }
 
-    if ($(".stickynotefield").children().length == 0) {
-        insertnote();
-    }
+    if ($(".stickynotefield").children().length == 0) insertnote();
+    
 
 }
 
 
 function makenote() {
 
-    //var check1 = $(".stickynotefield").children();
-    //document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:'+color+';"><div class="delnote"></div><h5 class="card-title">Tytuł</h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
     if ($(".stickynotefield").children().length < 1)
         insertnote();
 
 
     $(".stickynote").on("drag", function () {
 
-        if (draganddropflag == 0) {
+        /*if (draganddropflag == 0) {
             var parentid = parseInt($(this).parent().attr("id"));
             var count = $(this).parent().children().length;
             counts[parentid] = count - 2;
             checkCounters();
         }
-        draganddropflag = 1;
+        draganddropflag = 1;*/
+		globalparentid = parseInt($(this).parent().attr("id"));
+		
         return;
-
-
     });
 
 
@@ -78,6 +93,10 @@ function makenote() {
             checkCounters();
         }
         draganddropflag = 0;
+		
+		counts[globalparentid]--;
+		globalparentid = -1;
+		
         return;
 
     });
@@ -90,6 +109,8 @@ function makenote() {
             counts[parentid] = count;
         }
         draganddropflag = 0;
+		counts[globalparentid]--;
+		globalparentid = -1;
         return;
 
     });
@@ -102,11 +123,13 @@ function makenote() {
             counts[parentid] = count;
         }
         draganddropflag = 0;
+		counts[globalparentid]--;
+		globalparentid = -1;
         return;
 
     });
 
-    $(".intest").on("drop", function () {
+    $(".done").on("drop", function () {
 
         if (draganddropflag == 1) {
             var parentid = parseInt($(this).attr("id"));
@@ -114,6 +137,8 @@ function makenote() {
             counts[parentid] = count;
         }
         draganddropflag = 0;
+		counts[globalparentid]--;
+		globalparentid = -1;
         return;
 
     });
@@ -126,27 +151,27 @@ function makenote() {
         checkCounters();
     });
 
-
     $(".stickynote").draggable({
         appendTo: "body",
         cursor: "move",
         helper: 'clone',
         //revert: "invalid",
-        revert: function (event, ui) {
+        revert: function (event, ui)
+		{
             var parentid = parseInt($(this).parent().attr("id"));
             var count = $(this).parent().children().length;
             counts[parentid] = count - 1;
             checkCounters();
         }
-    });
-
+	});
+	
+	
     $(".backlog").droppable({
         tolerance: "intersect",
         accept: ".stickynote",
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function (event, ui) {
-
             $(".backlog").append($(ui.draggable));
 
         }
@@ -172,13 +197,13 @@ function makenote() {
         }
     });
 
-    $(".intest").droppable({
+    $(".done").droppable({
         tolerance: "intersect",
         accept: ".stickynote",
         activeClass: "ui-state-default",
         hoverClass: "ui-state-hover",
         drop: function (event, ui) {
-            $(".intest").append($(ui.draggable));
+            $(".done").append($(ui.draggable));
         }
     });
 }
