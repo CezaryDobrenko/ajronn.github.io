@@ -2,9 +2,9 @@ var colors = ["#b3e6ff", "#b3ff99", "#ffb3cc", "#ffff66", "#b3e6ff", "#b3ff99", 
 $(document).ready(makenote());
 
 function insertnote() {
-    var random = parseInt(Math.floor(Math.random() * 5));
-    var color = colors[random];
-    document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:' + color + ';"><div class="delnote"></div><h5 class="card-title"> <input type="text" class="form-control" placeholder="TITLE" id="cardtitle"></h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
+    //var random = parseInt(Math.floor(Math.random() * 5));
+    //var color = colors[random];
+    document.getElementById("field").innerHTML = '<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:' + "#b3e6ff" + ';"><div class="delnote"></div><h5 class="card-title"> <input type="text" class="form-control" placeholder="TITLE" id="cardtitle"></h5><textarea onkeydown="textAreaAdjust(this)"></textarea></div>';
     makenote();
 }
 
@@ -22,12 +22,12 @@ var block = 4;
 var names = ["backlog", "inprogress", "peerreview", "intest"];
 
 function checkCounters() {
-    document.getElementById("counterb").innerHTML = counts[0] + "/" + block;
+    document.getElementById("counterb").innerHTML = counts[0];
     document.getElementById("counteri").innerHTML = counts[1] + "/" + block;
     document.getElementById("counterp").innerHTML = counts[2] + "/" + block;
     document.getElementById("counterin").innerHTML = counts[3] + "/" + block;
     var i;
-    for (i = 0; i < 4; i++) {
+    for (i = 1; i < 4; i++) {
         if (counts[i] >= block) {
             $("." + names[i]).droppable("disable");
             $("." + names[i] + " h4").css("color", "red");
