@@ -70,37 +70,71 @@ function makenote() {
 
 
     $(".stickynote").on("drag", function () {
-
-        /*if (draganddropflag == 0) {
-            var parentid = parseInt($(this).parent().attr("id"));
-            var count = $(this).parent().children().length;
-            counts[parentid] = count - 2;
-            checkCounters();
-        }
-        draganddropflag = 1;*/
 		globalparentid = parseInt($(this).parent().attr("id"));
-		
         return;
     });
 
+    $('.delnote').on("click", function () {
+        var parentid = parseInt($(this).parent().parent().attr("id"));
+        var count = $(this).parent().parent().children().length - 2;
+        $(this).parent().remove();
+        counts[parentid] = count;
+        checkCounters();
+		return;
+    });
 
+    $(".stickynote").draggable({
+        appendTo: "body",
+        cursor: "move",
+        helper: 'clone',
+        //revert: "invalid",
+        revert: function (event, ui)
+		{
+            var parentid = parseInt($(this).parent().attr("id"));
+            var count = $(this).parent().children().length;
+            counts[parentid] = count - 1;
+            checkCounters();
+			return;
+        }
+	});
+	
+    $(".backlog").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".backlog").append($(ui.draggable));
+			return;
+
+        }
+    });
+	
     $(".backlog").on("drop", function () {
-
         if (draganddropflag == 1) {
             var parentid = parseInt($(this).attr("id"));
             var count = $(this).children().length;
             counts[parentid] = count;
             checkCounters();
         }
-        draganddropflag = 0;
-		
+        draganddropflag = 0;		
 		counts[globalparentid]--;
 		globalparentid = -1;
-		
         return;
 
     });
 
+    $(".inprogress").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".inprogress").append($(ui.draggable));
+			return;
+        }
+    });
+	
     $(".inprogress").on("drop", function () {
 
         if (draganddropflag == 1) {
@@ -115,6 +149,17 @@ function makenote() {
 
     });
 
+    $(".peerreview").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".peerreview").append($(ui.draggable));
+			return;
+        }
+    });
+	
     $(".peerreview").on("drop", function () {
 
         if (draganddropflag == 1) {
@@ -129,6 +174,17 @@ function makenote() {
 
     });
 
+    $(".done").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".done").append($(ui.draggable));
+			return;
+        }
+    });
+	
     $(".done").on("drop", function () {
 
         if (draganddropflag == 1) {
@@ -141,69 +197,5 @@ function makenote() {
 		globalparentid = -1;
         return;
 
-    });
-
-    $('.delnote').on("click", function () {
-        var parentid = parseInt($(this).parent().parent().attr("id"));
-        var count = $(this).parent().parent().children().length - 2;
-        $(this).parent().remove();
-        counts[parentid] = count;
-        checkCounters();
-    });
-
-    $(".stickynote").draggable({
-        appendTo: "body",
-        cursor: "move",
-        helper: 'clone',
-        //revert: "invalid",
-        revert: function (event, ui)
-		{
-            var parentid = parseInt($(this).parent().attr("id"));
-            var count = $(this).parent().children().length;
-            counts[parentid] = count - 1;
-            checkCounters();
-        }
-	});
-	
-	
-    $(".backlog").droppable({
-        tolerance: "intersect",
-        accept: ".stickynote",
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
-        drop: function (event, ui) {
-            $(".backlog").append($(ui.draggable));
-
-        }
-    });
-
-    $(".inprogress").droppable({
-        tolerance: "intersect",
-        accept: ".stickynote",
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
-        drop: function (event, ui) {
-            $(".inprogress").append($(ui.draggable));
-        }
-    });
-
-    $(".peerreview").droppable({
-        tolerance: "intersect",
-        accept: ".stickynote",
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
-        drop: function (event, ui) {
-            $(".peerreview").append($(ui.draggable));
-        }
-    });
-
-    $(".done").droppable({
-        tolerance: "intersect",
-        accept: ".stickynote",
-        activeClass: "ui-state-default",
-        hoverClass: "ui-state-hover",
-        drop: function (event, ui) {
-            $(".done").append($(ui.draggable));
-        }
     });
 }
