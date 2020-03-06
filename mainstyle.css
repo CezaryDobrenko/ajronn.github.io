@@ -4,7 +4,19 @@
   position: absolute;
   top: -30%;
   left: 0;
+  	   font-family: "Comic Sans MS", cursive;
+    display: inline-block;
+    color: #000;
+    background-color: #FFFACD;
+    border: 2px solid #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+    position: relative;
+	
 }
+
+
 
 .stickynotefield
 {
