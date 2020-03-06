@@ -1,3 +1,11 @@
+
+.stickynote[title]:hover:after {
+  content: attr(title);
+  position: absolute;
+  top: -30%;
+  left: 0;
+}
+
 .stickynotefield
 {
 	width: 100%;
