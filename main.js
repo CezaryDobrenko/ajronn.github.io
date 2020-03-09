@@ -2,10 +2,12 @@ $(document).ready(makenote());
 
 //Globar variables
 var counts = [0, 0, 0, 0];
-var block = 4;
+var block = 3;
 var names = ["backlog", "inprogress", "peerreview", "done"];
 var globalparentid = -1;
 var firstvisit = 0;
+var swingcounter = [[0,0,0,0],[0,0,0,0]];
+var swingnames = [["s1inprogress","s2inprogress","s3inprogress","s4inprogress"],["s1peerreview","s2peerreview","s3peerreview","s4peerreview"]];
 //----------------
 
 function insertnote()
@@ -42,36 +44,17 @@ function checkCounters()
     document.getElementById("counterp").innerHTML = counts[2] + "/" + block;
     document.getElementById("counterin").innerHTML = counts[3];
 	
-	var i;
-    for (i = 1; i < 3; i++)
-	{
-        if (counts[i] >= block)
-		{
-			if(i == 1){
-				for(j = 0; j <= 4; j++) $(".s"+j+"inprogress").droppable("disable");
-				$(".inprogress").css("color", "red");
-				$(".inprogress").css("font-weight", "bold");
+	for(i = 0; i <= 1; i++){
+		for(j = 0; j <= 4; j++){
+			if(swingcounter[i][j] >= 3){
+				$("."+swingnames[i][j]).droppable("disable");
+				$("."+swingnames[i][j]).css("border-bottom", "5px solid red");
+			} else {
+				$("."+swingnames[i][j]).droppable("enable");
+				$("."+swingnames[i][j]).css("border-bottom", "none");
 			}
-			if(i == 2){
-				for(j = 0; j <= 4; j++) $(".s"+j+"peerreview").droppable("disable");
-				$(".peerreview").css("color", "red");
-				$(".peerreview").css("font-weight", "bold");
-			}
-        }
-		else
-		{
-			if(i == 1){
-				for(j = 0; j <= 4; j++) $(".s"+j+"inprogress").droppable("enable");
-				$(".inprogress").css("color", "black");
-				$(".inprogress").css("font-weight", "300");
-			}
-			if(i == 2){
-				for(j = 0; j <= 4; j++) $(".s"+j+"peerreview").droppable("enable");
-				$(".peerreview").css("color", "black");
-				$(".peerreview").css("font-weight", "300");
-			}
-        }
-    }
+		}
+	}
 
 
     if ($(".stickynotefield").children().length == 0) insertnote();
@@ -91,17 +74,14 @@ function makenote() {
     });
 
     $('.delnote').on("click", function () {
-        var parentid = parseInt($(this).parent().parent().attr("id"));			
-		for(i = 0; i < 4; i++){
-			if(parentid == i){
-				if(document.getElementsByClassName("s1" + names[i])[0].childElementCount != 0) var swing1 = document.getElementsByClassName("s1" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s2" + names[i])[0].childElementCount != 0) var swing2 = document.getElementsByClassName("s2" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s3" + names[i])[0].childElementCount != 0) var swing3 = document.getElementsByClassName("s3" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s4" + names[i])[0].childElementCount != 0) var swing4 = document.getElementsByClassName("s4" + names[i])[0].childElementCount-1;
-			}
-		}
         $(this).parent().remove();
-        counts[parentid] = swing1 + swing2 + swing3 + swing4 - 1;
+		for(j = 1; j <= 4; j++){
+			var val1 = document.getElementsByClassName("s"+j+"inprogress")[0].childElementCount-1;
+			var val2 = document.getElementsByClassName("s"+j+"peerreview")[0].childElementCount-1;
+			swingcounter[0][j-1] = val1;
+			swingcounter[1][j-1] = val2;
+		}
+		console.log(swingcounter);
         checkCounters();
 		return;
     });
@@ -113,16 +93,13 @@ function makenote() {
         //revert: "invalid",
         revert: function (event, ui)
 		{
-            var parentid = parseInt($(this).parent().attr("id"));
-			for(i = 0; i < 4; i++){
-				if(parentid == i){
-				if(document.getElementsByClassName("s1" + names[i])[0].childElementCount != 0) var swing1 = document.getElementsByClassName("s1" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s2" + names[i])[0].childElementCount != 0) var swing2 = document.getElementsByClassName("s2" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s3" + names[i])[0].childElementCount != 0) var swing3 = document.getElementsByClassName("s3" + names[i])[0].childElementCount-1;
-				if(document.getElementsByClassName("s4" + names[i])[0].childElementCount != 0) var swing4 = document.getElementsByClassName("s4" + names[i])[0].childElementCount-1;
-				}
+			for(j = 1; j <= 4; j++){
+				var val1 = document.getElementsByClassName("s"+j+"inprogress")[0].childElementCount-1;
+				var val2 = document.getElementsByClassName("s"+j+"peerreview")[0].childElementCount-1;
+				swingcounter[0][j-1] = val1;
+				swingcounter[1][j-1] = val2;
 			}
-			counts[parentid] = swing1 + swing2 + swing3 + swing4;
+			console.log(swingcounter);
             checkCounters();
 			return;
         }
