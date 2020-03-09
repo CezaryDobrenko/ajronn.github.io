@@ -81,7 +81,6 @@ function makenote() {
 			swingcounter[0][j-1] = val1;
 			swingcounter[1][j-1] = val2;
 		}
-		console.log(swingcounter);
         checkCounters();
 		return;
     });
@@ -99,7 +98,6 @@ function makenote() {
 				swingcounter[0][j-1] = val1;
 				swingcounter[1][j-1] = val2;
 			}
-			console.log(swingcounter);
             checkCounters();
 			return;
         }
