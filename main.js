@@ -42,22 +42,37 @@ function checkCounters()
     document.getElementById("counterp").innerHTML = counts[2] + "/" + block;
     document.getElementById("counterin").innerHTML = counts[3];
 	
-    var i;
+	var i;
     for (i = 1; i < 3; i++)
 	{
         if (counts[i] >= block)
 		{
-            $("." + names[i]).droppable("disable");
-            $("." + names[i] + " h4").css("color", "red");
-            $("." + names[i] + " h4").css("font-weight", "bold");
+			if(i == 1){
+				for(j = 0; j <= 4; j++) $(".s"+j+"inprogress").droppable("disable");
+				$(".inprogress").css("color", "red");
+				$(".inprogress").css("font-weight", "bold");
+			}
+			if(i == 2){
+				for(j = 0; j <= 4; j++) $(".s"+j+"peerreview").droppable("disable");
+				$(".peerreview").css("color", "red");
+				$(".peerreview").css("font-weight", "bold");
+			}
         }
 		else
 		{
-            $("." + names[i]).droppable("enable");
-            $("." + names[i] + " h4").css("color", "black");
-            $("." + names[i] + " h4").css("font-weight", "300");
+			if(i == 1){
+				for(j = 0; j <= 4; j++) $(".s"+j+"inprogress").droppable("enable");
+				$(".inprogress").css("color", "black");
+				$(".inprogress").css("font-weight", "300");
+			}
+			if(i == 2){
+				for(j = 0; j <= 4; j++) $(".s"+j+"peerreview").droppable("enable");
+				$(".peerreview").css("color", "black");
+				$(".peerreview").css("font-weight", "300");
+			}
         }
     }
+
 
     if ($(".stickynotefield").children().length == 0) insertnote();
     
@@ -76,10 +91,17 @@ function makenote() {
     });
 
     $('.delnote').on("click", function () {
-        var parentid = parseInt($(this).parent().parent().attr("id"));
-        var count = $(this).parent().parent().children().length - 2;
+        var parentid = parseInt($(this).parent().parent().attr("id"));			
+		for(i = 0; i < 4; i++){
+			if(parentid == i){
+				if(document.getElementsByClassName("s1" + names[i])[0].childElementCount != 0) var swing1 = document.getElementsByClassName("s1" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s2" + names[i])[0].childElementCount != 0) var swing2 = document.getElementsByClassName("s2" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s3" + names[i])[0].childElementCount != 0) var swing3 = document.getElementsByClassName("s3" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s4" + names[i])[0].childElementCount != 0) var swing4 = document.getElementsByClassName("s4" + names[i])[0].childElementCount-1;
+			}
+		}
         $(this).parent().remove();
-        counts[parentid] = count;
+        counts[parentid] = swing1 + swing2 + swing3 + swing4 - 1;
         checkCounters();
 		return;
     });
@@ -92,8 +114,15 @@ function makenote() {
         revert: function (event, ui)
 		{
             var parentid = parseInt($(this).parent().attr("id"));
-            var count = $(this).parent().children().length;
-            counts[parentid] = count - 1;
+			for(i = 0; i < 4; i++){
+				if(parentid == i){
+				if(document.getElementsByClassName("s1" + names[i])[0].childElementCount != 0) var swing1 = document.getElementsByClassName("s1" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s2" + names[i])[0].childElementCount != 0) var swing2 = document.getElementsByClassName("s2" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s3" + names[i])[0].childElementCount != 0) var swing3 = document.getElementsByClassName("s3" + names[i])[0].childElementCount-1;
+				if(document.getElementsByClassName("s4" + names[i])[0].childElementCount != 0) var swing4 = document.getElementsByClassName("s4" + names[i])[0].childElementCount-1;
+				}
+			}
+			counts[parentid] = swing1 + swing2 + swing3 + swing4;
             checkCounters();
 			return;
         }
@@ -166,6 +195,287 @@ function makenote() {
 		globalparentid = -1;
         return;
     });
+	
+	// swingline  nr 1
+	
+    $(".s1backlog").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s1backlog").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s1backlog").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s1inprogress").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s1inprogress").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s1inprogress").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s1peerreview").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s1peerreview").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s1peerreview").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s1done").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s1done").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s1done").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+	// swingline  nr 2
+	
+    $(".s2backlog").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s2backlog").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s2backlog").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s2inprogress").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s2inprogress").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s2inprogress").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s2peerreview").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s2peerreview").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s2peerreview").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s2done").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s2done").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s2done").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+// swingline  nr 3
+	
+    $(".s3backlog").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s3backlog").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s3backlog").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s3inprogress").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s3inprogress").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s3inprogress").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s3peerreview").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s3peerreview").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s3peerreview").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s3done").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s3done").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s3done").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+// swingline  nr 4
+	
+    $(".s4backlog").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s4backlog").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s4backlog").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s4inprogress").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s4inprogress").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s4inprogress").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s4peerreview").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s4peerreview").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s4peerreview").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
+    $(".s4done").droppable({
+        tolerance: "intersect",
+        accept: ".stickynote",
+        activeClass: "ui-state-default",
+        hoverClass: "ui-state-hover",
+        drop: function (event, ui) {
+            $(".s4done").append($(ui.draggable));
+			return;
+        }
+    });
+	
+    $(".s4done").on("drop", function () {
+		counts[globalparentid]--;
+		globalparentid = -1;
+        return;
+    });
+	
 }
 
 	if(firstvisit == 0){ 

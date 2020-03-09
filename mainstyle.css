@@ -101,9 +101,7 @@ textarea:focus
 	border-radius:5px;
 }
 
-.list{
-	margin-bottom: 80px;
-}
+
 
 #cardtitle{
 	width: 80%;
@@ -120,6 +118,9 @@ textarea:focus
 	margin-top: 250px;
 }
 
+.opacitytitle{
+opacity: 0;
+}
 
 @media only screen and (max-width: 575px) {
 	.stickynotefield .stickynote{
