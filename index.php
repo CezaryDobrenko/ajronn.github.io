@@ -1,3 +1,15 @@
+<?php
+require_once('connection.php');
+			$sql = "SELECT * FROM notes";
+			$result = $connect->query($sql);
+
+			if($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					echo $row['id']." ".$row['title']." ";
+				}
+			}  	
+			?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -325,7 +337,7 @@
 </section>
 
 <!-- MAIN -->
-
+<button type="button" class="btn btn-primary" id="savebutton">Save changes</button>	
 
 
 

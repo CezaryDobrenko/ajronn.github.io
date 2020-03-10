@@ -457,3 +457,15 @@ function makenote() {
 		document.getElementsByClassName("stickynote")[0].title = "Przenieś kartke do góry";
 		firstvisit = 1;
 	}
+	
+	
+$("#savebutton").on("click",function(){
+	$.ajax({
+
+         type: "post",
+         url: "save.php",
+         success: function(){
+              alert("Hello");
+         }
+});
+});
