@@ -131,7 +131,7 @@
             </div>
         </div>
 		
-		<!-- Swingline -->
+		<!-- Swimlane -->
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s0">
             <div class="row flex-row">
@@ -178,7 +178,7 @@
                     </div>
                 </div>
             </div>
-					<div style = "text-align: center;">Swingline Kacper Woźniak (LIDER)</div>
+					<div style = "text-align: center;">Swimlane Kacper Woźniak (LIDER)</div>
 		</div>
 
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s1">
@@ -226,7 +226,7 @@
                     </div>
                 </div>
             </div>
-			<div style = "text-align: center;">Swingline Paweł Bartko</div>
+			<div style = "text-align: center;">Swimlane Paweł Bartko</div>
 		</div>
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s2">
@@ -274,7 +274,7 @@
                     </div>
                 </div>
             </div>
-			<div style = "text-align: center;">Swingline Piotr Warmiński</div>
+			<div style = "text-align: center;">Swimlane Piotr Warmiński</div>
 		</div>
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s3">
@@ -322,7 +322,7 @@
                     </div>
                 </div>
             </div>
-			<div style = "text-align: center;">Swingline Igor Grzywacz</div>
+			<div style = "text-align: center;">Swimlane Igor Grzywacz</div>
 		</div>
 
 
