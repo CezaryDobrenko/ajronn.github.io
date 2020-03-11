@@ -1,5 +1,7 @@
 var myPhpValue = $("#myPhpValue").val();
-
+var idV = $("#idValue").val();
+var idValue = JSON.parse(idV);
+idValue++;
 if(myPhpValue != '')
 {
 	var array = JSON.parse(myPhpValue);
@@ -11,9 +13,9 @@ function insert(ar)
 	var i;
 	var id, title, text, parentid;
 	ar.forEach(function(array){
-		for(i = 0 ; i<array.length ; i=i+5)
+		for(i = 0 ; i<array.length ; i=i+6)
 		{
-			id = array[i];
+			id = array[5];
 			title = array[i+1];
 			text = array[i+2];
 			parentid=array[i+4];
@@ -46,7 +48,7 @@ function insertnote()
 {
 	
     document.getElementById("field").innerHTML = 
-		'<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:#b3e6ff;">'+
+		'<div class="card p-2 darken-1 mx-2 list-item stickynote" id="'+idValue+'"draggable="true" style="background-color:#b3e6ff;">'+
 			'<div class="delnote"></div>'+
 			'<h5 class="card-title">'+
 				'<input type="text" class="form-control" placeholder="TITLE" id="cardtitle">'+
@@ -58,7 +60,7 @@ function insertnote()
 		document.getElementsByClassName("stickynote")[0].title = "";
 		firstvisit = false;
 	}
-
+	idValue++;
     makenote();
 }
 
@@ -484,11 +486,11 @@ function makenote() {
     });
 	
 }
-
+/*
 	if(firstvisit == 0){ 
 		document.getElementsByClassName("stickynote")[0].title = "Przenieś kartke do góry";
 		firstvisit = 1;
-	}
+	}*/
 	
 	
 $("#savebutton").on("click",function(){
@@ -518,6 +520,14 @@ $("#savebutton").on("click",function(){
 		dataarray.push(parentid);
 		
 	}
-	
-	
+	console.log(dataarray);
+	$.ajax({ 
+       type: "POST", 
+       url: "save.php", 
+       data: { d : dataarray}, 
+       success: function() { 
+              alert("Success"); 
+        } 
+}); 
+	//window.location = "save.php";
 });

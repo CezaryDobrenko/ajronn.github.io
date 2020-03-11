@@ -3,6 +3,11 @@
 	$sql = "SELECT * FROM notes";
 	$result = $connect->query($sql);
 	$ar = $result->fetch_all(MYSQLI_NUM);
+	
+	$sql = 'SELECT MAX(noteid) FROM notes';
+	$result = $connect->query($sql);
+	$maxid = $result->fetch_all(MYSQLI_NUM);
+	
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -81,7 +86,7 @@
     <div class="container-fluid mb-5">
         <div class="lists mb-5">
             <div class="row flex-row flex-sm-nowrap py-5">
-                <div class="col-sm-3 col-md-3 backlog list" id="0">
+                <div class="col-sm-3 col-md-3 backlog list" id="backlogid">
 					<div class="card">
                         <div class="card-block red lighten-4 py-3">
                             <h4 class="card-title text-center py-2 ">Backlog<div id="counterb" style = "display: none;">0</div><br>Infinity</h4>
@@ -91,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 inprogress list" id="1">
+                <div class="col-sm-3 col-md-3 inprogress list" id="inprogressid">
 
                     <div class="card">
                         <div class="card-block deep-purple lighten-4 py-3">
@@ -103,7 +108,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 peerreview list" id="peerreviewid">
                     <div class="card">
                         <div class="card-block green lighten-4 py-3">
                             <h4 class="card-title text-center py-2">Peer Review<div id="counterp" style = "display: none;">0/4</div><br>max 3</h4>
@@ -113,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 done list" id="3">
+                <div class="col-sm-3 col-md-3 done list" id="doneid">
                     <div class="card">
                         <div class="card-block deep-orange lighten-4 py-3">
                             <h4 class="card-title text-center py-2">Done<div id="counterin" style = "display: none;">0</div><br>Infinity</h4>
@@ -130,7 +135,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s0">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s1backlog list" id="0">
+                <div class="col-sm-3 col-md-3 s1backlog list" id="s10">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -140,7 +145,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s1inprogress list" id="1">
+				<div class="col-sm-3 col-md-3 s1inprogress list" id="s11">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -152,7 +157,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s1peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 s1peerreview list" id="s12">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -162,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s1done list" id="3">
+                <div class="col-sm-3 col-md-3 s1done list" id="s13">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -178,7 +183,7 @@
 
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s1">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s2backlog list" id="0">
+                <div class="col-sm-3 col-md-3 s2backlog list" id="s20">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -188,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s2inprogress list" id="1">
+				<div class="col-sm-3 col-md-3 s2inprogress list" id="s21">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -200,7 +205,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s2peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 s2peerreview list" id="s22">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -210,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s2done list" id="3">
+                <div class="col-sm-3 col-md-3 s2done list" id="s23">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -226,7 +231,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s2">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s3backlog list" id="0">
+                <div class="col-sm-3 col-md-3 s3backlog list" id="s30">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -236,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s3inprogress list" id="1">
+				<div class="col-sm-3 col-md-3 s3inprogress list" id="s31">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -248,7 +253,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s3peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 s3peerreview list" id="s32">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -258,7 +263,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s3done list" id="3">
+                <div class="col-sm-3 col-md-3 s3done list" id="s33">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -274,7 +279,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s3">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s4backlog list" id="0">
+                <div class="col-sm-3 col-md-3 s4backlog list" id="s40">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -284,7 +289,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s4inprogress list" id="1">
+				<div class="col-sm-3 col-md-3 s4inprogress list" id="s41">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -296,7 +301,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s4peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 s4peerreview list" id="s42">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -306,7 +311,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s4done list" id="3">
+                <div class="col-sm-3 col-md-3 s4done list" id="s43">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -363,6 +368,7 @@
 </footer>
 <!-- FOOTER -->
 <input type="hidden" id="myPhpValue" value='<?php echo json_encode($ar); ?>' />
+<input type="hidden" id="idValue" value='<?php echo json_encode($maxid); ?>' />
 <script src="main.js"></script>
 
 </body>
