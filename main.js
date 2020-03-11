@@ -18,7 +18,7 @@ function insert(ar)
 			text = array[i+2];
 			parentid=array[i+4];
 
-			$("#"+parentid).append('<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:#b3e6ff;">'+
+			$("#"+parentid).append('<div class="card p-2 darken-1 mx-2 list-item stickynote" id="'+id+'" draggable="true" style="background-color:#b3e6ff;">'+
 				'<div class="delnote"></div>'+
 				'<h5 class="card-title">'+
 					'<input type="text" class="form-control" placeholder="TITLE" id="cardtitle" value="'+title+'">'+

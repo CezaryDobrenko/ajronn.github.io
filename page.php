@@ -81,7 +81,7 @@
     <div class="container-fluid mb-5">
         <div class="lists mb-5">
             <div class="row flex-row flex-sm-nowrap py-5">
-                <div class="col-sm-3 col-md-3 backlog list" id="0">
+                <div class="col-sm-3 col-md-3 backlog list" id="backlogid">
 					<div class="card">
                         <div class="card-block red lighten-4 py-3">
                             <h4 class="card-title text-center py-2 ">Backlog<div id="counterb" style = "display: none;">0</div><br>Infinity</h4>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 inprogress list" id="1">
+                <div class="col-sm-3 col-md-3 inprogress list" id="inprogressid">
 
                     <div class="card">
                         <div class="card-block deep-purple lighten-4 py-3">
@@ -103,7 +103,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 peerreview list" id="2">
+                <div class="col-sm-3 col-md-3 peerreview list" id="peerreviewid">
                     <div class="card">
                         <div class="card-block green lighten-4 py-3">
                             <h4 class="card-title text-center py-2">Peer Review<div id="counterp" style = "display: none;">0/4</div><br>max 3</h4>
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 done list" id="3">
+                <div class="col-sm-3 col-md-3 done list" id="doneid">
                     <div class="card">
                         <div class="card-block deep-orange lighten-4 py-3">
                             <h4 class="card-title text-center py-2">Done<div id="counterin" style = "display: none;">0</div><br>Infinity</h4>
