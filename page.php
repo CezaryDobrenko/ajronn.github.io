@@ -1,15 +1,9 @@
 <?php
-require_once('connection.php');
-			$sql = "SELECT * FROM notes";
-			$result = $connect->query($sql);
-
-			if($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					echo $row['id']." ".$row['title']." ";
-				}
-			}  	
-			?>
-
+	require_once('connection.php');
+	$sql = "SELECT * FROM notes";
+	$result = $connect->query($sql);
+	$ar = $result->fetch_all(MYSQLI_NUM);
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -368,6 +362,8 @@ require_once('connection.php');
     <div class="footer-copyright text-center py-4">TABLICA KANBAN - PROJEKT ZESPOŁOWY</div>
 </footer>
 <!-- FOOTER -->
+<input type="hidden" id="myPhpValue" value='<?php echo json_encode($ar); ?>' />
 <script src="main.js"></script>
+
 </body>
 </html>

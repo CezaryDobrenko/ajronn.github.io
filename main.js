@@ -1,3 +1,35 @@
+var myPhpValue = $("#myPhpValue").val();
+
+if(myPhpValue != '')
+{
+	var array = JSON.parse(myPhpValue);
+	insert(array);
+}
+
+function insert(ar)
+{
+	var i;
+	var id, title, text, parentid;
+	ar.forEach(function(array){
+		for(i = 0 ; i<array.length ; i=i+5)
+		{
+			id = array[i];
+			title = array[i+1];
+			text = array[i+2];
+			parentid=array[i+3];
+
+			$("."+parentid).append('<div class="card p-2 darken-1 mx-2 list-item stickynote" draggable="true" style="background-color:#b3e6ff;">'+
+				'<div class="delnote"></div>'+
+				'<h5 class="card-title">'+
+					'<input type="text" class="form-control" placeholder="TITLE" id="cardtitle" value="'+title+'">'+
+				'</h5>'+
+				'<textarea onkeydown="textAreaAdjust(this)">'+text+'</textarea>'+
+			'</div>');
+			makenote();
+		}
+	});
+}
+
 $(document).ready(makenote());
 
 //Globar variables
