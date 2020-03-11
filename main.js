@@ -492,8 +492,32 @@ function makenote() {
 	
 	
 $("#savebutton").on("click",function(){
+	var tmp = ['s10','s11','s12','s13','s20','s21','s22','s23','s30','s31','s32','s33','s40','s41','s42','s43'];
+	var array = [];
+	var i;
+	for(i = 0; i<tmp.length;i++)
+	{
+		const foo = document.getElementById(tmp[i]);
+		for (let j = 1; j < foo.children.length; j++)
+		{
+			array.push(foo.children[j].getAttribute('id'));
+		}
+	}
 	
-	
+	var dataarray = [];
+	for(i = 0; i<array.length;i++)
+	{
+		dataarray.push(array[i]);
+		var id = array[i];
+		var inputfield = document.getElementById(array[i]).getElementsByTagName('input').item(0).value.toString();
+		dataarray.push(inputfield);
+		//dataarray.push(array[i].);
+		var textfield = document.getElementById(array[i]).getElementsByTagName('textarea').item(0).value.toString();
+		dataarray.push(textfield);
+		var parentid = document.getElementById(array[i]).parentNode.id;
+		dataarray.push(parentid);
+		
+	}
 	
 	
 });

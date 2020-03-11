@@ -130,7 +130,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s0">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s1backlog list" id="10">
+                <div class="col-sm-3 col-md-3 s1backlog list" id="s10">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s1inprogress list" id="11">
+				<div class="col-sm-3 col-md-3 s1inprogress list" id="s11">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -152,7 +152,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s1peerreview list" id="12">
+                <div class="col-sm-3 col-md-3 s1peerreview list" id="s12">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s1done list" id="13">
+                <div class="col-sm-3 col-md-3 s1done list" id="s13">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -178,7 +178,7 @@
 
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s1">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s2backlog list" id="20">
+                <div class="col-sm-3 col-md-3 s2backlog list" id="s20">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s2inprogress list" id="21">
+				<div class="col-sm-3 col-md-3 s2inprogress list" id="s21">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -200,7 +200,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s2peerreview list" id="22">
+                <div class="col-sm-3 col-md-3 s2peerreview list" id="s22">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -210,7 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s2done list" id="23">
+                <div class="col-sm-3 col-md-3 s2done list" id="s23">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -226,7 +226,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s2">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s3backlog list" id="30">
+                <div class="col-sm-3 col-md-3 s3backlog list" id="s30">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -236,7 +236,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s3inprogress list" id="31">
+				<div class="col-sm-3 col-md-3 s3inprogress list" id="s31">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -248,7 +248,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s3peerreview list" id="32">
+                <div class="col-sm-3 col-md-3 s3peerreview list" id="s32">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -258,7 +258,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s3done list" id="33">
+                <div class="col-sm-3 col-md-3 s3done list" id="s33">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
@@ -274,7 +274,7 @@
 		
 		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s3">
             <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s4backlog list" id="40">
+                <div class="col-sm-3 col-md-3 s4backlog list" id="s40">
 					<div class="card my-2">
                         <div class="card-block red lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">1</h4>
@@ -284,7 +284,7 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-sm-3 col-md-3 s4inprogress list" id="41">
+				<div class="col-sm-3 col-md-3 s4inprogress list" id="s41">
 
                     <div class="card my-2">
                         <div class="card-block deep-purple lighten-4">
@@ -296,7 +296,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-3 col-md-3 s4peerreview list" id="42">
+                <div class="col-sm-3 col-md-3 s4peerreview list" id="s42">
                     <div class="card my-2">
                         <div class="card-block green lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">3</h4>
@@ -306,7 +306,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3 col-md-3 s4done list" id="43">
+                <div class="col-sm-3 col-md-3 s4done list" id="s43">
                     <div class="card my-2">
                         <div class="card-block deep-orange lighten-4">
                             <h4 class="card-title text-center py-2 opacitytitle">4</h4>
