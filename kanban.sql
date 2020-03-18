@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 13 Mar 2020, 18:54
+-- Czas generowania: 16 Mar 2020, 22:00
 -- Wersja serwera: 10.4.11-MariaDB
 -- Wersja PHP: 7.4.3
 
@@ -31,15 +31,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `kolumny` (
   `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8_polish_ci NOT NULL,
-  `id_col` varchar(20) COLLATE utf8_polish_ci NOT NULL
+  `id_col` varchar(20) COLLATE utf8_polish_ci NOT NULL,
+  `max_notes` varchar(255) COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Zrzut danych tabeli `kolumny`
---
-
-INSERT INTO `kolumny` (`id`, `title`, `id_col`) VALUES
-(2141, 'col2086990227', 'asdasd');
 
 -- --------------------------------------------------------
 
@@ -51,16 +45,10 @@ CREATE TABLE `notki` (
   `id` int(11) NOT NULL,
   `id_col` varchar(255) COLLATE utf8_polish_ci NOT NULL,
   `title` varchar(255) COLLATE utf8_polish_ci NOT NULL,
-  `content` varchar(255) COLLATE utf8_polish_ci NOT NULL
+  `content` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8_polish_ci NOT NULL,
+  `progress` varchar(255) COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Zrzut danych tabeli `notki`
---
-
-INSERT INTO `notki` (`id`, `id_col`, `title`, `content`) VALUES
-(1577, 'col2086990227drag', '', ''),
-(1578, 'col2086990227drag', '', '');
 
 -- --------------------------------------------------------
 
@@ -80,9 +68,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `password`, `rola`) VALUES
-(1, '123', '123', 'admin'),
-(2, 'paw', 'bar', 'noob'),
-(3, '14qwd', 'asadasda', '1231');
+(1, 'user1', 'zaq1@WSX', 'admin'),
+(2, 'user2', 'zaq1@WSX', 'member'),
+(3, 'user3', 'zaq1@WSX', 'member');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -114,13 +102,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT dla tabeli `kolumny`
 --
 ALTER TABLE `kolumny`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6359;
 
 --
 -- AUTO_INCREMENT dla tabeli `notki`
 --
 ALTER TABLE `notki`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1579;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6528;
 
 --
 -- AUTO_INCREMENT dla tabeli `user`

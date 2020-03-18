@@ -47,8 +47,6 @@
     <link rel="stylesheet" href="css/style.css">
 	
 
-
-
     <!-- PALETĘ KOLORÓW BRAŁEM Z https://mdbootstrap.com/docs/jquery/css/colors/ -->
 
 
@@ -70,7 +68,7 @@
                     Login <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right mt-2 signin-out">
                     <div class="row imgavatarmain">
-                        <div><img src = "img/avatar/123/avatar.png" class="imgavatar"></div>
+                        <div><img src = "img/avatar/<?php echo $_SESSION["email"]; ?>/avatar.png" class="imgavatar"></div>
                         <div><p class="user"> LOGIN: <?php echo $_SESSION["email"]; ?><p class="user"> ROLA: <?php echo $_SESSION["rola"]; ?></div>
                     </div>
 
@@ -93,9 +91,9 @@
 	</div>
 </section>
 
-<div class="container my-5 ">
+<div class="container my-5 placetocreatecard">
         <div class="row justify-content-md-center">
-				<div style = "width: 450px; ">
+				<div style = "width: 450px; " >
 						<div class="column" id = "dropzone" style = "height: 100px;">
 								<!-- New Note -->
 						</div>
@@ -107,7 +105,7 @@
 <footer class="page-footer font-small orange darken-1">
      <div class="container">
             <div class="row">
-    				<div style = "height: 112px;">
+    				<div id = "notefield" style = "height: 112px;">
     				</div>
             </div>
         </div>

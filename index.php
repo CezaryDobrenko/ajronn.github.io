@@ -1,14 +1,26 @@
 <?php
-	require_once('connection.php');
-	$sql = "SELECT * FROM notes";
+//Syfne logowanie byle sprawdzić czy działa
+session_start();
+if(isset($_POST['email']) && isset($_POST['haslo'])){
+	require_once('php/connection.php');
+	$sql = "SELECT * FROM user";
 	$result = $connect->query($sql);
-	$ar = $result->fetch_all(MYSQLI_NUM);
-	
-	$sql = 'SELECT MAX(noteid) FROM notes';
-	$result = $connect->query($sql);
-	$maxid = $result->fetch_all(MYSQLI_NUM);
-	
+	$ar = $result->fetch_all(MYSQLI_NUM);	
+	foreach ($ar as $item) {
+		if($_POST['email'] == $item[1]){
+			if($_POST['haslo'] == $item[2]){
+				$_SESSION["email"] = $item[1];
+				$_SESSION["rola"] = $item[3];
+				header('Location: kanban.php');
+			}
+		}
+	}
+}
+if(isset($_SESSION["email"])){
+	header('Location: kanban.php');
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -20,6 +32,7 @@
 
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script
             src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
@@ -35,16 +48,18 @@
     <!-- WTYCZKA DO BOOTSTRAPA -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" href="mainstyle.css">
+    <link rel="stylesheet" href="css/style.css">
+	
+
 
 
     <!-- PALETĘ KOLORÓW BRAŁEM Z https://mdbootstrap.com/docs/jquery/css/colors/ -->
 
 
 </head>
-<body class="indigo lighten-5">
+<body class="amber lighten-5">
 <!-- MENU -->
-<nav class="navbar navbar-expand-lg navbar-dark info-color-dark">
+<nav class="navbar navbar-expand-lg navbar-dark orange darken-1">
     <a class="navbar-brand" href="#">TABLICA KANBAN</a>
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,21 +70,21 @@
         <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
 
             <li class="dropdown order-1">
-                <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-info dropdown-toggle">
+                <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn orange lighten-1 dropdown-toggle">
                     Login <span class="caret"></span></button>
                 <ul class="dropdown-menu dropdown-menu-right mt-2">
                     <li class="px-3 py-2">
-                        <form class="form" role="form">
+                        <form action = "" method = "POST" class="form" role="form">
                             <div class="form-group">
                                 <input id="emailInput" placeholder="Email" class="form-control form-control-sm"
-                                       type="text" required="">
+                                       name="email" type="text" required="">
                             </div>
                             <div class="form-group">
                                 <input id="passwordInput" placeholder="Password" class="form-control form-control-sm"
-                                       type="text" required="">
+                                       name="haslo" type="text" required="">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-info btn-block">Login</button>
+                                <button type="submit" class="btn orange lighten-1 btn-block">Login</button>
                             </div>
                         </form>
                     </li>
@@ -81,295 +96,27 @@
 </nav>
 <!-- MENU -->
 
-<!-- MAIN -->
-<section ondrop="makenote()">
-    <div class="container-fluid mb-5">
-        <div class="lists mb-5">
-            <div class="row flex-row flex-sm-nowrap py-5">
-                <div class="col-sm-3 col-md-3 backlog list" id="backlogid">
-					<div class="card">
-                        <div class="card-block red lighten-4 py-3">
-                            <h4 class="card-title text-center py-2 ">Backlog<div id="counterb" style = "display: none;">0</div><br>Infinity</h4>
+<!-- Kanban board -->
 
-                            <!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 inprogress list" id="inprogressid">
-
-                    <div class="card">
-                        <div class="card-block deep-purple lighten-4 py-3">
-                            <h4 class="card-title text-center py-2">In Progress<div id="counteri" style = "display: none;">0/4</div><br>max 3</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-3 col-md-3 peerreview list" id="peerreviewid">
-                    <div class="card">
-                        <div class="card-block green lighten-4 py-3">
-                            <h4 class="card-title text-center py-2">Peer Review<div id="counterp" style = "display: none;">0/4</div><br>max 3</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 done list" id="doneid">
-                    <div class="card">
-                        <div class="card-block deep-orange lighten-4 py-3">
-                            <h4 class="card-title text-center py-2">Done<div id="counterin" style = "display: none;">0</div><br>Infinity</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-		<!-- Swimlane -->
-		
-		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s0">
-            <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s1backlog list" id="s10">
-					<div class="card my-2">
-                        <div class="card-block red lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">1</h4>
-
-                            <!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-				<div class="col-sm-3 col-md-3 s1inprogress list" id="s11">
-
-                    <div class="card my-2">
-                        <div class="card-block deep-purple lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">2</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-3 col-md-3 s1peerreview list" id="s12">
-                    <div class="card my-2">
-                        <div class="card-block green lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">3</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 s1done list" id="s13">
-                    <div class="card my-2">
-                        <div class="card-block deep-orange lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">4</h4>
-                            
-							<!-- KARTKI -->
-							
-                        </div>
-                    </div>
-                </div>
-            </div>
-					<div style = "text-align: center;">Swimlane Kacper Woźniak (LIDER)</div>
+<section style="height: 714px">
+	<div>
+		<div>
+			<h1 class="text-center mt-5">ZALOGUJ SIĘ ABY MIEĆ DOSTĘP DO TABLICY</p>
+			<img class="klodka mt-5" src = "img/klodka.png">
 		</div>
-
-		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s1">
-            <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s2backlog list" id="s20">
-					<div class="card my-2">
-                        <div class="card-block red lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">1</h4>
-
-                            <!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-				<div class="col-sm-3 col-md-3 s2inprogress list" id="s21">
-
-                    <div class="card my-2">
-                        <div class="card-block deep-purple lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">2</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-3 col-md-3 s2peerreview list" id="s22">
-                    <div class="card my-2">
-                        <div class="card-block green lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">3</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 s2done list" id="s23">
-                    <div class="card my-2">
-                        <div class="card-block deep-orange lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">4</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<div style = "text-align: center;">Swimlane Paweł Bartko</div>
-		</div>
-		
-		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s2">
-            <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s3backlog list" id="s30">
-					<div class="card my-2">
-                        <div class="card-block red lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">1</h4>
-
-                            <!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-				<div class="col-sm-3 col-md-3 s3inprogress list" id="s31">
-
-                    <div class="card my-2">
-                        <div class="card-block deep-purple lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">2</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-3 col-md-3 s3peerreview list" id="s32">
-                    <div class="card my-2">
-                        <div class="card-block green lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">3</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 s3done list" id="s33">
-                    <div class="card my-2">
-                        <div class="card-block deep-orange lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">4</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<div style = "text-align: center;">Swimlane Piotr Warmiński</div>
-		</div>
-		
-		<div class="swingline" style = "display: inline-block; width: 100%; min-height: 50px; border: 1px solid black;" id="s3">
-            <div class="row flex-row">
-                <div class="col-sm-3 col-md-3 s4backlog list" id="s40">
-					<div class="card my-2">
-                        <div class="card-block red lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">1</h4>
-
-                            <!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-				<div class="col-sm-3 col-md-3 s4inprogress list" id="s41">
-
-                    <div class="card my-2">
-                        <div class="card-block deep-purple lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">2</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-sm-3 col-md-3 s4peerreview list" id="s42">
-                    <div class="card my-2">
-                        <div class="card-block green lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">3</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 col-md-3 s4done list" id="s43">
-                    <div class="card my-2">
-                        <div class="card-block deep-orange lighten-4">
-                            <h4 class="card-title text-center py-2 opacitytitle">4</h4>
-
-							<!-- KARTKI -->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-			<div style = "text-align: center;">Swimlane Igor Grzywacz</div>
-		</div>
-
-
-		<!-- SEKCJA DODAWANIA KARTEK -->
-		<div class="stickynotefield cyan lighten-5" id="field">
-			
-		</div>
-
-    </div>
-	
+	</div>
 </section>
 
-<!-- MAIN -->
-<button type="button" class="btn btn-primary" id="savebutton">Save changes</button>	
-
-
-
 <!-- FOOTER -->
-<footer class="page-footer font-small info-color-dark darken-3">
+<footer class="page-footer font-small orange darken-1">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 py-5 mt-3">
-				<!-- SOCIAL MEDIA
-                <div class="mb-5 flex-center">
-                    <a class="fb-ic">
-                        <em class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
-                    </a>
-                    <a class="tw-ic">
-                        <em class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
-                    </a>
-                    <a class="gplus-ic">
-                        <em class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
-                    </a>
-                    <a class="ins-ic">
-                        <em class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </em>
-                    </a>
-                </div>
-				-->
-            </div>
+				<div style = "height: 112px;">
+				</div>
         </div>
     </div>
     <div class="footer-copyright text-center py-4">TABLICA KANBAN - PROJEKT ZESPOŁOWY</div>
 </footer>
 <!-- FOOTER -->
-<input type="hidden" id="myPhpValue" value='<?php echo json_encode($ar); ?>' />
-<input type="hidden" id="idValue" value='<?php echo json_encode($maxid); ?>' />
-<script src="main.js"></script>
-
 </body>
 </html>
