@@ -13,6 +13,8 @@
 
 // Global variables
 var t = 0;
+var te;
+var w8;
 
 // Pierwszy start programu
 function init(){
@@ -89,10 +91,10 @@ function addNote(){
 			<br>
 						<input class="author" type="hidden" value="`+autor+`">
 						Postęp: <input type = "text" title = "skala 15-220, jeśli puste to cała szerokość" class="progressinput" onchange="progress()">
-						<img src = "img/avatar/`+autor+`/avatar.png" style = "height: 50px; float: right" title = "created by: `+autor+`">
+						<img src = "img/avatar/default/avatar.png" class = "avatarimg" onclick = "changeAvatar(this)" style = "height: 50px; float: right" title = "created by: `+autor+`">
 		</div>
 	</div>`;
-	document.getElementById("dropzone").children[0].style.width = "420px";
+	document.getElementById("dropzone").children[0].style.width = "403px";
 }
 
 function addNoteFromDatabase(){
@@ -113,7 +115,7 @@ function addNoteFromDatabase(){
 						<br>
 						<input class="author" type="hidden" value="`+noteArr[i][4]+`">
 						Postęp: <input type = "text" title = "skala 15-220, jeśli puste to cała szerokość" class="progressinput" onchange="progress()" value = "`+noteArr[i][5]+`">
-						<img src = "img/avatar/`+noteArr[i][4]+`/avatar.png" style = "height: 50px; float: right" title = "created by: `+noteArr[i][4]+`">
+						<img src = "img/avatar/`+noteArr[i][4]+`/avatar.png" class = "avatarimg" onclick = "changeAvatar(this)" style = "height: 50px; float: right" title = "modified by: `+noteArr[i][4]+`">
 				</div>
 			</div>`;
 			rodzic.innerHTML += dziecko;
@@ -146,6 +148,37 @@ function progress(){
 	}
 	saveAllChanges();
 }
+
+	function changeAvatar(x){
+		var div = document.createElement("div");
+		te = x;
+		if(document.getElementById("test")){
+			document.getElementById("test").remove(); 
+		}
+		div.id = "test"; 
+		div.style.width = "85px";
+		div.style.display = "inline-block";
+		div.style.backgroundColor = "white";
+		div.style.position = 'absolute';
+		div.style.top = x.offsetTop+50;
+		div.style.left = x.offsetLeft;
+		div.style.border = "1px solid black";
+		div.innerHTML += '<div style = "float: right;"><img class= "deletenote" src = "img/delete.png" onclick = "RemoveSelectListByButton()"></div>';
+		div.innerHTML += '<img src = "img/avatar/user1/avatar.png" title = "change to user1" width = "80px" onclick = "RemoveSelectList(1)">';
+		div.innerHTML += '<img src = "img/avatar/user2/avatar.png" title = "change to user2" width = "80px" onclick = "RemoveSelectList(2)">';
+		div.innerHTML += '<img src = "img/avatar/user3/avatar.png" title = "change to user3" width = "80px" onclick = "RemoveSelectList(3)">';
+		document.body.appendChild(div);
+	}
+	
+	function RemoveSelectList(x){
+		te.src = "img/avatar/user"+x+"/avatar.png";
+		document.getElementById("test").remove(); 
+		saveNote();
+	}
+	
+	function RemoveSelectListByButton(){
+		document.getElementById("test").remove(); 
+	}
 
 // funkcje usuwające
 
@@ -189,21 +222,13 @@ function Testowa(){
 		blocker.push(document.getElementsByClassName("kanban-column")[i].children[1].children[1].value);
 		notes.push(document.getElementsByClassName("kanban-column")[i].children[2].children[0].childElementCount);
 	}
-	console.log(blocker);
-	console.log(notes);
 	for(i = 0; i < length; i++){
 		if(notes[i] > parseInt(blocker[i])-1){
-			document.getElementsByClassName("kanban-column")[i].style.border = "solid 1px red";
+			document.getElementsByClassName("kanban-column")[i].style.border = "solid 0.1px red";
+			document.getElementsByClassName("column-body")[i].style.border = "solid 1px red";
+			document.getElementsByClassName("column-body")[i].style.borderTop = "none";
 		} else {
-			document.getElementsByClassName("kanban-column")[i].style.border = "none";	
-		}
-	}
-	for(i = 0; i < length; i++){
-		if(blocker[i] != ""){
-			temp = document.getElementsByClassName("kanban-column")[i].children[2].children[0].childElementCount;
-			for(j = temp; j > parseInt(blocker[i]); j--){
-				document.getElementsByClassName("column")[i].removeChild(document.getElementsByClassName("column")[i].lastChild)
-			}
+			document.getElementsByClassName("column-body")[i].style.border = "none";	
 		}
 	}
 }
@@ -258,8 +283,25 @@ function saveAllChanges(){
 	saveNote();
 }
 
+function GetAutorFromSrc()
+{
+	for(j = 0; j < document.getElementsByClassName("author").length-1; j++){
+		test = document.getElementsByClassName("avatarimg")[j].src.split("").reverse().join("");
+		nazwa = "";
+		for(i = 11; i < test.length; i++)
+			if(test[i] == "/")
+				i = 5000;
+			else 
+				nazwa += test[i];	
+		nazwa = nazwa.split("").reverse().join("");
+		document.getElementsByClassName("author")[j].value = nazwa;
+	}
+}
+
+
 function saveNote(){
 	data2 = [];
+	GetAutorFromSrc();
 	length = document.getElementsByClassName("positioner")[0].childElementCount-1;
 	for(i = 0; i < length; i++){
 		length2 = document.getElementsByClassName("column")[i].childElementCount;
@@ -274,6 +316,7 @@ function saveNote(){
 			data2.push(tmp);
 		}
 	}
+
 	console.log(data2);
 	$.ajax({ 
 		   type: "POST", 
