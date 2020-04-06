@@ -156,18 +156,16 @@ function progress(){
 			document.getElementById("test").remove(); 
 		}
 		div.id = "test"; 
+		div.style.float = "right";
 		div.style.width = "85px";
 		div.style.display = "inline-block";
 		div.style.backgroundColor = "white";
-		div.style.position = 'absolute';
-		div.style.top = x.offsetTop+50;
-		div.style.left = x.offsetLeft;
 		div.style.border = "1px solid black";
 		div.innerHTML += '<div style = "float: right;"><img class= "deletenote" src = "img/delete.png" onclick = "RemoveSelectListByButton()"></div>';
 		div.innerHTML += '<img src = "img/avatar/user1/avatar.png" title = "change to user1" width = "80px" onclick = "RemoveSelectList(1)">';
 		div.innerHTML += '<img src = "img/avatar/user2/avatar.png" title = "change to user2" width = "80px" onclick = "RemoveSelectList(2)">';
 		div.innerHTML += '<img src = "img/avatar/user3/avatar.png" title = "change to user3" width = "80px" onclick = "RemoveSelectList(3)">';
-		document.body.appendChild(div);
+		x.parentElement.appendChild(div);
 	}
 	
 	function RemoveSelectList(x){
