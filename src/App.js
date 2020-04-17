@@ -1,9 +1,15 @@
 import React from 'react';
 import Kanban from './components/Kanban'
-import './index.css'
+import Swimlane from './components/Swimlane'
+
 
 function App() {
-  return (<Kanban />)
+  return (
+    <div>
+      <Swimlane />
+    </div>
+  );
+    
 }
 
 export default App;

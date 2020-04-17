@@ -1,35 +1,24 @@
-import React from 'react'
-import Column from './Column'
-
-class Swimlane extends React.Component {
-
-    
-    constructor(props){
-        super(props)
-
-    }
-    
+import React, {Component} from 'react'
+import Kanban from './Kanban'
+class Swimlane extends React.Component{
     state = {
-        inputValue: ''
+        list:[]
     }
-    
-    changeTitleHandler(e){
-      this.props.changeTitle(this.props.element,e.target.value)
-    }
+    addSwimlane=(e)=>{
+        const list = this.state.list;
+        this.setState({
+            list: list.concat(<Kanban/>)
 
-    render(){
-        const elements = this.props.columns.map(e => {
-            return <Column element={e} />
         })
+    }
+    render(){
         return(
-            <div className="swimlane" key={this.props.element.id}>
-                <div className='headofswimlane'>
-                    <input type="text" placeholder="Name" defaultValue={this.props.element.title} onChange={this.changeTitleHandler.bind(this)}></input>
-                </div>
-                {elements}
-                <div className="closeswimlinebutton" onClick={() => this.props.removeSwimlane(this.props.element)}></div>
+            <div>
+                <button onClick = {this.addSwimlane}> add swimline</button>
+                {this.state.list}
             </div>
         )
     }
 }
-export default Swimlane
+
+export default Swimlane;
