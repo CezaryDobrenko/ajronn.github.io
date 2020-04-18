@@ -52,7 +52,7 @@ class Swimlane extends React.Component{
 
     render(){
         const elements = this.state.columns.map(e => {
-            return <Droppable id={e.id} style={this.droppableStyle}><input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto"}}value={e.title}></input></Droppable>
+            return <Droppable id={e.id} style={this.droppableStyle}><input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto"}} defaultValue={e.title}></input></Droppable>
         })
 
 
