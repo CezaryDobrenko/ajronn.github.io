@@ -1,24 +1,23 @@
-import React, {Component} from 'react'
-import Kanban from './Kanban'
+import React from 'react'
+import Collapsible from 'react-collapsible'
+import Header from "./Header"
+
 class Swimlane extends React.Component{
-    state = {
-        list:[]
-    }
-    addSwimlane=(e)=>{
-        const list = this.state.list;
-        this.setState({
-            list: list.concat(<Kanban/>)
 
-        })
+    constructor(props)
+    {
+        super(props);
     }
-    render(){
-        return(
-            <div>
-                <button onClick = {this.addSwimlane}> add swimline</button>
-                {this.state.list}
+   render(){
+       return (
+           <div>
+            <Collapsible trigger={<div><input style={{width: "150px", height: "20px"}}type="text" defaultValue={this.props.element.title}></input><button onClick={() => this.props.removeSwimlane(this.props.element)}>Remove swimlane</button></div>}>
+                <p>TO JEST PRZYKLADOWY SWIMLANE I TU BEDA KOLUMNY</p>
+                <p>PRZYKLAD PRZYKLAD</p>
+            </Collapsible>
             </div>
-        )
-    }
+       )
+   }
 }
-
+    
 export default Swimlane;
