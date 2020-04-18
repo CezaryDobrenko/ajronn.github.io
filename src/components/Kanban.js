@@ -1,13 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Swimlane from './Swimlane'
 class Kanban extends React.Component{
     state = {
         swimlineid: 1,
-        columnid: 1,
         swimlines: [
             {id: 0, title: 'John'}
         ],
-        columns: [],
 
     }
 
