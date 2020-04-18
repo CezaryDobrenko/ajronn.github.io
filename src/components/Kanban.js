@@ -39,7 +39,7 @@ class Kanban extends React.Component{
 
         return(
             <div>
-                <button onClick = {this.addSwimlane.bind(this)}> add swimline</button>
+                <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
                 {elements}
             </div>
         )
