@@ -15,10 +15,7 @@ class Swimlane extends React.Component{
 
     state = {
         columnid: 0,
-        columns: [
-            {id: "0", wiplimit: null, title: "Backlog"}
-
-        ]
+        columns: []
 
         
     }
