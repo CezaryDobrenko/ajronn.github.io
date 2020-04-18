@@ -1,5 +1,7 @@
 import React from 'react'
 import Swimlane from './Swimlane'
+import NoteField from './NoteField'
+
 class Kanban extends React.Component{
     state = {
         swimlineid: 1,
@@ -41,6 +43,7 @@ class Kanban extends React.Component{
             <div>
                 <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
                 {elements}
+                <NoteField />
             </div>
         )
     }
