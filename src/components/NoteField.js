@@ -10,11 +10,12 @@ export default class NoteField extends React.Component{
     }
 
     state = {
-        exist: false,
+        toggle: false,
+        idnumber: 0,
         id: 'item0',
-        idnumber: 0
+        
     }
-    
+
 
     notefieldStyle = {
         height: "100px",
@@ -32,20 +33,18 @@ export default class NoteField extends React.Component{
     }
 
     addNoteToNoteField(){
-        /*this.setState({idnumber: this.state.idnumber+1})
+        this.setState({idnumber: this.state.idnumber + 1})
         this.setState({id: "item"+this.state.idnumber})
-        this.setState({exist: true})*/
+        
+        
     }
 
     render(){
-
+        const element = <Draggable id={this.state.id} style={this.noteStyle} ></Draggable>
 
         return(
-            <div style={this.notefieldStyle} onDragEnd={this.addNoteToNoteField.bind(this)}>
-                {this.state.exist
-                    ? null
-                    : <Draggable id={this.state.id} style={this.noteStyle} ></Draggable>
-                }
+            <div className="notefield" style={this.notefieldStyle} onDragEnd={this.addNoteToNoteField.bind(this)}>
+                {element}
             </div>
         )
 
