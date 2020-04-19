@@ -4,11 +4,17 @@ import Droppable from "../dnd/droppable"
 
 export default class NoteField extends React.Component{
 
-    state = {
-        note: [
-            {id: 'item1'}
-        ]
+    constructor(props){
+        super(props)
+        
     }
+
+    state = {
+        exist: false,
+        id: 'item0',
+        idnumber: 0
+    }
+    
 
     notefieldStyle = {
         height: "100px",
@@ -20,19 +26,26 @@ export default class NoteField extends React.Component{
 
     noteStyle = {
         height: "50px",
-        width: "196px",
+        width: "190px",
         backgroundColor: "rgb(70,50,98)",
-        margin: "2px"
+        margin: "5px"
+    }
+
+    addNoteToNoteField(){
+        /*this.setState({idnumber: this.state.idnumber+1})
+        this.setState({id: "item"+this.state.idnumber})
+        this.setState({exist: true})*/
     }
 
     render(){
-        const elements = this.state.note.map(e => {
-            return <Draggable id={e.id} style={this.noteStyle}></Draggable>
-        })
+
 
         return(
-            <div style={this.notefieldStyle}>
-                {elements}
+            <div style={this.notefieldStyle} onDragEnd={this.addNoteToNoteField.bind(this)}>
+                {this.state.exist
+                    ? null
+                    : <Draggable id={this.state.id} style={this.noteStyle} ></Draggable>
+                }
             </div>
         )
 
