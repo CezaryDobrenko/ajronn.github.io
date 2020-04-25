@@ -3,46 +3,69 @@ import Swimlane from './Swimlane'
 
 class Kanban extends React.Component{
     state = {
-        idnumber: 0,
-        swimlineid: 1,
-        swimlines: [
-            {id: 0, title: 'John'}
+        noteid: 1,
+        columnid: 1,
+        swimlaneid: 1,
+        swimlanes: [
+            {id: 'swimlane0', title: 'John'}
         ],
+        notes: [
+            {id: "note0", columnid: "column0"}
+        ],
+        columns: [
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog"}
+        ]
 
     }
 
-    incrementNoteIdNumber(){
-        this.setState({idnumber: this.state.idnumber+1})
-    }
-
-    addSwimlane(){
-        this.setState({swimlineid: this.state.swimlineid +1 })
+    addColumn(swimlaneid, title){
         
         const item = {
-            id: this.state.swimlineid,
+            id: 'column'+this.state.columnid+1,
+            swimlaneid: swimlaneid,
+            title: title
+        }
+        const newElements = [...this.state.columns, item]
+        this.setState({columns: newElements})
+        this.setState({columnid: this.state.columnid +1 })
+    }
+
+    addNote(columnid){
+        const item = {
+            id: 'item'+this.state.noteid,
+            columnid: columnid
+        }
+        const newElements = [...this.state.notes, item]
+        this.setState({notes: newElements})
+        this.setState({noteid: this.state.noteid+1})
+    }
+
+    addSwimlane(){      
+        const item = {
+            id: 'swimlane'+this.state.swimlaneid,
             title: ""
         }
-
-        const newElements = [...this.state.swimlines, item]
-        this.setState({swimlines: newElements})
+        const newElements = [...this.state.swimlanes, item]
+        this.setState({swimlanes: newElements})
+        this.setState({swimlaneid: this.state.swimlaneid +1 })
 
     }
 
     removeSwimlane(e){
-        var array = [...this.state.swimlines]
+        var array = [...this.state.swimlanes]
         var index = array.indexOf(e)
 
         if(index !== -1){
             array.splice(index,1);
-            this.setState({swimlines: array})
+            this.setState({swimlanes: array})
         }
     }
 
     render(){
-        const elements = this.state.swimlines.map(e => {
+        const elements = this.state.swimlanes.map(e => {
             return(
                 <div key={e.id}>
-                    <Swimlane element={e} removeSwimlane={this.removeSwimlane.bind(this)} incrementNoteIdNumber={this.incrementNoteIdNumber.bind(this)} idnumber={this.state.idnumber}/>
+                    <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}/>
                 </div>
             )
         })

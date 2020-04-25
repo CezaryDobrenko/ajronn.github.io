@@ -4,7 +4,7 @@ export default class AddColumnInput extends React.Component {
     
     _handleKeyDown = (e) => {
       if (e.key === 'Enter') {
-        {this.props.addColumn(e.target.value)}
+        {this.props.addColumn(this.props.swimlaneid,e.target.value)}
         e.target.value = ""
       }
     }

@@ -1,19 +1,26 @@
 import React from 'react'
-import Droppable from '../dnd/droppable'
-import Draggable from '../dnd/draggable'
 import '../css/note.css'
+import {useDrag} from 'react-dnd'
+import { ItemTypes } from './Items'
 
-class Note extends React.Component{
+const Note = props => {
+  
+    const[{isDragging}, drag] = useDrag({
+        item: {
+            type: ItemTypes.NOTE,
+            id: props.item.id
+        },
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging()
+        })
     
+    })
 
-    render(){
-
-
-
-       return (
-        <div className="note">Note id: {this.props.id}</div>
-       )
-   }
+    return(
+        <div className={"note"} ref={drag} id={props.item.id}>
+            {props.item.id}
+        </div>
+    )
 }
-    
+
 export default Note;

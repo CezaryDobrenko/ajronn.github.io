@@ -1,37 +1,19 @@
 import React from 'react'
 import Collapsible from 'react-collapsible'
-
 import Popup from "reactjs-popup"
 import AddColumnInput from "./AddColumnInput"
 import '../css/swimlane.css'
 import Column from './Column.js'
 
-
-class Swimlane extends React.Component{
-
-    state = {
-        columnid: 0,
-        columns: [
-            {id: "0", wiplimit: null, title: "Backlog"}
-        ]
-    }
+class Swimlane extends React.Component{   
     
-    addColumn(v){
-        this.setState({columnid: this.state.columnid +1 })
-        const item = {
-            id: this.state.columnid,
-            wiplimit: null,
-            title: v
-        }
-        const newElements = [...this.state.columns, item]
-        this.setState({columns: newElements})
-    }
-
     render(){
-        const elements = this.state.columns.map(e => {
+        const elements = this.props.columns
+        .filter((e) => e.swimlaneid == this.props.element.id)
+        .map(e => {
             return(
                 <div key = {e.id}>
-                    <Column id={e.id} title={e.title} idnumber={this.idnumber} incrementNoteIdNumber={this.props.incrementNoteIdNumber} idnumber={this.props.idnumber} />
+                    <Column id={e.id} title={e.title} notes= {this.props.notes} addNote={this.props.addNote} />
                 </div>
             )
         })
@@ -46,7 +28,7 @@ class Swimlane extends React.Component{
                         <div className="columnfield">
                             {elements}
                             <div className="addcolumnfield">
-                                <AddColumnInput addColumn={this.addColumn.bind(this)}/>
+                                <AddColumnInput addColumn={this.props.addColumn} swimlaneid = {this.props.element.id}/>
                             </div>
                         </div>
             </Collapsible>
