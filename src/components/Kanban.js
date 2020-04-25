@@ -1,14 +1,18 @@
 import React from 'react'
 import Swimlane from './Swimlane'
-import NoteField from './NoteField'
 
 class Kanban extends React.Component{
     state = {
+        idnumber: 0,
         swimlineid: 1,
         swimlines: [
             {id: 0, title: 'John'}
         ],
 
+    }
+
+    incrementNoteIdNumber(){
+        this.setState({idnumber: this.state.idnumber+1})
     }
 
     addSwimlane(){
@@ -36,14 +40,18 @@ class Kanban extends React.Component{
 
     render(){
         const elements = this.state.swimlines.map(e => {
-            return <Swimlane element={e} removeSwimlane={this.removeSwimlane.bind(this)}/>
+            return(
+                <div key={e.id}>
+                    <Swimlane element={e} removeSwimlane={this.removeSwimlane.bind(this)} incrementNoteIdNumber={this.incrementNoteIdNumber.bind(this)} idnumber={this.state.idnumber}/>
+                </div>
+            )
         })
 
         return(
             <div>
                 <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
                 {elements}
-                <NoteField />
+                
             </div>
         )
     }

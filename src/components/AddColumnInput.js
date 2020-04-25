@@ -1,9 +1,6 @@
 import React from "react"
 
 export default class AddColumnInput extends React.Component {
-    constructor(props){
-        super(props)
-    }
     
     _handleKeyDown = (e) => {
       if (e.key === 'Enter') {
