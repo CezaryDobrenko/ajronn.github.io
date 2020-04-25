@@ -4,10 +4,14 @@ import {ItemTypes} from './Items'
 
 const DropBox = props => {
 
-    const[{addedProps}, drop] = useDrop({
+    const[{isOver}, drop] = useDrop({
         accept: ItemTypes.NOTE,
         collect: monitor => ({
-            isOver: !!monitor.isOver()
+            isOver: !!monitor.isOver(),
+            drop: (
+                props.setColumnidTo(props.columnid, monitor.getItem())
+                /*props.moveNote(monitor.getItem())*/
+            )
         })
     })
 

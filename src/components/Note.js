@@ -10,8 +10,9 @@ const Note = props => {
             type: ItemTypes.NOTE,
             id: props.item.id
         },
+        
         collect: monitor => ({
-            isDragging: !!monitor.isDragging()
+            isDragging: !!monitor.isDragging(),
         })
     
     })
