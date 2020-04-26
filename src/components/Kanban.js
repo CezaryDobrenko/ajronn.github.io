@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 
@@ -15,10 +15,25 @@ class Kanban extends React.Component{
         ],
         columns: [
             {id: "column0", swimlaneid:"swimlane0",title: "Backlog"}
-        ],
+        ]
 
-        columnidto: "0",
-        noteidto: "0"
+    }
+
+    onDragEnd(result){
+        if (!result.destination) return;
+        if(result.destination.droppableId != null && result.source.droppableId != null)
+        {
+            this.setState({
+                notes: this.state.notes.map(e => {
+                    if(e.id == result.draggableId){
+                        e.columnid = result.destination.droppableId
+                    }
+                })
+            })
+
+            
+        }
+        
 
     }
 
@@ -82,6 +97,7 @@ class Kanban extends React.Component{
     }
 
     render(){
+        
         const elements = this.state.swimlanes.map(e => {
             return(
                 <div key={e.id}>
@@ -91,7 +107,7 @@ class Kanban extends React.Component{
         })
 
         return(
-            <DragDropContext>
+            <DragDropContext onDragEnd={result => this.onDragEnd(result)}>
 
                 <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
                 {elements}

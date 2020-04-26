@@ -12,11 +12,12 @@ class Column extends React.Component{
     
 
     render(){
-        const elements = this.props.notes
-        .filter((e) => e.columnid === this.props.id)
-        .map((e) => {
+            const elements = this.props.notes
+            .filter((e) => e.columnid === this.props.id)
+            .map((e) => {
             return <Note key={e.id} item={e}/>
         })
+        
 
 
        return (
