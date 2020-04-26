@@ -1,26 +1,26 @@
 import React from 'react'
 import '../css/note.css'
-import {useDrag} from 'react-dnd'
 import { ItemTypes } from './Items'
+import {Draggable} from 'react-beautiful-dnd'
 
 const Note = props => {
   
-    const[{isDragging}, drag] = useDrag({
-        item: {
-            type: ItemTypes.NOTE,
-            id: props.item.id
-        },
-        
-        collect: monitor => ({
-            isDragging: !!monitor.isDragging(),
-        })
     
-    })
 
     return(
-        <div className={"note"} ref={drag} id={props.item.id}>
-            {props.item.id}
-        </div>
+
+        <Draggable  draggableId={props.item.id} index={0}>
+            {(provided, snapshot) => (
+                <div
+                className={"note"}
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                >
+                    {"Note id "+props.item.id}
+                </div>
+            )}
+        </Draggable>
     )
 }
 

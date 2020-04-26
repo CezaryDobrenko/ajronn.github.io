@@ -1,5 +1,6 @@
 import React from 'react'
 import Swimlane from './Swimlane'
+import {DragDropContext} from 'react-beautiful-dnd'
 
 class Kanban extends React.Component{
     state = {
@@ -22,7 +23,7 @@ class Kanban extends React.Component{
     }
 
     moveNote(note){
-        if(note != null){
+        if(note != null && note.id != this.state.columnidto){
             this.state.notes.map(e => (e.id === note.id ? e.columnid = this.state.columnidto : null))
         }
     }
@@ -90,10 +91,12 @@ class Kanban extends React.Component{
         })
 
         return(
-            <div>
+            <DragDropContext>
+
                 <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
                 {elements}
-            </div>
+
+            </DragDropContext>
         )
     }
 }
