@@ -1,0 +1,22 @@
+.mb1 {
+    margin-bottom: 1rem;
+}
+
+.progress-container {
+    background: #ccc;
+    height: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    height: 10px;
+    border-radius: 10px;
+    background-color: #0da1d4;
+    display: block;
+}
+
+.siema{
+    float: left;
+}
