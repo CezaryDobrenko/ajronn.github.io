@@ -20,12 +20,23 @@ class Progress extends React.Component{
     }
 
     changeProgress(event) {
+
         if (event.target.value) {
             this.setState({progress: event.target.value})
             this.setState({validProgress: event.target.value})
         } else {
             this.setState({progress: event.target.value})
         }
+        if(event.target.value > 100 || event.target.value < 0)
+        {
+            this.setState({progress: 0})
+            this.setState({validProgress: 0})
+        }
+        if(event.target.value == "")
+        {
+            this.setState({validProgress: 0})
+        }
+
     }
 
     changeGoal(event) {
@@ -38,10 +49,11 @@ class Progress extends React.Component{
     }
 
 
+
     render() {
         return(
             <div>
-                <input type="text" className="mb1" value={this.state.progress} onChange={this.changeProgress}/>
+                <input type="number" min="0" max="100" className="mb1" value={this.state.progress} onChange={this.changeProgress}/>
                 <div className="progress-container">
                     <ProgressBar
                         progress={this.state.validProgress}

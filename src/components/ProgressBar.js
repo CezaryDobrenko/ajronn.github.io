@@ -6,8 +6,6 @@ class ProgressBar extends React.Component {
     calculateProgress(progress, goal) {
         if (Number(goal) >= Number(progress)) {
             return (progress/goal) * 100 + "%"
-        } else {
-            return 100 + "%"
         }
     }
 
