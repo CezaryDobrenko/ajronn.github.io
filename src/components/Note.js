@@ -10,9 +10,8 @@ import defaultAvatar from '../avatars/default.png'
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
     const handleClick=(name)=>{
-        console.log(props.item)
         props.item.avatar = name;
-        console.log(props.item)
+        props.reloadNotesState()
     }
     return(
         

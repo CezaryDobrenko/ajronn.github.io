@@ -32,14 +32,16 @@ class Kanban extends React.Component{
                     item = e
             })
             const index = copyOfNotes.indexOf(item)
-            const newNote = {id: item.id, columnid: result.destination.droppableId}
-            copyOfNotes[index] = newNote
-            
-            //wymuszam przeładowanie tablicy
-            this.setState({notes: copyOfNotes})
+            const newNote = {id: item.id, columnid: result.destination.droppableId, avatar: item.avatar}
+            this.state.notes[index] = newNote
+            this.reloadNotesState()
         }
         
 
+    }
+
+    reloadNotesState(){
+        this.setState({notes: this.state.notes})
     }
 
     moveNote(note){
@@ -110,7 +112,7 @@ class Kanban extends React.Component{
                 <div key={e.id}>
                     <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} 
                     addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
-                    setColumnidTo={this.setColumnidTo.bind(this)} moveNote={this.moveNote.bind(this)}/>
+                    setColumnidTo={this.setColumnidTo.bind(this)} moveNote={this.moveNote.bind(this)} reloadNotesState={this.reloadNotesState.bind(this)}/>
                 </div>
             )
         })

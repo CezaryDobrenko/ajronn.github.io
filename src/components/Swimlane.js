@@ -13,7 +13,7 @@ class Swimlane extends React.Component{
         .map(e => {
             return(
                 <div key = {e.id}>
-                    <Column id={e.id} title={e.title} notes= {this.props.notes} addNote={this.props.addNote}/>
+                    <Column id={e.id} title={e.title} notes= {this.props.notes} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
                 </div>
             )
         })

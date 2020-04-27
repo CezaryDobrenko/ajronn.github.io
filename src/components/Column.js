@@ -16,7 +16,7 @@ class Column extends React.Component{
             const elements = this.props.notes
             .filter((e) => e.columnid === this.props.id)
             .map((e) => {
-            return <Note key={e.id} item={e}/>
+            return <Note key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
         })
         
         
