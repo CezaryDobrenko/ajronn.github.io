@@ -1,7 +1,7 @@
 .note
 {
     width: calc(100% - 20px);
-    height: 50px;
+    height: auto;
     background-color: yellow;
     margin: 10px;
 }
