@@ -25,15 +25,18 @@ class Kanban extends React.Component{
         if (!result.destination) return;
         if(result.destination.droppableId != null && result.source.droppableId != null)
         {
-            this.setState({
-                notes: this.state.notes.map(e => {
-                    if(e.id == result.draggableId){
-                        e.columnid = result.destination.droppableId
-                    }
-                })
+            const copyOfNotes = this.state.notes;
+            var item;
+            copyOfNotes.map(e => {
+                if(e.id == result.draggableId)
+                    item = e
             })
-
+            const index = copyOfNotes.indexOf(item)
+            const newNote = {id: item.id, columnid: result.destination.droppableId}
+            copyOfNotes[index] = newNote
             
+            //wymuszam przeładowanie tablicy
+            this.setState({notes: copyOfNotes})
         }
         
 
@@ -69,7 +72,7 @@ class Kanban extends React.Component{
 
     addNote(columnid){
         const item = {
-            id: 'item'+this.state.noteid,
+            id: 'note'+this.state.noteid,
             columnid: columnid
             ,avatar: defaultAvatar
         }
@@ -105,7 +108,9 @@ class Kanban extends React.Component{
         const elements = this.state.swimlanes.map(e => {
             return(
                 <div key={e.id}>
-                    <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)} setColumnidTo={this.setColumnidTo.bind(this)} moveNote={this.moveNote.bind(this)}/>
+                    <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} 
+                    addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
+                    setColumnidTo={this.setColumnidTo.bind(this)} moveNote={this.moveNote.bind(this)}/>
                 </div>
             )
         })
