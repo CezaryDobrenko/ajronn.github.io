@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
+import defaultAvatar from '../avatars/default.png'
+
 
 class Kanban extends React.Component{
     state = {
@@ -11,7 +13,7 @@ class Kanban extends React.Component{
             {id: 'swimlane0', title: 'John'}
         ],
         notes: [
-            {id: "note0", columnid: "column0"}
+            {id: "note0", columnid: "column0",avatar:defaultAvatar }
         ],
         columns: [
             {id: "column0", swimlaneid:"swimlane0",title: "Backlog"}
@@ -69,11 +71,13 @@ class Kanban extends React.Component{
         const item = {
             id: 'item'+this.state.noteid,
             columnid: columnid
+            ,avatar: defaultAvatar
         }
         const newElements = [...this.state.notes, item]
         this.setState({notes: newElements})
         this.setState({noteid: this.state.noteid+1})
     }
+
 
     addSwimlane(){      
         const item = {
