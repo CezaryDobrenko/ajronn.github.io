@@ -14,7 +14,7 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "" }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 0 }]}
         ]
 
     }
@@ -93,7 +93,8 @@ class Kanban extends React.Component{
             id: 'note'+this.state.noteid,
             columnid: columnid,
             avatar: defaultAvatar,
-            contents: ""
+            contents: "",
+            progress: 0
         }
 
         const copyOfColumns = this.state.columns

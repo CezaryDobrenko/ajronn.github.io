@@ -5,7 +5,6 @@ import Popup from 'reactjs-popup'
 import avatar1 from '../avatars/avatar1.png'
 import avatar2 from '../avatars/avatar2.png'
 import avatar3 from '../avatars/avatar3.png'
-import Progress from "./Progress";
 
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
@@ -13,6 +12,9 @@ const Note = (props) => {
         props.item.avatar = name;
         props.reloadNotesState()
     }
+
+    const [progress, setProgress] = React.useState("0%")
+
     return(
         
         <Draggable  draggableId={props.item.id} index={props.index}>
@@ -35,9 +37,17 @@ const Note = (props) => {
                     </Popup>
                     </div>
                     <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
-                    <Progress/>
+                    
+                    <input type="text" onChange={event => setProgress(event.target.value+"%")}/>
+                    <div style={{width: "100%", height: "10px", backgroundColor: "grey"}}>
+                        <div style={{width: progress, height: "10px", backgroundColor: "lightblue", borderRadius: "5px"}}/>
+                    </div>
+                    
+                    
                 </div>
+                
             )}
+            
         </Draggable>
     )
 }
