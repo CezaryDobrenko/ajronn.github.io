@@ -7,7 +7,7 @@ const DropBox = (props) => {
    
     return(
         
-        <Droppable droppableId={props.columnid}>
+        <Droppable droppableId={props.columnid} >
             {(provided, snapshot) => (
                 <div
                 ref={provided.innerRef}

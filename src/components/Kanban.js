@@ -12,11 +12,9 @@ class Kanban extends React.Component{
         swimlanes: [
             {id: 'swimlane0', title: 'John'}
         ],
-        notes: [
-            {id: "note0", columnid: "column0",avatar:defaultAvatar }
-        ],
+        
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog"}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar }]}
         ]
 
     }
@@ -25,18 +23,36 @@ class Kanban extends React.Component{
         if (!result.destination) return;
         if(result.destination.droppableId != null && result.source.droppableId != null)
         {
-            const copyOfNotes = this.state.notes;
+            const {source,destination} = result;
+            console.log(source)
+            console.log(destination)
+
             var item;
-            copyOfNotes.map(e => {
-                if(e.id == result.draggableId)
-                    item = e
+            this.state.columns.map(e => {
+                if(e.id == source.droppableId){
+                    e.notes.map(e => {
+                        if(e.id == result.draggableId)
+                            item = e;
+                    })
+                }
             })
-            const index = copyOfNotes.indexOf(item)
-            const newNote = {id: item.id, columnid: result.destination.droppableId, avatar: item.avatar}
-            this.state.notes[index] = newNote
-            this.reloadNotesState()
+            
+            const copyOfColumns = this.state.columns
+            copyOfColumns.map(e => {
+                if(e.id == source.droppableId){
+                    e.notes.splice(source.index,1)
+                }
+            })
+
+            copyOfColumns.map(e => {
+                if(e.id == destination.droppableId){
+                    e.notes.splice(destination.index,0,item)
+                }
+            })
+
+            this.setState({columns: copyOfColumns})
         }
-        
+       
 
     }
 
@@ -44,11 +60,6 @@ class Kanban extends React.Component{
         this.setState({notes: this.state.notes})
     }
 
-    moveNote(note){
-        if(note != null && note.id != this.state.columnidto){
-            this.state.notes.map(e => (e.id === note.id ? e.columnid = this.state.columnidto : null))
-        }
-    }
 
     setColumnidTo(columnid, note){
         this.setState({columnidto: columnid})
@@ -65,7 +76,8 @@ class Kanban extends React.Component{
         const item = {
             id: 'column'+this.state.columnid,
             swimlaneid: swimlaneid,
-            title: title
+            title: title,
+            notes: []
         }
         const newElements = [...this.state.columns, item]
         this.setState({columns: newElements})
@@ -75,11 +87,20 @@ class Kanban extends React.Component{
     addNote(columnid){
         const item = {
             id: 'note'+this.state.noteid,
-            columnid: columnid
-            ,avatar: defaultAvatar
+            columnid: columnid,
+            avatar: defaultAvatar
         }
-        const newElements = [...this.state.notes, item]
-        this.setState({notes: newElements})
+
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => {
+            if(e.id == columnid)
+                e.notes = [...e.notes,item]
+        })
+
+        
+
+        
+        this.setState({columns: copyOfColumns})
         this.setState({noteid: this.state.noteid+1})
     }
 
@@ -112,7 +133,7 @@ class Kanban extends React.Component{
                 <div key={e.id}>
                     <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} 
                     addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
-                    setColumnidTo={this.setColumnidTo.bind(this)} moveNote={this.moveNote.bind(this)} reloadNotesState={this.reloadNotesState.bind(this)}/>
+                    setColumnidTo={this.setColumnidTo.bind(this)} reloadNotesState={this.reloadNotesState.bind(this)}/>
                 </div>
             )
         })

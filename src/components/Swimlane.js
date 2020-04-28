@@ -10,10 +10,10 @@ class Swimlane extends React.Component{
     render(){
         const elements = this.props.columns
         .filter((e) => e.swimlaneid === this.props.element.id)
-        .map(e => {
+        .map((e,index) => {
             return(
                 <div key = {e.id}>
-                    <Column id={e.id} title={e.title} notes= {this.props.notes} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
+                    <Column element={e} index={index} title={e.title} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
                 </div>
             )
         })

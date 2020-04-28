@@ -16,7 +16,7 @@ const Note = (props) => {
     }
     return(
         
-        <Draggable  draggableId={props.item.id} index={0}>
+        <Draggable  draggableId={props.item.id} index={props.index}>
             {(provided, snapshot) => (
                 <div
                 className={"note"}

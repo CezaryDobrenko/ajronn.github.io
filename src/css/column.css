@@ -2,7 +2,7 @@
 {
 
     background-color: rgb(70,83,98);
-    width: 200px;
+    min-width: 200px;
     margin: 15px;
     float: left;
     border-radius: 20px;
