@@ -1,5 +1,6 @@
 .mb1 {
     margin-bottom: 1rem;
+    width: 10px;
 }
 
 .progress-container {
@@ -17,9 +18,6 @@
     display: block;
 }
 
-.siema{
-    float: left;
-}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -30,6 +28,5 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-  width: 30px;
+    width:30px !important;
 }
-
