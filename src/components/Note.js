@@ -13,8 +13,6 @@ const Note = (props) => {
         props.reloadNotesState()
     }
 
-    const [progress, setProgress] = React.useState("0%")
-
     const changeProgress = (e) =>{
         var value = 0;
 
@@ -52,7 +50,7 @@ const Note = (props) => {
                     </div>
                     <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
                     
-                    <input style={{width: "30px"}} type="text" onChange={event => changeProgress(event.target.value)}/>
+                    <input style={{width: "30px"}} maxLength="3" type="text" onChange={event => changeProgress(event.target.value)}/>
                     <div style={{width: "100%", height: "10px", backgroundColor: "grey", textAlign: "center"}}>
                         <div style={{width: props.item.progress+"%", height: "10px", backgroundImage: "linear-gradient(to right, rgb(26, 178, 255), lightblue)", borderRadius: "5px"}}></div>
                     </div>
