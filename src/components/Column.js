@@ -18,7 +18,7 @@ class Column extends React.Component{
 
             const elements = this.props.element.notes
             .map((e,index) => {
-            return <Note index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
+            return <Note changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
         })
         
         

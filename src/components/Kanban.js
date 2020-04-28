@@ -19,6 +19,19 @@ class Kanban extends React.Component{
 
     }
 
+    changeProgress(noteid, value){
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => {
+            e.notes.map(e => {
+                if(e.id === noteid){
+                    e.progress = value
+                }
+            })
+        })
+
+        this.setState({columns: copyOfColumns})
+    }
+
     changeColumnTitle(columnid, title){
         const copyOfColumns = this.state.columns
         copyOfColumns.map(e => (e.id === columnid ? e.title = title : e))
@@ -139,7 +152,8 @@ class Kanban extends React.Component{
                 <div key={e.id}>
                     <Swimlane element={e} columns={this.state.columns} addNote={this.addNote.bind(this)}
                     addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
-                    reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}/>
+                    reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}
+                    changeProgress={this.changeProgress.bind(this)}/>
                 </div>
             )
         })

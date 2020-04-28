@@ -15,6 +15,20 @@ const Note = (props) => {
 
     const [progress, setProgress] = React.useState("0%")
 
+    const changeProgress = (e) =>{
+        var value = 0;
+
+        if(e >= 0 && e<=100)
+            value = e;
+        
+        if(e>100)
+            value = 100;
+
+        if(e == "")
+            value = 0;
+        props.changeProgress(props.item.id,value)
+    }
+
     return(
         
         <Draggable  draggableId={props.item.id} index={props.index}>
@@ -38,9 +52,9 @@ const Note = (props) => {
                     </div>
                     <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
                     
-                    <input type="text" onChange={event => setProgress(event.target.value+"%")}/>
-                    <div style={{width: "100%", height: "10px", backgroundColor: "grey"}}>
-                        <div style={{width: progress, height: "10px", backgroundColor: "lightblue", borderRadius: "5px"}}/>
+                    <input style={{width: "30px"}} type="text" onChange={event => changeProgress(event.target.value)}/>
+                    <div style={{width: "100%", height: "10px", backgroundColor: "grey", textAlign: "center"}}>
+                        <div style={{width: props.item.progress+"%", height: "10px", backgroundImage: "linear-gradient(to right, rgb(26, 178, 255), lightblue)", borderRadius: "5px"}}></div>
                     </div>
                     
                     
