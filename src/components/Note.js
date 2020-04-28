@@ -25,7 +25,7 @@ const Note = (props) => {
                 >
                     
 
-                    <div style={{position: "relative", top: "-20px", left: "150px"}}>
+                    <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
                     <Popup trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center">
                         <div>
                             <button onClick={()=>handleClick(avatar1)} style={{visibility:"hidden"}}> <img src={avatar1} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
@@ -34,7 +34,7 @@ const Note = (props) => {
                         </div>
                     </Popup>
                     </div>
-                    <textarea defaultValue={props.item.contents}/>
+                    <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
                     <Progress/>
                 </div>
             )}

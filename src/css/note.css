@@ -2,10 +2,13 @@
 {
     width: calc(100% - 20px);
     height: auto;
-    background-color: yellow;
+    background-color: rgb(255, 255, 128);
     margin: 10px;
+    position: relative;
 }
 
 textarea{
     resize: none;
+    z-index: 0;
+
 }
