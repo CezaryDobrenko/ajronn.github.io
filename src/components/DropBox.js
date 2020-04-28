@@ -1,5 +1,4 @@
 import React from 'react'
-import {ItemTypes} from './Items'
 import {Droppable} from 'react-beautiful-dnd'
 
 const DropBox = (props) => {

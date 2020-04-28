@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 import defaultAvatar from '../avatars/default.png'
@@ -14,9 +14,15 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "" }]}
         ]
 
+    }
+
+    changeColumnTitle(columnid, title){
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => (e.id === columnid ? e.title = title : e))
+        this.setState({columns: copyOfColumns})
     }
 
     onDragEnd(result){
@@ -24,14 +30,12 @@ class Kanban extends React.Component{
         if(result.destination.droppableId != null && result.source.droppableId != null)
         {
             const {source,destination} = result;
-            console.log(source)
-            console.log(destination)
 
             var item;
             this.state.columns.map(e => {
-                if(e.id == source.droppableId){
+                if(e.id === source.droppableId){
                     e.notes.map(e => {
-                        if(e.id == result.draggableId)
+                        if(e.id === result.draggableId)
                             item = e;
                     })
                 }
@@ -39,13 +43,13 @@ class Kanban extends React.Component{
             
             const copyOfColumns = this.state.columns
             copyOfColumns.map(e => {
-                if(e.id == source.droppableId){
+                if(e.id === source.droppableId){
                     e.notes.splice(source.index,1)
                 }
             })
 
             copyOfColumns.map(e => {
-                if(e.id == destination.droppableId){
+                if(e.id === destination.droppableId){
                     e.notes.splice(destination.index,0,item)
                 }
             })
@@ -88,12 +92,13 @@ class Kanban extends React.Component{
         const item = {
             id: 'note'+this.state.noteid,
             columnid: columnid,
-            avatar: defaultAvatar
+            avatar: defaultAvatar,
+            contents: ""
         }
 
         const copyOfColumns = this.state.columns
         copyOfColumns.map(e => {
-            if(e.id == columnid)
+            if(e.id === columnid)
                 e.notes = [...e.notes,item]
         })
 
@@ -131,9 +136,9 @@ class Kanban extends React.Component{
         const elements = this.state.swimlanes.map(e => {
             return(
                 <div key={e.id}>
-                    <Swimlane element={e} columns={this.state.columns} notes={this.state.notes} addNote={this.addNote.bind(this)} 
+                    <Swimlane element={e} columns={this.state.columns} addNote={this.addNote.bind(this)}
                     addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
-                    setColumnidTo={this.setColumnidTo.bind(this)} reloadNotesState={this.reloadNotesState.bind(this)}/>
+                    reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}/>
                 </div>
             )
         })

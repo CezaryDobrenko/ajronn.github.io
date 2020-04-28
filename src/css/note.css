@@ -5,3 +5,7 @@
     background-color: yellow;
     margin: 10px;
 }
+
+textarea{
+    resize: none;
+}

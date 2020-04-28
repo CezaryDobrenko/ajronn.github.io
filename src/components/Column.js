@@ -9,6 +9,9 @@ class Column extends React.Component{
         minHeight: "100px",
     }
 
+    changeTitle = (e) => {
+        this.props.changeColumnTitle(this.props.element.id,e.target.value)
+    }
     
 
     render(){
@@ -22,7 +25,7 @@ class Column extends React.Component{
 
        return (
            <div className={"column"} id={this.props.id}>
-               <div><input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto"}} defaultValue={this.props.title}></input>
+               <div><input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto"}} defaultValue={this.props.title} onChange={this.changeTitle} />
                     <DropBox notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
                <button onClick={() => this.props.addNote(this.props.element.id)} style={{bottom: "0px", position: "relative",width: "calc(100% - 20px)", margin: "5px 10px"}}>Add note</button>

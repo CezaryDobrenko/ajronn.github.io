@@ -1,5 +1,4 @@
 import React from 'react'
-import Collapsible from 'react-collapsible'
 import ProgressBar from "./ProgressBar";
 import '../css/progress.css'
 
@@ -32,7 +31,7 @@ class Progress extends React.Component{
             this.setState({progress: 0})
             this.setState({validProgress: 0})
         }
-        if(event.target.value == "")
+        if(event.target.value === "")
         {
             this.setState({validProgress: 0})
         }
