@@ -40,8 +40,9 @@ const Note = (props) => {
                     
 
                     <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
-                    <Popup trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center">
-                        <div>
+                    <Popup contentStyle={{width: "auto"}} modal trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center" >
+                        <div style={{textAlign: "center"}}>
+                            Choose avatar<br/>
                             <button onClick={()=>handleClick(avatar1)} style={{visibility:"hidden"}}> <img src={avatar1} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
                             <button onClick={()=>handleClick(avatar2)} style={{visibility:"hidden"}}> <img src={avatar2} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
                             <button onClick={()=>handleClick(avatar3)} style={{visibility:"hidden"}}> <img src={avatar3} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
@@ -52,13 +53,14 @@ const Note = (props) => {
                 
                     
                     
-                    
-                    <Popup trigger={
+
+                    <Popup contentStyle={{width: "auto"}} modal trigger={
                         <div style={{width: "100%", height: "10px", backgroundColor: "grey", textAlign: "center"}}>
                             <div style={{width: props.item.progress+"%", height: "10px", backgroundImage: "linear-gradient(to right, rgb(26, 178, 255), lightblue)", borderRadius: "5px"}}></div>
                         </div>
                     }>
-                        <input style={{width: "30px"}} maxLength="3" type="text" onChange={event => changeProgress(event.target.value)}/>
+                        Change value of progress<br/>
+                        <input placeholder="%" style={{width: "30px", marginLeft: "auto", marginRight: "auto", display: "block"}} maxLength="3" type="text" onChange={event => changeProgress(event.target.value)}/>
                     </Popup>
                     
                 </div>
