@@ -15,7 +15,7 @@ const Note = (props) => {
     }
 
     const changeProgress = (e) =>{
-        console.log(e)
+
         var value = 0;
 
         if(e >= 0 && e<=100)
@@ -40,7 +40,7 @@ const Note = (props) => {
                 {...provided.dragHandleProps}
                 >
                     
-
+                    
                     <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
                     <Popup contentStyle={{width: "auto"}} modal trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center" >
                         <div style={{textAlign: "center"}}>
@@ -51,6 +51,7 @@ const Note = (props) => {
                         </div>
                     </Popup>
                     </div>
+                    <div className="removenotebutton" onClick={() => props.removeNote(props.item, props.item.columnid)}/>
                     <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
                 
                     

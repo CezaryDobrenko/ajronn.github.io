@@ -31,24 +31,22 @@ class Kanban extends React.Component{
         this.setState({columns: copyOfColumns})
     }
 
-    removeNote(noteid, columnid){
+    removeNote(note, columnid){
         const copyOfColumns = this.state.columns
-        var copyOfNotes;
-        copyOfColumns.map( (e,index) => {
-            if(e.id === columnid){
-                copyOfNotes = e.notes;
-                var item;
-                copyOfNotes = copyOfNotes.map(e =>{
-                    if(noteid === e.id){
-                        item = e;
-                    }
-                })
-                copyOfNotes.splice(copyOfNotes.indexOf(item),1)
-                e.notes = copyOfNotes;
-
+        let copyOfColumn;
+        copyOfColumns.map(e =>{
+            if(e.id == columnid){
+                copyOfColumn = e;
             }
         })
 
+        let i = copyOfColumn.notes.indexOf(note)
+        copyOfColumn.notes.splice(i,1)
+        copyOfColumns.map(e =>{
+            if(e.id == columnid){
+                e=copyOfColumn
+            }
+        })
         this.setState({columns: copyOfColumns})
     }
 
