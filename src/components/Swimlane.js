@@ -20,7 +20,7 @@ class Swimlane extends React.Component{
 
        return (
            <div>
-            <Collapsible trigger={<div><Popup trigger={<button>Trigger</button>} position="right center">
+            <Collapsible triggerStyle={{backgroundColor: "rgb(70,83,98)"}} trigger={<div><Popup trigger={<button>Trigger</button>} position="right center">
                 <input type="text" defaultValue={this.props.element.title}/>
                 <button onClick={() => this.props.removeSwimlane(this.props.element)}>Remove swimlane</button>
                 </Popup></div>}>
