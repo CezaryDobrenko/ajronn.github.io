@@ -13,19 +13,17 @@ class Swimlane extends React.Component{
         .map((e,index) => {
             return(
                 <div key = {e.id}>
-                    <Column changeColumnWIPLimit={this.props.changeColumnWIPLimit} removeNote={this.props.removeNote} removeColumn={this.props.removeColumn} changeProgress={this.props.changeProgress} changeColumnTitle={this.props.changeColumnTitle} element={e} index={index} title={e.title} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
+                    <Column changeColumnInfo={this.props.changeColumnInfo} changeColumnWIPLimit={this.props.changeColumnWIPLimit} removeNote={this.props.removeNote} removeColumn={this.props.removeColumn} changeProgress={this.props.changeProgress} changeColumnTitle={this.props.changeColumnTitle} element={e} index={index} title={e.title} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
                 </div>
             )
         })
 
        return (
            <div>
-            <Collapsible triggerStyle={{backgroundColor: "rgb(70,83,98)"}} trigger={<div><Popup trigger={<button>Trigger</button>} position="right center">
-                <input type="text" defaultValue={this.props.element.title}/>
-                <button onClick={() => this.props.removeSwimlane(this.props.element)}>Remove swimlane</button>
-                </Popup></div>}>
-
+            <Collapsible triggerStyle={{backgroundColor: "rgb(70,83,98)", height: "50px"}} >
+                <div style={{width: "100%", height: "50px", borderBottom: "1px solid black"}}><button onClick={() => this.props.removeSwimlane(this.props.element)}>- swimlane</button><input type="text" style={{width: "auto"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
                         <div className="columnfield">
+
                             {elements}
                             <div className="addcolumnfield">
                                 <AddColumnInput addColumn={this.props.addColumn} swimlaneid = {this.props.element.id}/>

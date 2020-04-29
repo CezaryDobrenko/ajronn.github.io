@@ -6,13 +6,19 @@ import avatar1 from '../avatars/avatar1.png'
 import avatar2 from '../avatars/avatar2.png'
 import avatar3 from '../avatars/avatar3.png'
 import Progressbar from './Progressbar'
+import TextareaAutosize from 'react-textarea-autosize';
+
 
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
     const handleClick=(name)=>{
         props.item.avatar = name;
         props.reloadNotesState()
+        
     }
+
+
+    
 
     const changeProgress = (e) =>{
 
@@ -52,7 +58,8 @@ const Note = (props) => {
                     </Popup>
                     </div>
                     <div className="removenotebutton" onClick={() => props.removeNote(props.item, props.item.columnid)}/>
-                    <div style={{margin: "5px", paddingTop: "10px"}}><textarea defaultValue={props.item.contents}/></div>
+                    <div style={{margin: "5px", paddingTop: "10px"}}><TextareaAutosize defaultValue={props.item.contents}/>
+                    </div>
                 
                     
                     

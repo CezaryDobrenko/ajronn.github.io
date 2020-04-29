@@ -3,6 +3,9 @@ import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 import defaultAvatar from '../avatars/default.png'
 
+
+
+
 class Kanban extends React.Component{
     state = {
         noteid: 1,
@@ -13,9 +16,30 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0, notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 10 }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 10 }]}
         ]
 
+    }
+
+    changeColumnInfo(columnid, i){
+        
+        let info = i.replace(String.fromCharCode(10),"<br />")
+
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => (e.id === columnid ? e.info = info : e))
+        this.setState({columns: copyOfColumns})
+    }
+
+
+    changeSwimlaneTitle(swimlane, title){
+        let copyOfSwimlanes = this.state.swimlanes
+        copyOfSwimlanes.map(e => {
+            if(e.id == swimlane.id){
+                e.title = title;
+            }
+        })
+
+        this.setState({swimlanes: copyOfSwimlanes})
     }
 
     changeColumnWIPLimit(columnid, wip){
@@ -28,6 +52,7 @@ class Kanban extends React.Component{
         }
         const copyOfColumns = this.state.columns
         copyOfColumns.map(e => (e.id === columnid ? e.wiplimit = wiplimit : e))
+        
         this.setState({columns: copyOfColumns})
     }
 
@@ -106,7 +131,7 @@ class Kanban extends React.Component{
                     e.notes.splice(source.index,1)
                 }
             })
-            
+            item.columnid = destination.droppableId;
             copyOfColumns.map(e => {
                 if(e.id === destination.droppableId){
                     e.notes.splice(destination.index,0,item)
@@ -141,7 +166,8 @@ class Kanban extends React.Component{
             swimlaneid: swimlaneid,
             title: title,
             notes: [],
-            wiplimit: 0
+            wiplimit: 0,
+            info: ""
         }
         const newElements = [...this.state.columns, item]
         this.setState({columns: newElements})
@@ -201,7 +227,8 @@ class Kanban extends React.Component{
                     addColumn={this.addColumn.bind(this)} removeSwimlane={this.removeSwimlane.bind(this)}
                     reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
-                    changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)}/>
+                    changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
+                    changeColumnInfo={this.changeColumnInfo.bind(this)}/>
                 </div>
             )
         })
@@ -209,10 +236,10 @@ class Kanban extends React.Component{
         return(
             <div>
                 <DragDropContext onDragEnd={result => this.onDragEnd(result)}>
-                    <button onClick = {this.addSwimlane.bind(this)}> add swimlane</button>
+                    <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
                     {elements}
                 </DragDropContext>
-                
+
             </div>
             
         )
