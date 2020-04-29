@@ -41,6 +41,7 @@ class Kanban extends React.Component{
 
         this.setState({swimlanes: copyOfSwimlanes})
     }
+    
 
     changeColumnWIPLimit(columnid, wip){
         let wiplimit;
@@ -75,6 +76,7 @@ class Kanban extends React.Component{
         this.setState({columns: copyOfColumns})
     }
 
+
     removeColumn(columnid){
         const copyOfColumns = this.state.columns
 
@@ -108,6 +110,7 @@ class Kanban extends React.Component{
         copyOfColumns.map(e => (e.id === columnid ? e.title = title : e))
         this.setState({columns: copyOfColumns})
     }
+    
 
     onDragEnd(result){
         if (!result.destination) return;
@@ -147,6 +150,7 @@ class Kanban extends React.Component{
     reloadNotesState(){
         this.setState({notes: this.state.notes})
     }
+
 
 
     setColumnidTo(columnid, note){
@@ -195,7 +199,7 @@ class Kanban extends React.Component{
         this.setState({columns: copyOfColumns})
         this.setState({noteid: this.state.noteid+1})
     }
-
+    
 
     addSwimlane(){      
         const item = {
@@ -217,6 +221,7 @@ class Kanban extends React.Component{
             this.setState({swimlanes: array})
         }
     }
+    
 
     render(){
         
@@ -228,7 +233,7 @@ class Kanban extends React.Component{
                     reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
                     changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
-                    changeColumnInfo={this.changeColumnInfo.bind(this)}/>
+                    changeColumnInfo={this.changeColumnInfo.bind(this) }/>
                 </div>
             )
         })

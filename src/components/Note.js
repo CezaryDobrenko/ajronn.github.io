@@ -16,9 +16,11 @@ const Note = (props) => {
         props.reloadNotesState()
         
     }
+    const handleText=(e)=>{
+        props.item.contents = e.target.value;
+        props.reloadNotesState()
+    }
 
-
-    
 
     const changeProgress = (e) =>{
 
@@ -48,7 +50,7 @@ const Note = (props) => {
                     
                     
                     <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
-                    <Popup contentStyle={{width: "auto"}} modal trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center" >
+                    <Popup contentStyle={{width: "auto"}} trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/></button>} position="right center" >
                         <div style={{textAlign: "center"}}>
                             Choose avatar<br/>
                             <button onClick={()=>handleClick(avatar1)} style={{visibility:"hidden"}}> <img src={avatar1} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
@@ -58,7 +60,7 @@ const Note = (props) => {
                     </Popup>
                     </div>
                     <div className="removenotebutton" onClick={() => props.removeNote(props.item, props.item.columnid)}/>
-                    <div style={{margin: "5px", paddingTop: "10px"}}><TextareaAutosize defaultValue={props.item.contents}/>
+                    <div style={{margin: "5px", paddingTop: "10px"}}><TextareaAutosize onChange = {handleText} defaultValue={props.item.contents}/>
                     </div>
                 
                     
