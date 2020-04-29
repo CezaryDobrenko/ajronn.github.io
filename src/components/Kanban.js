@@ -2,7 +2,7 @@ import React from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 import defaultAvatar from '../avatars/default.png'
-
+import ReactTooltip from "react-tooltip";
 
 
 
@@ -239,7 +239,7 @@ class Kanban extends React.Component{
                     <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
                     {elements}
                 </DragDropContext>
-
+                <ReactTooltip multiline={true} />
             </div>
             
         )
