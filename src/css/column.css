@@ -6,6 +6,36 @@
     margin: 15px;
     float: left;
     border-radius: 20px;
+    position: relative;
 
+}
 
+.xbutton{
+    width: 20px;
+    height: 20px;
+    background-image: url("../img/x.png");
+    background-repeat:no-repeat;
+    background-size: 20px 20px;
+    position: absolute;
+    top: -5px;
+    left: calc(100% - 20px);
+
+}
+
+.xbutton:hover{
+    transform: rotate(180deg);
+    transition-duration: 1s;
+}
+
+.wiplimitfield{
+    width: 27px;
+    height: 27px;
+    /*background-color: rgb(255, 255, 128);*/
+    border: 2px solid rgb(70,83,98);
+    background-size: 20px 20px;
+    position: absolute;
+    left: calc(50% - 8px);
+    top: -5px;
+    border-radius: 5px;
+    text-align: center;
 }

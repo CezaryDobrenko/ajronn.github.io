@@ -5,6 +5,7 @@ import Popup from 'reactjs-popup'
 import avatar1 from '../avatars/avatar1.png'
 import avatar2 from '../avatars/avatar2.png'
 import avatar3 from '../avatars/avatar3.png'
+import Progressbar from './Progressbar'
 
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
@@ -14,6 +15,7 @@ const Note = (props) => {
     }
 
     const changeProgress = (e) =>{
+        console.log(e)
         var value = 0;
 
         if(e >= 0 && e<=100)
@@ -28,7 +30,7 @@ const Note = (props) => {
     }
 
     return(
-        
+
         <Draggable  draggableId={props.item.id} index={props.index}>
             {(provided, snapshot) => (
                 <div
@@ -53,21 +55,17 @@ const Note = (props) => {
                 
                     
                     
-
-                    <Popup contentStyle={{width: "auto"}} modal trigger={
-                        <div style={{width: "100%", height: "10px", backgroundColor: "grey", textAlign: "center"}}>
-                            <div style={{width: props.item.progress+"%", height: "10px", backgroundImage: "linear-gradient(to right, rgb(26, 178, 255), lightblue)", borderRadius: "5px"}}></div>
-                        </div>
-                    }>
-                        Change value of progress<br/>
-                        <input placeholder="%" style={{width: "30px", marginLeft: "auto", marginRight: "auto", display: "block"}} maxLength="3" type="text" onChange={event => changeProgress(event.target.value)}/>
-                    </Popup>
+                    <Progressbar progress={props.item.progress} changeProgress={changeProgress}/>
+                    
                     
                 </div>
                 
             )}
             
         </Draggable>
+        
+
+        
     )
 }
 
