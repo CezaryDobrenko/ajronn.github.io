@@ -3,7 +3,6 @@ import '../css/column.css'
 import Note from './Note.js'
 import DropBox from './DropBox'
 import Popup from 'reactjs-popup'
-import ReactTooltip from "react-tooltip";
 import TextareaAutosize from 'react-textarea-autosize'
 
 class Column extends React.Component{
@@ -43,7 +42,7 @@ class Column extends React.Component{
                </div>
                <button onClick={() => this.props.addNote(this.props.element.id)} style={{bottom: "0px", position: "relative",width: "calc(100% - 20px)", margin: "5px 10px"}}>Add note</button>
                 <Popup modal contentStyle={{width: "auto"}} trigger={<p data-place="bottom" data-tip={this.props.element.info}><div className="infofield"/></p>}>Change condition<TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))} onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/></Popup>
-                <ReactTooltip multiline={true} />
+                
 
            </div>
        )

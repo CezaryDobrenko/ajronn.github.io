@@ -26,7 +26,7 @@ class Swimlane extends React.Component{
 
                             {elements}
                             <div className="addcolumnfield">
-                                <AddColumnInput addColumn={this.props.addColumn} swimlaneid = {this.props.element.id}/>
+                                <AddColumnInput addColumn={this.props.addColumn}/>
                             </div>
                         </div>
             </Collapsible>

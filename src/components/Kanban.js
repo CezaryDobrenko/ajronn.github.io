@@ -163,8 +163,8 @@ class Kanban extends React.Component{
         }
     }
 
-    addColumn(swimlaneid, title){
-        
+    addColumn(title){
+        /*
         const item = {
             id: 'column'+this.state.columnid,
             swimlaneid: swimlaneid,
@@ -175,7 +175,29 @@ class Kanban extends React.Component{
         }
         const newElements = [...this.state.columns, item]
         this.setState({columns: newElements})
-        this.setState({columnid: this.state.columnid +1 })
+        this.setState({columnid: this.state.columnid +1 })*/
+            let i = this.state.columnid;
+            let newColumns = []
+            this.state.swimlanes.map( e => {
+
+                    let col = {
+                        id: 'column'+i,
+                        swimlaneid: e.id,
+                        title: title,
+                        wiplimit: 0,
+                        info: "",
+                        notes: []
+                    }
+                    newColumns.push(col)
+                    i++;
+
+            })
+            this.setState({columnid: i})
+            let sumOfColumns = [...this.state.columns, ...newColumns];
+            this.setState({columns: sumOfColumns});
+
+
+
     }
 
     addNote(columnid){
@@ -202,12 +224,45 @@ class Kanban extends React.Component{
     
 
     addSwimlane(){      
+        if(this.state.columns.length>0){
+            let swimlaneid = this.state.swimlanes[0].id;
+            let columnsTitles = [];
+            let i = this.state.columnid;
+            this.state.columns.map( e => {
+                if(e.swimlaneid == swimlaneid){
+                    let col = {
+                        id: 'column'+i,
+                        swimlaneid: 'swimlane'+this.state.swimlaneid,
+                        title: e.title,
+                        wiplimit: e.wiplimit,
+                        info: "",
+                        notes: []
+                    }
+                    columnsTitles.push(col)
+                    
+                    i++;
+                }
+
+            })
+
+            let newColumns = [...this.state.columns, ...columnsTitles];
+            this.setState({columns: newColumns});
+            this.setState({columnid: i});
+
+
+            
+        }
+        
+        
+
         const item = {
             id: 'swimlane'+this.state.swimlaneid,
             title: ""
         }
+
         const newElements = [...this.state.swimlanes, item]
         this.setState({swimlanes: newElements})
+        
         this.setState({swimlaneid: this.state.swimlaneid +1 })
 
     }
