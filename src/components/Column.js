@@ -4,6 +4,7 @@ import Note from './Note.js'
 import DropBox from './DropBox'
 import Popup from 'reactjs-popup'
 import TextareaAutosize from 'react-textarea-autosize'
+import ReactTooltip from "react-tooltip";
 
 class Column extends React.Component{
 
@@ -22,7 +23,7 @@ class Column extends React.Component{
 
             const elements = this.props.element.notes
             .map((e,index) => {
-            return <Note removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
+            return <Note checkUserLimit={this.props.checkUserLimit} changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
         })
         
         
@@ -43,7 +44,7 @@ class Column extends React.Component{
                <button onClick={() => this.props.addNote(this.props.element.id)} style={{bottom: "0px", position: "relative",width: "calc(100% - 20px)", margin: "5px 10px"}}>Add note</button>
                 <Popup modal contentStyle={{width: "auto"}} trigger={<p data-place="bottom" data-tip={this.props.element.info}><div className="infofield"/></p>}>Change condition<TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))} onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/></Popup>
                 
-
+                <ReactTooltip multiline={true} />
            </div>
        )
         

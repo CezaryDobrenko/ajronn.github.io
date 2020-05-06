@@ -2,12 +2,19 @@ import React from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 import defaultAvatar from '../avatars/default.png'
-import ReactTooltip from "react-tooltip";
 
 
+import Ricky from '../avatars/ricky.jpg'
+import Julian from '../avatars/julian.jpeg'
+import Bubbles from '../avatars/bubbles.jpg'
 
 class Kanban extends React.Component{
     state = {
+        users: [
+            {name: "Ricky", avatar: Ricky, wiplimit: 1},
+            {name: "Julian", avatar: Julian, wiplimit: 3},
+            {name: "Bubbles", avatar: Bubbles, wiplimit: 2},
+        ],
         noteid: 1,
         columnid: 1,
         swimlaneid: 1,
@@ -16,8 +23,62 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 10 }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 10, color: "yellow", block: false, }]}
         ]
+
+    }
+
+    checkUserLimit(user){
+        
+        let limit = 0;
+        this.state.users.map(e => {
+            if(e.avatar === user)
+                limit = e.wiplimit;
+        })
+
+        let counter = 0;
+        this.state.columns.map(col => {
+            col.notes.map(no => {
+                
+                if(no.avatar === user)
+                    counter++;
+            })
+        })
+
+ 
+
+            const copyOfColumns = this.state.columns
+            copyOfColumns.map(e => {
+                e.notes.map(e => {
+                    console.log(e.avatar)
+                    if(e.avatar === user && counter > limit){
+                        e.block = true;
+                    }
+                    else{
+                        e.block = false;
+                    }
+                })
+            })
+
+            this.setState({columns: copyOfColumns})
+
+        
+
+    }
+
+
+    changeColor(noteid, color){
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => {
+            e.notes.map(e => {
+                if(e.id === noteid){
+                    e.color = color
+                }
+            })
+        })
+
+        this.setState({columns: copyOfColumns})
+
 
     }
 
@@ -127,7 +188,10 @@ class Kanban extends React.Component{
                     })
                 }
             })
-            
+
+            if(source.droppableId != destination.droppableId)
+                item.progress = 0;
+
             const copyOfColumns = this.state.columns
             copyOfColumns.map(e => {
                 if(e.id === source.droppableId){
@@ -164,18 +228,7 @@ class Kanban extends React.Component{
     }
 
     addColumn(title){
-        /*
-        const item = {
-            id: 'column'+this.state.columnid,
-            swimlaneid: swimlaneid,
-            title: title,
-            notes: [],
-            wiplimit: 0,
-            info: ""
-        }
-        const newElements = [...this.state.columns, item]
-        this.setState({columns: newElements})
-        this.setState({columnid: this.state.columnid +1 })*/
+        
             let i = this.state.columnid;
             let newColumns = []
             this.state.swimlanes.map( e => {
@@ -185,7 +238,7 @@ class Kanban extends React.Component{
                         swimlaneid: e.id,
                         title: title,
                         wiplimit: 0,
-                        info: "",
+                        info: "Empty",
                         notes: []
                     }
                     newColumns.push(col)
@@ -206,7 +259,9 @@ class Kanban extends React.Component{
             columnid: columnid,
             avatar: defaultAvatar,
             contents: "",
-            progress: 0
+            progress: 0,
+            color: "yellow",
+            block: false
         }
 
         const copyOfColumns = this.state.columns
@@ -235,7 +290,7 @@ class Kanban extends React.Component{
                         swimlaneid: 'swimlane'+this.state.swimlaneid,
                         title: e.title,
                         wiplimit: e.wiplimit,
-                        info: "",
+                        info: "Empty",
                         notes: []
                     }
                     columnsTitles.push(col)
@@ -288,7 +343,7 @@ class Kanban extends React.Component{
                     reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
                     changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
-                    changeColumnInfo={this.changeColumnInfo.bind(this) }/>
+                    changeColumnInfo={this.changeColumnInfo.bind(this) } changeColor={this.changeColor.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)}/>
                 </div>
             )
         })
@@ -299,7 +354,7 @@ class Kanban extends React.Component{
                     <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
                     {elements}
                 </DragDropContext>
-                <ReactTooltip multiline={true} />
+               
             </div>
             
         )

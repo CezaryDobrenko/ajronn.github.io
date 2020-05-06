@@ -2,16 +2,46 @@
 {
     width: calc(100% - 20px);
     height: auto;
-    background-color: rgb(255, 255, 128);
+
     margin: 10px;
     position: relative;
-    z-index: 4;
+
+}
+
+.colorcircle
+{
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    border: 1px solid lightgray;
+    float: left;
+    margin: 1px;
+    transition: transform .2s;
+}
+
+.colorcircle:hover
+{
+    transform: scale(1.1);
+}
+
+.y
+{
+    background-color: rgb(255, 255, 128);
+}
+
+.b
+{
+   background-color: rgb(128, 191, 255);
+}
+
+.g
+{
+    background-color: rgb(204, 255, 179);
 }
 
 textarea{
     margin-top: 10px;
     resize: none;
-    z-index: 0;
 
 }
 
@@ -31,32 +61,4 @@ textarea{
     opacity: 0;
     pointer-events: none;
     transition: opacity 250ms ease !important;
-}
-
-.trash{
-    width: 20px;
-    height: 20px;
-    background-image: url("../img/trash.png");
-    background-repeat:no-repeat;
-    background-size: 20px 20px;
-    float: left;
-
-}
-
-.removenotebutton{
-    position: absolute;
-    height: 10px;
-    width: 10px;
-    margin: 5px;
-    padding: 5px;
-    background-image: url("../img/xnote.png");
-    background-size: 10px 10px;
-    background-repeat:no-repeat;
-    display: none;
-}
-
-.note:hover .removenotebutton{
-    display: block;
-    cursor: pointer;
-    z-index: 5;
 }
