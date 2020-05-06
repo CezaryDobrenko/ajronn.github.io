@@ -2,11 +2,11 @@ import React from 'react'
 import Swimlane from './Swimlane'
 import {DragDropContext} from 'react-beautiful-dnd'
 import defaultAvatar from '../avatars/default.png'
-
-
 import Ricky from '../avatars/ricky.jpg'
 import Julian from '../avatars/julian.jpeg'
 import Bubbles from '../avatars/bubbles.jpg'
+
+
 
 class Kanban extends React.Component{
     state = {
@@ -23,9 +23,19 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:defaultAvatar,contents: "", progress: 10, color: "yellow", block: false, }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Ricky,contents: "Seeds plants", progress: 10, color: "yellow", block: false, }]}
         ]
 
+    }
+
+    changeUserLimit(user, limit){
+        const copyOfUsers = this.state.users;
+        copyOfUsers.map(e => {
+            if(e.name == user)
+                e.wiplimit = limit;
+        })
+
+        this.setState({users: copyOfUsers});
     }
 
     checkUserLimit(user){
@@ -350,6 +360,12 @@ class Kanban extends React.Component{
 
         return(
             <div>
+                <div style={{width: "150px", marginLeft: "100px"}}>
+                    <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
+                    <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
+                    <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
+                </div>
+
                 <DragDropContext onDragEnd={result => this.onDragEnd(result)}>
                     <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
                     {elements}
