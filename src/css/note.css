@@ -22,6 +22,7 @@
 .colorcircle:hover
 {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .y
@@ -48,17 +49,33 @@ textarea{
 .react-contextmenu {
     width: 120px;
     height: 50px;
-    padding: 5px 0;
-    margin: 2px 0 0;
+    /*padding: 5px 0;
+    margin: 2px 0 0;*/
     font-size: 16px;
     color: #373a3c;
     text-align: left;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(151, 140, 140, 0.15);
     border-radius: .25rem;
     outline: none;
     opacity: 0;
     pointer-events: none;
     transition: opacity 250ms ease !important;
+}
+
+.menuelement
+{
+    cursor: pointer;
+    border-bottom: 1px solid rgb(230, 230, 230);
+    height: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: white;
+}
+
+.menuelementhover:hover
+{
+    background-color: rgb(230, 230, 230);
 }

@@ -14,6 +14,7 @@ const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
 
     
+    
     const handleClick=(name)=>{
         props.item.avatar = name;
         props.reloadNotesState()
@@ -59,12 +60,12 @@ const Note = (props) => {
                         
                         
                         <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
-                        <Popup contentStyle={{width: "auto"}} trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible", border: props.item.block ? "2px solid rgb(255, 77, 77)" : "" }}/></button>} position="right center" >
+                        <Popup contentStyle={{width: "auto"}} trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible", border: props.item.block ? "2px solid rgb(255, 77, 77)" : "" }}/></button>} position="right center" >
                             <div style={{textAlign: "center"}}>
                                 Choose avatar<br/>
-                                <button onClick={()=>handleClick(Ricky)} style={{visibility:"hidden"}}> <img src={Ricky} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
-                                <button onClick={()=>handleClick(Julian)} style={{visibility:"hidden"}}> <img src={Julian} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
-                                <button onClick={()=>handleClick(Bubbles)} style={{visibility:"hidden"}}> <img src={Bubbles} style={{borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
+                                <button onClick={()=>handleClick(Ricky)} style={{visibility:"hidden"}}> <img src={Ricky} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
+                                <button onClick={()=>handleClick(Julian)} style={{visibility:"hidden"}}> <img src={Julian} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
+                                <button onClick={()=>handleClick(Bubbles)} style={{visibility:"hidden"}}> <img src={Bubbles} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
                             </div>
                         </Popup>
                         </div>
@@ -86,17 +87,20 @@ const Note = (props) => {
         </ContextMenuTrigger>
         <ContextMenu id={props.item.id} style={{zIndex: "10", width:"auto", height: "auto"}}>
             
-            <MenuItem >
-                <div onClick={() => props.removeNote(props.item, props.item.columnid)}><img src={Trash} height="25"/>Remove note</div>
+            <MenuItem className="menuelement menuelementhover">
+                <div onClick={() => props.removeNote(props.item, props.item.columnid)} >
+                    <img src={Trash} height="15" />Remove note
+                    </div>
             </MenuItem>
 
             <MenuItem >
-                Change color
-                <div>
-                    
-                    <div className="colorcircle y" onClick={() => props.changeColor(props.item.id,"yellow")}/>
-                    <div className="colorcircle b" onClick={() => props.changeColor(props.item.id,"blue")}/>
-                    <div className="colorcircle g" onClick={() => props.changeColor(props.item.id,"green")}/>
+                <div className="menuelementhover" style={{height: "60px"}}>
+                    <p> Change color</p>
+
+                        <div className="colorcircle y" onClick={() => props.changeColor(props.item.id,"yellow")}/>
+                        <div className="colorcircle b" onClick={() => props.changeColor(props.item.id,"blue")}/>
+                        <div className="colorcircle g" onClick={() => props.changeColor(props.item.id,"green")}/>
+
                 </div>
 
             </MenuItem>

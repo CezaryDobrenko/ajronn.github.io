@@ -31,7 +31,7 @@ class Column extends React.Component{
        return (
             
            <div className={"column"} style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {border: "2px solid red"} : {border: "none"}} id={this.props.id}>
-               <Popup modal contentStyle={{width: "auto"}} trigger={<div className="wiplimitfield" style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {backgroundColor: "#ff4d4d"} : {backgroundColor: "rgb(255, 255, 128)"}}>{this.props.element.wiplimit == 0 ? "∞" : this.props.element.wiplimit}</div>} position="top left">
+               <Popup modal contentStyle={{width: "auto"}} trigger={<div className="wiplimitfield" style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {backgroundColor: "#ff4d4d"} : {backgroundColor: "rgb(255, 255, 128)", cursor: "pointer"}}>{this.props.element.wiplimit == 0 ? "∞" : this.props.element.wiplimit}</div>} position="top left">
                     <input placeholder="WIP limit" style={{width: "130px", marginLeft: "auto", marginRight: "auto", display: "block"}} maxLength="3" type="text" onChange={(event) => this.props.changeColumnWIPLimit(this.props.element.id,event.target.value)}/>
                     
                </Popup>
