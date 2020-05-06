@@ -23,7 +23,7 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Ricky,contents: "Seeds plants", progress: 10, color: "yellow", block: false, }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, }]}
         ]
 
     }
@@ -289,7 +289,7 @@ class Kanban extends React.Component{
     
 
     addSwimlane(){      
-        if(this.state.columns.length>0){
+        if(this.state.columns.length>0 && this.state.swimlanes.length>0){
             let swimlaneid = this.state.swimlanes[0].id;
             let columnsTitles = [];
             let i = this.state.columnid;
