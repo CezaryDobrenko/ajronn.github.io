@@ -1,0 +1,26 @@
+.columnfield
+{
+    height: 300px;
+    /*backgroundColor: "#ccc"*/
+}
+
+.addcolumnfield
+{
+    background-color: rgb(70,83,98);
+    width: 200px;
+    height: 50px;
+    float: left;
+    margin: 15px;
+    border-radius: 20px;
+}
+
+input
+{
+    width: 150px;
+    height: 20px;
+}
+
+button
+{
+    cursor: pointer;
+}
