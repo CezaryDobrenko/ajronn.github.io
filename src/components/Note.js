@@ -9,6 +9,9 @@ import Progressbar from './Progressbar'
 import TextareaAutosize from 'react-textarea-autosize';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import Trash from '../img/trash.png'
+import Disable from '../img/disable.png'
+import Enable from '../img/enable.png'
+import ColorPicker from '../img/colorpicker.png'
 
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
@@ -45,12 +48,12 @@ const Note = (props) => {
     return(
         <div>
         <ContextMenuTrigger id={props.item.id}>
-            <Draggable draggableId={props.item.id} index={props.index}>
+            <Draggable draggableId={props.item.id} index={props.index} isDragDisabled={!props.item.enable}>
                 
                 {(provided, snapshot) => (
                     
                     <div
-                    className={`${props.color == "yellow" && "note y"} ${props.color == "blue" && "note b"} ${props.color == "green" && "note g"}`}
+                    className={`${props.color == "yellow" && "note y"} ${props.color == "blue" && "note b"} ${props.color == "green" && "note g"} ${props.item.enable ? "" : "disable"}`}
                         
                     
                     ref={provided.innerRef}
@@ -92,10 +95,17 @@ const Note = (props) => {
                     <img src={Trash} height="15" />Remove note
                     </div>
             </MenuItem>
+            
+            <MenuItem className="menuelement menuelementhover" >
+                <div style={{cursor: "pointer"}} onClick={() => props.changeNoteStatus(props.item.id)}>
+                    {props.item.enable ? <img src={Disable} height="15" /> : <img src={Enable} height="15" />}
+                    {props.item.enable ? "Disable note" : "Enable note"}
+                </div>
+            </MenuItem>
 
             <MenuItem >
-                <div className="menuelementhover" style={{height: "60px"}}>
-                    <p> Change color</p>
+                <div className="menuelement menuelementhover" style={{height: "60px"}}>
+                    <img src={ColorPicker} height="15" />
 
                         <div className="colorcircle y" onClick={() => props.changeColor(props.item.id,"yellow")}/>
                         <div className="colorcircle b" onClick={() => props.changeColor(props.item.id,"blue")}/>
@@ -104,6 +114,9 @@ const Note = (props) => {
                 </div>
 
             </MenuItem>
+
+            
+            
 
         </ContextMenu></div>
         

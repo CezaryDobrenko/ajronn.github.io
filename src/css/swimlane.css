@@ -19,3 +19,8 @@ input
     width: 150px;
     height: 20px;
 }
+
+button
+{
+    cursor: pointer;
+}

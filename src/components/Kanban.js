@@ -23,8 +23,23 @@ class Kanban extends React.Component{
         ],
         
         columns: [
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, }]}
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true}]}
         ]
+
+    }
+
+    changeNoteStatus(noteid){
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(e => {
+            e.notes.map(e => {
+                if(e.id === noteid){
+                    e.enable = !e.enable
+                }
+            })
+        })
+
+        this.setState({columns: copyOfColumns})
+
 
     }
 
@@ -64,7 +79,7 @@ class Kanban extends React.Component{
                     if(e.avatar === user && counter > limit){
                         e.block = true;
                     }
-                    else{
+                    if(e.avatar === user && counter <= limit){
                         e.block = false;
                     }
                 })
@@ -271,7 +286,8 @@ class Kanban extends React.Component{
             contents: "",
             progress: 0,
             color: "yellow",
-            block: false
+            block: false,
+            enable: true
         }
 
         const copyOfColumns = this.state.columns
@@ -353,24 +369,25 @@ class Kanban extends React.Component{
                     reloadNotesState={this.reloadNotesState.bind(this)} changeColumnTitle={this.changeColumnTitle.bind(this)}
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
                     changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
-                    changeColumnInfo={this.changeColumnInfo.bind(this) } changeColor={this.changeColor.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)}/>
+                    changeColumnInfo={this.changeColumnInfo.bind(this) } changeColor={this.changeColor.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)}
+                    changeNoteStatus={this.changeNoteStatus.bind(this)} />
                 </div>
             )
         })
 
         return(
             <div>
-                <div style={{width: "150px", marginLeft: "100px"}}>
-                    <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
-                    <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
-                    <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
-                </div>
+                
 
                 <DragDropContext onDragEnd={result => this.onDragEnd(result)}>
                     <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
                     {elements}
                 </DragDropContext>
-               
+                <div style={{width: "150px", marginLeft: "100px", border: "1px solid black", marginTop: "1800px"}}>
+                    <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
+                    <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
+                    <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
+                </div>
             </div>
             
         )

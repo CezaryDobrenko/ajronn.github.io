@@ -25,6 +25,7 @@
 .xbutton:hover{
     transform: rotate(180deg);
     transition-duration: 1s;
+    cursor: pointer;
 }
 
 .wiplimitfield{

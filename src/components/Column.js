@@ -23,7 +23,7 @@ class Column extends React.Component{
 
             const elements = this.props.element.notes
             .map((e,index) => {
-            return <Note checkUserLimit={this.props.checkUserLimit} changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
+            return <Note changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit} changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
         })
         
         
