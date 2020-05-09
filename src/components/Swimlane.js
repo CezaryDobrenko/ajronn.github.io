@@ -25,7 +25,7 @@ class Swimlane extends React.Component{
                 <div style={{width: "100%", height: "100%"}}>
                 
                     <div className="steericon" onClick={() => this.props.removeSwimlane(this.props.element)}><img src={SwimlaneIcon} height="30"/></div>
-                    <input type="text" style={{all:"initial",width: "200px",marginLeft:"40%",backgroundColor:"white",textAlign:"center",border:"2px solid #6EF2FF",borderRadius:"10px",height:"30px",fontFamily: "'Comic Neue', cursive",marginBottom:"10px"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
+                    <input type="text" style={{all:"initial",width: "200px",marginLeft:"20px",backgroundColor:"transparent",textAlign:"center",border:"2px solid #009900",borderRadius:"10px",height:"30px",fontFamily: "'Comic Neue', cursive",marginBottom:"20px"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
                         <div className="columnfield">
 
                             {elements}
