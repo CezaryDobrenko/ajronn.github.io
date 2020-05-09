@@ -1,0 +1,17 @@
+.menu{
+        height: auto;
+        margin-top: 100px;
+        width: 198px;
+        float: left;
+        border: 1px solid black;
+        border-left: none;
+        border-radius: 0 10px 10px 0;
+        transition: left 1s ease-out;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: -198px;
+}
+.unhide {
+    left: 0;
+  }

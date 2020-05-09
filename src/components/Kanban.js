@@ -402,7 +402,7 @@ class Kanban extends React.Component{
     reloadNotesState={this.reloadNotesState.bind(this)}/>
     
     
-    <div style={{float: "left", width: this.state.slideMenuActive ? "calc(100% - 200px)" : "calc(100% - 1px)"}}>
+    <div className={this.state.slideMenuActive ? "content pushed" : "content"}>
                     
 
                     <div>

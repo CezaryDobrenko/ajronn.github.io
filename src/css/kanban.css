@@ -1,3 +1,19 @@
+.content{
+    width: calc(100% - 1px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transition: left 1s ease-out;
+}
+
+.content.pushed {
+    left: 198px;
+  }
+
+
+
 .slidemenu{
     background-color: white;
     display: none;
