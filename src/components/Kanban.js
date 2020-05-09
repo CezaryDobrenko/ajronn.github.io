@@ -418,7 +418,7 @@ class Kanban extends React.Component{
                         </div>
 
                         <div className="steericon" onClick = {this.addSwimlane.bind(this)}><img src={SwimlaneIcon} height="40"/></div>
-                        <div style={{width: "auto", display: "inline-block", marginLeft: "20px",fontFamily: "'Courgette', cursive", fontSize: "30px"}}>Kanban powered by Uniteam</div>
+                        <div style={{width: "auto", display: "inline-block", marginLeft: "20px",fontFamily: "'Comic Neue', cursive", fontSize: "30px"}}>Kanban powered by Uniteam</div>
                     </div>
                     
                         {elements}
