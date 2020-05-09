@@ -88,32 +88,27 @@ const Note = (props) => {
                 
             </Draggable>
         </ContextMenuTrigger>
-        <ContextMenu id={props.item.id} style={{zIndex: "10", width:"auto", height: "auto"}}>
-            
-            <MenuItem className="menuelement menuelementhover">
-                <div onClick={() => props.removeNote(props.item, props.item.columnid)} >
-                    <img src={Trash} height="15" />Remove note
-                    </div>
+        <ContextMenu id={props.item.id}>
+
+            <MenuItem onClick={() => props.removeNote(props.item, props.item.columnid)}>
+                <img src={Trash} height="20" style={{verticalAlign: "middle"}}></img> Remove note
+            </MenuItem>
+
+            <MenuItem onClick={() => props.changeNoteStatus(props.item.id)}>
+                <img src={props.item.enable ? Disable : Enable} height="20" style={{verticalAlign: "middle"}}></img> {props.item.enable ? "Disable note" : "Enable note"}
+            </MenuItem>
+
+            <MenuItem>
+                <img src={ColorPicker} height="20" style={{verticalAlign: "middle"}} />
+                <div className="colorcircle y" onClick={() => props.changeColor(props.item.id,"yellow")}/>
+                <div className="colorcircle b" onClick={() => props.changeColor(props.item.id,"blue")}/>
+                <div className="colorcircle g" onClick={() => props.changeColor(props.item.id,"green")}/>
             </MenuItem>
             
-            <MenuItem className="menuelement menuelementhover" >
-                <div style={{cursor: "pointer"}} onClick={() => props.changeNoteStatus(props.item.id)}>
-                    {props.item.enable ? <img src={Disable} height="15" /> : <img src={Enable} height="15" />}
-                    {props.item.enable ? "Disable note" : "Enable note"}
-                </div>
-            </MenuItem>
+                    
 
-            <MenuItem >
-                <div className="menuelement menuelementhover" style={{height: "60px"}}>
-                    <img src={ColorPicker} height="15" />
-
-                        <div className="colorcircle y" onClick={() => props.changeColor(props.item.id,"yellow")}/>
-                        <div className="colorcircle b" onClick={() => props.changeColor(props.item.id,"blue")}/>
-                        <div className="colorcircle g" onClick={() => props.changeColor(props.item.id,"green")}/>
-
-                </div>
-
-            </MenuItem>
+            
+            
 
             
             

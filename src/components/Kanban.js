@@ -19,16 +19,26 @@ class Kanban extends React.Component{
             {name: "Julian", avatar: Julian, wiplimit: 3},
             {name: "Bubbles", avatar: Bubbles, wiplimit: 2},
         ],
-        noteid: 1,
-        columnid: 1,
+        noteid: 5,
+        columnid: 2,
         swimlaneid: 1,
         swimlanes: [
             {id: 'swimlane0', title: 'John'}
         ],
         
         columns: [
-            {id: "parkinglot", swimlaneid:"parkinglot",title: "",wiplimit: 0,info: "", notes: []},
-            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true}]}
+            {id: "parkinglot", swimlaneid:"parkinglot",title: "",wiplimit: 0,info: "", notes: [
+                {id: "note5", columnid: "parkinglot",avatar:Ricky,contents: "Send Cory to work", progress: 0, color: "yellow", block: false, enable: true}
+            ]},
+            {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "None",
+            notes: [
+                {id: "note1", columnid: "column0",avatar:Ricky,contents: "Recover my car!", progress: 0, color: "yellow", block: false, enable: true},
+                {id: "note2", columnid: "column0",avatar:Julian,contents: "Make drink", progress: 0, color: "yellow", block: false, enable: true}
+            ]},
+            {id: "column1", swimlaneid:"swimlane0",title: "In progress",wiplimit: 3,info: "Start task",
+            notes: [
+                {id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true},
+            ]}
         ]
 
     }
@@ -207,9 +217,6 @@ class Kanban extends React.Component{
     
 
     onDragEnd(result){
-        console.clear()
-        console.log(result.destination)
-        console.log(result.source)
         if (!result.destination) return;
         if(result.destination.droppableId != null && result.source.droppableId != null)
         {
@@ -243,7 +250,7 @@ class Kanban extends React.Component{
 
             this.setState({columns: copyOfColumns})
         }
-       
+        this.checkUserLimit()
 
     }
 
@@ -274,7 +281,7 @@ class Kanban extends React.Component{
                         swimlaneid: e.id,
                         title: title,
                         wiplimit: 0,
-                        info: "Empty",
+                        info: "None",
                         notes: []
                     }
                     newColumns.push(col)

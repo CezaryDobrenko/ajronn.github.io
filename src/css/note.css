@@ -1,6 +1,6 @@
 .note
 {
-    width: calc(100% - 20px);
+    width: 177px;
     height: auto;
     margin: 10px;
     position: relative;
@@ -17,7 +17,7 @@
     width: 30px;
     border-radius: 20px;
     border: 1px solid lightgray;
-    float: left;
+    float: right;
     margin: 1px;
     transition: transform .2s;
 }
@@ -50,36 +50,29 @@ textarea{
 }
 
 .react-contextmenu {
-   
-    height: 50px;
-    /*padding: 5px 0;
-    margin: 2px 0 0;*/
-    font-size: 16px;
-    color: #373a3c;
-    text-align: left;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid rgba(151, 140, 140, 0.15);
-    border-radius: .25rem;
-    outline: none;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 250ms ease !important;
-}
-
-.menuelement
-{
-    cursor: pointer;
-    border-bottom: 1px solid rgb(230, 230, 230);
-    /*height: 30px;*/
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    background-color: white;
+    z-index: 10;
     width: 150px;
+    background-color: gray;
+    height: auto;
+    
+    
 }
 
-.menuelementhover:hover
+.react-contextmenu-item
 {
-    background-color: rgb(230, 230, 230);
+    height: 35px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    vertical-align: middle;
+    line-height: 32px;
+    padding-left: 5px;
+    border-bottom: 1px solid gray;
+
+    
+}
+
+.react-contextmenu-item:hover
+{
+    background-color: #D3D3D3;
 }

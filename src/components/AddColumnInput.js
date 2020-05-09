@@ -1,4 +1,5 @@
 import React from "react"
+import Enter from "../img/enter.png"
 
 export default class AddColumnInput extends React.Component {
     
@@ -10,6 +11,14 @@ export default class AddColumnInput extends React.Component {
     }
   
     render() {
-      return <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto"}} type="text" placeholder="Add column" onKeyDown={this._handleKeyDown} />
+      return(
+        <div>
+          <input style={{width: "60%", display: "inline-block",
+          marginLeft: "20px",fontFamily: "'Courgette', cursive",
+          color: "white", fontSize: "15px", textAlign: "center"}} type="text" placeholder="Add column" onKeyDown={this._handleKeyDown} />
+          <img style={{verticalAlign: "middle", marginLeft: "10px"}} src={Enter} height="30"/>
+        </div>
+      )
+
     }
   }

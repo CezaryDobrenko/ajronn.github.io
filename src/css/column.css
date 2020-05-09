@@ -36,7 +36,7 @@
     background-size: 20px 20px;
     position: absolute;
     left: calc(50% - 8px);
-    top: -5px;
+    top: -12px;
     border-radius: 5px;
     text-align: center;
 }
