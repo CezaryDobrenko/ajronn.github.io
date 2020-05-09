@@ -2,6 +2,7 @@ import React from 'react'
 import Note from './Note'
 import DropBox from './DropBox'
 import StickyNote from "../img/stickynote.png"
+import "../css/parkinglot.css"
 
 const ParkingLot = (props) =>{
 
@@ -15,15 +16,13 @@ const ParkingLot = (props) =>{
     })
 
     return(
-        <div style={{marginTop: "100px" ,height: "auto", display: props.slideMenuActive ? "block" : "none",
-            width: "198px", float: "left", position: "flex", border: "1px solid black",
-            borderLeft: "none", borderRadius: "0 10px 10px 0"}}>
+        <div className={props.slideMenuActive ? "menu unhide" : "menu"}>
             
             <div style={{textAlign: "center", borderBottom: "1px solid black", marginBottom: "20px"}}>
                 <p><img src={StickyNote} height="20"></img> Park the card</p>
             </div>
 
-            <DropBox height="500px" columnid="parkinglot" notes={ournotes}/>
+            <DropBox height="300px" columnid="parkinglot" notes={ournotes}/>
 
 
 
