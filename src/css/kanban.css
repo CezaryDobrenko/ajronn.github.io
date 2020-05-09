@@ -12,13 +12,6 @@
     left: 215px;
   }
 
-
-
-.slidemenu{
-    background-color: white;
-    display: none;
-}
-
 .steericon{
     cursor: pointer;
     width: 40px;
@@ -30,5 +23,5 @@
 }
 
 .steericon:hover{
-    transform: rotate(5deg) scale(1.05);
+    transform: rotate(8deg) scale(1.05);
 }
