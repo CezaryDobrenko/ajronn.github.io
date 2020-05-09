@@ -24,3 +24,7 @@ button
 {
     cursor: pointer;
 }
+
+.Collapsible{
+    background-color: #ffffe6;
+}
