@@ -11,7 +11,7 @@ const DropBox = (props) => {
                 <div
                 ref={provided.innerRef}
                 //style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey',width: "100%", minHeight: "100px", paddingBottom: "50px" }}
-                style={{ width: "100%", minHeight: "100px", paddingBottom: "50px" }}
+                style={{ width: "100%", minHeight: props.height, paddingBottom: "50px"}}
                 {...provided.droppableProps}
                 >
                     {props.notes}

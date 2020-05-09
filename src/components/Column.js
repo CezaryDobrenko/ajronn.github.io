@@ -39,7 +39,7 @@ class Column extends React.Component{
                <div>
                     
                     <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px"}} defaultValue={this.props.title} onChange={this.changeTitle} />
-                    <DropBox notes = {elements} columnid={this.props.element.id}></DropBox>
+                    <DropBox height= "100px" notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
                <button onClick={() => this.props.addNote(this.props.element.id)} style={{bottom: "0px", position: "relative",width: "calc(100% - 20px)", margin: "5px 10px"}}>Add note</button>
                 <Popup modal contentStyle={{width: "auto"}} trigger={<p data-place="bottom" data-tip={this.props.element.info}><div className="infofield"/></p>}>Change condition<TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))} onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/></Popup>

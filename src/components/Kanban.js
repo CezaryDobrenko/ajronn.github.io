@@ -5,11 +5,11 @@ import defaultAvatar from '../avatars/default.png'
 import Ricky from '../avatars/ricky.jpg'
 import Julian from '../avatars/julian.jpeg'
 import Bubbles from '../avatars/bubbles.jpg'
-
-
-
+import DropBox from './DropBox'
+import Note from './Note'
 class Kanban extends React.Component{
     state = {
+        slideMenuActive: false,
         users: [
             {name: "Ricky", avatar: Ricky, wiplimit: 1},
             {name: "Julian", avatar: Julian, wiplimit: 3},
@@ -23,6 +23,7 @@ class Kanban extends React.Component{
         ],
         
         columns: [
+            {id: "parkinglot", swimlaneid:"parkinglot",title: "",wiplimit: 0,info: "", notes: []},
             {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "First example condition<br />Second example condition", notes: [{id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true}]}
         ]
 
@@ -199,6 +200,9 @@ class Kanban extends React.Component{
     
 
     onDragEnd(result){
+        console.clear()
+        console.log(result.destination)
+        console.log(result.source)
         if (!result.destination) return;
         if(result.destination.droppableId != null && result.source.droppableId != null)
         {
@@ -357,7 +361,11 @@ class Kanban extends React.Component{
             this.setState({swimlanes: array})
         }
     }
-    
+
+    hoverMenu(){
+        this.setState({slideMenuActive: !this.state.slideMenuActive})
+
+    }
 
     render(){
         
@@ -374,21 +382,45 @@ class Kanban extends React.Component{
                 </div>
             )
         })
+        const notes = this.state.columns[0].notes.map((e,index) => {
+            return <Note changeNoteStatus={this.changeNoteStatus.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)} changeColor={this.changeColor.bind(this)} color={e.color} removeNote={this.removeNote.bind(this)} changeProgress={this.changeProgress.bind(this)} index={index} key={e.id} item={e} reloadNotesState={this.reloadNotesState.bind(this)}/>
+        })
 
         return(
-            <div>
-                
+            
+<div>
+<DragDropContext onDragEnd={result => this.onDragEnd(result)} >
+    <div style={{height: "100vh", display: this.state.slideMenuActive ? "block" : "none", width: "198px", float: "left", position: "flex", borderRight: "1px solid black"}}>
+        <p>Parkinglot brum brum</p>
+        <DropBox height="500px" columnid="parkinglot" notes={notes}>
+            
+        </DropBox>
 
-                <DragDropContext onDragEnd={result => this.onDragEnd(result)}>
-                    <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
-                    {elements}
-                </DragDropContext>
-                <div style={{width: "150px", marginLeft: "100px", border: "1px solid black", marginTop: "1800px"}}>
-                    <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
-                    <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
-                    <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
-                </div>
-            </div>
+
+
+    </div>
+    
+    
+    <div style={{float: "left", width: this.state.slideMenuActive ? "calc(100% - 200px)" : "calc(100% - 1px)"}}>
+                    
+
+
+                        
+
+
+                    <button onClick= {() => this.hoverMenu()}>{this.state.slideMenuActive ? "Close" : "Open"} parkinglot</button>
+                        <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
+                        {elements}
+                    
+                    <div style={{width: "150px", marginLeft: "100px", border: "1px solid black", marginTop: "1800px"}}>
+                        <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
+                        <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
+                        <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
+                    </div>
+
+    </div>
+    </DragDropContext>
+</div>
             
         )
     }
