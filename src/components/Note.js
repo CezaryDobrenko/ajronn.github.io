@@ -21,7 +21,7 @@ const Note = (props) => {
     const handleClick=(name)=>{
         props.item.avatar = name;
         props.reloadNotesState()
-        props.checkUserLimit(name);
+        props.checkUserLimit();
         
     }
     const handleText=(e)=>{
@@ -73,7 +73,7 @@ const Note = (props) => {
                         </Popup>
                         </div>
                         
-                        <div style={{margin: "5px", paddingTop: "10px"}}><TextareaAutosize onChange = {handleText} defaultValue={props.item.contents}/>
+                        <div style={{margin: "5px", paddingTop: "10px"}}><TextareaAutosize style={{fontFamily: "'Comic Neue', cursive"}} onChange = {handleText} defaultValue={props.item.contents}/>
                         </div>
                     
                         

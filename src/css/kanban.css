@@ -2,3 +2,17 @@
     background-color: white;
     display: none;
 }
+
+.steericon{
+    cursor: pointer;
+    width: 40px;
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 5px;
+    transition-duration: 0.5s;
+    position: relative;
+}
+
+.steericon:hover{
+    transform: rotate(5deg) scale(1.05);
+}

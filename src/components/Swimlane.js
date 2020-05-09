@@ -4,6 +4,7 @@ import Popup from "reactjs-popup"
 import AddColumnInput from "./AddColumnInput"
 import '../css/swimlane.css'
 import Column from './Column.js'
+import SwimlaneIcon from '../img/swimlaneminus.png'
 
 class Swimlane extends React.Component{   
     
@@ -21,7 +22,9 @@ class Swimlane extends React.Component{
        return (
            <div>
             <Collapsible triggerStyle={{backgroundColor: "rgb(70,83,98)", height: "50px"}} >
-                <div style={{width: "100%", height: "50px", borderBottom: "1px solid black"}}><button onClick={() => this.props.removeSwimlane(this.props.element)}>- swimlane</button><input type="text" style={{width: "auto"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
+                <div style={{width: "100%", height: "50px", borderBottom: "1px solid black"}}>
+                    <div className="steericon" onClick={() => this.props.removeSwimlane(this.props.element)}><img src={SwimlaneIcon} height="30"/></div>
+                    <input type="text" style={{width: "auto"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
                         <div className="columnfield">
 
                             {elements}

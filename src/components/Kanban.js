@@ -5,8 +5,12 @@ import defaultAvatar from '../avatars/default.png'
 import Ricky from '../avatars/ricky.jpg'
 import Julian from '../avatars/julian.jpeg'
 import Bubbles from '../avatars/bubbles.jpg'
-import DropBox from './DropBox'
-import Note from './Note'
+import ParkingOpen from "../img/parkingopen.png"
+import ParkingClose from "../img/parkingclose.png"
+import SwimlaneIcon from '../img/swimlane.png'
+import "../css/kanban.css"
+
+import ParkingLot from "./ParkingLot"
 class Kanban extends React.Component{
     state = {
         slideMenuActive: false,
@@ -54,39 +58,42 @@ class Kanban extends React.Component{
         this.setState({users: copyOfUsers});
     }
 
-    checkUserLimit(user){
+    checkUserLimit(){
         
-        let limit = 0;
         this.state.users.map(e => {
-            if(e.avatar === user)
-                limit = e.wiplimit;
-        })
-
-        let counter = 0;
-        this.state.columns.map(col => {
-            col.notes.map(no => {
-                
-                if(no.avatar === user)
-                    counter++;
+            let user = e.avatar;
+            let limit = 0;
+            this.state.users.map(e => {
+                if(e.avatar === user)
+                    limit = e.wiplimit;
             })
-        })
 
- 
-
-            const copyOfColumns = this.state.columns
-            copyOfColumns.map(e => {
-                e.notes.map(e => {
-                    console.log(e.avatar)
-                    if(e.avatar === user && counter > limit){
-                        e.block = true;
-                    }
-                    if(e.avatar === user && counter <= limit){
-                        e.block = false;
-                    }
+            let counter = 0;
+            this.state.columns.map(col => {
+                col.notes.map(no => {
+                    
+                    if(no.avatar === user && no.columnid != "parkinglot")
+                        counter++;
                 })
             })
 
-            this.setState({columns: copyOfColumns})
+    
+
+                const copyOfColumns = this.state.columns
+                copyOfColumns.map(e => {
+                    e.notes.map(e => {
+                        console.log(e.avatar)
+                        if(e.avatar === user && counter > limit && e.columnid != "parkinglot"){
+                            e.block = true;
+                        }
+                        if(e.avatar === user && counter <= limit ){
+                            e.block = false;
+                        }
+                    })
+                })
+
+                this.setState({columns: copyOfColumns})
+        })
 
         
 
@@ -382,34 +389,31 @@ class Kanban extends React.Component{
                 </div>
             )
         })
-        const notes = this.state.columns[0].notes.map((e,index) => {
-            return <Note changeNoteStatus={this.changeNoteStatus.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)} changeColor={this.changeColor.bind(this)} color={e.color} removeNote={this.removeNote.bind(this)} changeProgress={this.changeProgress.bind(this)} index={index} key={e.id} item={e} reloadNotesState={this.reloadNotesState.bind(this)}/>
-        })
+        
 
         return(
             
 <div>
 <DragDropContext onDragEnd={result => this.onDragEnd(result)} >
-    <div style={{height: "100vh", display: this.state.slideMenuActive ? "block" : "none", width: "198px", float: "left", position: "flex", borderRight: "1px solid black"}}>
-        <p>Parkinglot brum brum</p>
-        <DropBox height="500px" columnid="parkinglot" notes={notes}>
-            
-        </DropBox>
 
-
-
-    </div>
+    <ParkingLot slideMenuActive={this.state.slideMenuActive} notes = {this.state.columns[0].notes} changeNoteStatus={this.changeNoteStatus.bind(this)} 
+    checkUserLimit={this.checkUserLimit.bind(this)} changeColor={this.changeColor.bind(this)} 
+    removeNote={this.removeNote.bind(this)} changeProgress={this.changeProgress.bind(this)}
+    reloadNotesState={this.reloadNotesState.bind(this)}/>
     
     
     <div style={{float: "left", width: this.state.slideMenuActive ? "calc(100% - 200px)" : "calc(100% - 1px)"}}>
                     
 
+                    <div>
+                        <div className="steericon" onClick= {() => this.hoverMenu()}><img src={!this.state.slideMenuActive ? ParkingClose : ParkingOpen} height="40"/>
+                            <div style={{position: "absolute", zIndex: "10", bottom: "0", left: "37px", color: "#33adff", fontWeight: "700"}}>{this.state.columns[0].notes.length}</div>
+                        </div>
 
-                        
-
-
-                    <button onClick= {() => this.hoverMenu()}>{this.state.slideMenuActive ? "Close" : "Open"} parkinglot</button>
-                        <button onClick = {this.addSwimlane.bind(this)}>+ swimlane</button>
+                        <div className="steericon" onClick = {this.addSwimlane.bind(this)}><img src={SwimlaneIcon} height="40"/></div>
+                        <div style={{width: "auto", display: "inline-block", marginLeft: "20px",fontFamily: "'Courgette', cursive", fontSize: "30px"}}>Kanban powered by Uniteam</div>
+                    </div>
+                    
                         {elements}
                     
                     <div style={{width: "150px", marginLeft: "100px", border: "1px solid black", marginTop: "1800px"}}>

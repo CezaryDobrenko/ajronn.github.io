@@ -5,6 +5,7 @@ import DropBox from './DropBox'
 import Popup from 'reactjs-popup'
 import TextareaAutosize from 'react-textarea-autosize'
 import ReactTooltip from "react-tooltip";
+import Add from '../img/add.png'
 
 class Column extends React.Component{
 
@@ -30,7 +31,7 @@ class Column extends React.Component{
 
        return (
             
-           <div className={"column"} style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {border: "2px solid red"} : {border: "none"}} id={this.props.id}>
+           <div className={"column"} style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {border: "2px solid red"} : {border: "2px solid rgb(70,83,98)"}} id={this.props.id}>
                <Popup modal contentStyle={{width: "auto"}} trigger={<div className="wiplimitfield" style={this.props.element.wiplimit <= this.props.element.notes.length && this.props.element.wiplimit !=0 ? {backgroundColor: "#ff4d4d"} : {backgroundColor: "rgb(255, 255, 128)", cursor: "pointer"}}>{this.props.element.wiplimit == 0 ? "∞" : this.props.element.wiplimit}</div>} position="top left">
                     <input placeholder="WIP limit" style={{width: "130px", marginLeft: "auto", marginRight: "auto", display: "block"}} maxLength="3" type="text" onChange={(event) => this.props.changeColumnWIPLimit(this.props.element.id,event.target.value)}/>
                     
@@ -38,10 +39,10 @@ class Column extends React.Component{
                <div className="xbutton" onClick={() => this.props.removeColumn(this.props.element.id)}></div>
                <div>
                     
-                    <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px"}} defaultValue={this.props.title} onChange={this.changeTitle} />
+                    <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px", fontFamily: "'Courgette', cursive", color: "white", fontSize: "20px", textAlign: "center"}} defaultValue={this.props.title} onChange={this.changeTitle} />
                     <DropBox height= "100px" notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
-               <button onClick={() => this.props.addNote(this.props.element.id)} style={{bottom: "0px", position: "relative",width: "calc(100% - 20px)", margin: "5px 10px"}}>Add note</button>
+               <div className="addnotebutton" style={{paddingTop: "5px", borderRadius:"10px 0 10px 0"}} onClick={() => this.props.addNote(this.props.element.id)}><img src={Add} style={{display: "block" ,width: "30px", marginLeft: "auto", marginRight: "auto"}} height="30"/></div>
                 <Popup modal contentStyle={{width: "auto"}} trigger={<p data-place="bottom" data-tip={this.props.element.info}><div className="infofield"/></p>}>Change condition<TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))} onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/></Popup>
                 
                 <ReactTooltip multiline={true} />
