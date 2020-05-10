@@ -14,7 +14,7 @@
 
 .steericon{
     cursor: pointer;
-    width: 40px;
+    width: auto;
     display: inline-block;
     margin-left: 20px;
     margin-top: 5px;
@@ -25,25 +25,29 @@
 .steericon:hover{
     transform: rotate(8deg) scale(1.05);
 }
-
+.box{
+    transition: 0.1s;
+}
 .box:active{
-    animation: rotate 1s;
+    transform: rotate(360deg);
 }
 
-@keyframes rotate {
-	0% {
-		transform: rotate(0deg);
+.headertext{
+    font-family: 'Courgette', cursive;
+    color: black;
+    font-size: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+}
 
-    }
+.uniteam{
     
-    50% {
-        transform: rotate(360deg);
-    }
-
-
-	100% {
-		transform: rotate(180deg);
-
-	}
-
+    display: inline-block;
+    margin-left: 50px;
+    font-family: 'Courgette', cursive;
+    font-size: 30px;
+    height: 10px;
+    vertical-align: text-bottom;
 }
+

@@ -49,3 +49,13 @@ button
     background-color: #ffffe6;
     
 }
+
+.text{
+  font-family: 'Courgette', cursive;
+  color: black;
+  font-size: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  height: 40px;
+  margin-left: 10px;
+}

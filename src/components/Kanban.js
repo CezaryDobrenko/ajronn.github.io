@@ -417,12 +417,13 @@ class Kanban extends React.Component{
                     
 
                     <div>
-                        <div className="steericon box" onClick= {() => this.hoverMenu()}><img src={!this.state.slideMenuActive ? ParkingClose : ParkingOpen} height="40"/>
+                        <div className="steericon" onClick= {() => this.hoverMenu()}><img className="box" src={!this.state.slideMenuActive ? ParkingClose : ParkingOpen} height="40"/>
                             <div style={{position: "absolute", zIndex: "10", bottom: "0", left: "37px", color: "#33adff", fontWeight: "700"}}>{this.state.columns[0].notes.length}</div>
-                        </div>
+                            
+                        </div><p className="headertext" style={{marginLeft: "10px"}}>{this.state.slideMenuActive ? "Close box" : "Open box"}</p>
 
-                        <div className="steericon" onClick = {this.addSwimlane.bind(this)}><img src={SwimlaneIcon} height="40"/></div>
-                        <div style={{width: "auto", display: "inline-block", marginLeft: "20px",fontFamily: "'Comic Neue', cursive", fontSize: "30px"}}>Kanban powered by Uniteam</div>
+                        <div className="steericon" onClick = {this.addSwimlane.bind(this)}><img src={SwimlaneIcon} height="40" /></div> <p className="headertext">Add swimlane</p>
+                        <p className="uniteam">Kanban powered by Uniteam</p>
                     </div>
                     
                         {elements}

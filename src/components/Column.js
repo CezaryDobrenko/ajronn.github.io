@@ -42,7 +42,11 @@ class Column extends React.Component{
                     <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px", fontFamily: "'Courgette', cursive", color: "white", fontSize: "20px", textAlign: "center"}} defaultValue={this.props.title} onChange={this.changeTitle} />
                     <DropBox height= "100px" notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
-               <div className="addnotebutton" style={{paddingTop: "5px", borderRadius:"10px 0 10px 0"}} onClick={() => this.props.addNote(this.props.element.id)}><img src={Add} style={{display: "block" ,width: "30px", marginLeft: "auto", marginRight: "auto"}} height="30"/></div>
+
+               <div className="addnotebutton" onClick={() => this.props.addNote(this.props.element.id)}>
+                    <img src={Add} height="25" style={{marginRight: "2px", marginTop: "10px"}}/>Add note
+                </div>
+
                 <Popup modal contentStyle={{width: "auto", height: "auto"}}
                 trigger={
                 <p><div data-place="bottom" data-tip={this.props.element.info} className="infofield"/></p>}>
