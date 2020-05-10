@@ -127,7 +127,8 @@ class Kanban extends React.Component{
 
     changeColumnInfo(columnid, i){
         
-        let info = i.replace(String.fromCharCode(10),"<br />")
+        //let info = i.replace(String.fromCharCode(10),<br />)
+        let info = i.replace(/(\r\n|\n|\r)/gm,"<br />")
 
         const copyOfColumns = this.state.columns
         copyOfColumns.map(e => (e.id === columnid ? e.info = info : e))

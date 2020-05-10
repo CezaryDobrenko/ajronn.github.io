@@ -27,7 +27,7 @@ class Column extends React.Component{
             return <Note changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit} changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
         })
         
-        
+
 
        return (
             
@@ -43,7 +43,13 @@ class Column extends React.Component{
                     <DropBox height= "100px" notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
                <div className="addnotebutton" style={{paddingTop: "5px", borderRadius:"10px 0 10px 0"}} onClick={() => this.props.addNote(this.props.element.id)}><img src={Add} style={{display: "block" ,width: "30px", marginLeft: "auto", marginRight: "auto"}} height="30"/></div>
-                <Popup modal contentStyle={{width: "auto"}} trigger={<p data-place="bottom" data-tip={this.props.element.info}><div className="infofield"/></p>}>Change condition<TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))} onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/></Popup>
+                <Popup modal contentStyle={{width: "auto", height: "auto"}}
+                trigger={
+                <p><div data-place="bottom" data-tip={this.props.element.info} className="infofield"/></p>}>
+                    Change condition<br />
+                    <TextareaAutosize defaultValue={this.props.element.info.replace("<br />",String.fromCharCode(10))}
+                    onChange={(event) => this.props.changeColumnInfo(this.props.element.id, event.target.value)}/>
+                </Popup>
                 
                 <ReactTooltip multiline={true} />
            </div>
