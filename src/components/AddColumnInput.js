@@ -12,7 +12,7 @@ export default class AddColumnInput extends React.Component {
   
     render() {
       return(
-        <div>
+        <div style={{width: "200px", marginLeft: "2px"}}>
           <input style={{width: "60%", display: "inline-block",
           marginLeft: "20px",fontFamily: "'Courgette', cursive",
           color: "white", fontSize: "15px", textAlign: "center"}} type="text" placeholder="Add column" onKeyDown={this._handleKeyDown} />

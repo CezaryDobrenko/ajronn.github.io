@@ -24,7 +24,7 @@ class Swimlane extends React.Component{
                 w++;
             }
         })
-        w = w*211+218;
+        w = w*204+250;
         w = w+"px";
        return (
            <div style={{backroundColor:"#7BAEFF"}}>
