@@ -19,7 +19,7 @@ const ParkingLot = (props) =>{
     return(
         <div className={props.slideMenuActive ? "menu unhide" : "menu"}>
             
-            <div className="parkingtitle">
+            <div className={props.slideMenuActive ? "parkingtitle shake" : "parkingtitle"}>
                 <p style={{fontFamily: "'Courgette', cursive",color: "rgb(255, 255, 77)", fontSize: "20px"}}><img src={Point} height="25"></img> Park the card <img src={StickyNote} height="20"></img></p>
             </div>
             <div style={{borderBottom: "3px solid rgb(255, 255, 77)", marginBottom: "20px"}}></div>
