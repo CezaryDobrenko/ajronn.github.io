@@ -19,7 +19,7 @@ class Kanban extends React.Component{
             {name: "Julian", avatar: Julian, wiplimit: 3},
             {name: "Bubbles", avatar: Bubbles, wiplimit: 2},
         ],
-        noteid: 5,
+        noteid: 4,
         columnid: 2,
         swimlaneid: 1,
         swimlanes: [
@@ -28,7 +28,7 @@ class Kanban extends React.Component{
         
         columns: [
             {id: "parkinglot", swimlaneid:"parkinglot",title: "",wiplimit: 0,info: "", notes: [
-                {id: "note5", columnid: "parkinglot",avatar:Ricky,contents: "Send Cory to work", progress: 0, color: "yellow", block: false, enable: true}
+                {id: "note3", columnid: "parkinglot",avatar:Ricky,contents: "Send Cory to work", progress: 0, color: "yellow", block: false, enable: true}
             ]},
             {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "None",
             notes: [
@@ -422,12 +422,12 @@ class Kanban extends React.Component{
                     </div>
                     
                         {elements}
-                    
+                    {/*
                     <div style={{width: "150px", marginLeft: "100px", border: "1px solid black", marginTop: "1800px"}}>
                         <input type="text" placeholder="Ricky WIP limit" onChange={(e) => this.changeUserLimit("Ricky", e.target.value)} />
                         <input type="text" placeholder="Julian WIP limit" onChange={(e) => this.changeUserLimit("Julian", e.target.value)} />
                         <input type="text" placeholder="Bubbles WIP limit" onChange={(e) => this.changeUserLimit("Bubbles", e.target.value)} />
-                    </div>
+                    </div>*/}
 
     </div>
     </DragDropContext>

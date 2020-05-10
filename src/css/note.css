@@ -76,3 +76,20 @@ textarea{
 {
     background-color: #D3D3D3;
 }
+
+.warning{
+    position: absolute;
+    top: 30px;
+    left: 37px;
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-image: url("../img/warning.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    visibility: visible;
+}
+
+.hidewarning{
+    display: none;
+}

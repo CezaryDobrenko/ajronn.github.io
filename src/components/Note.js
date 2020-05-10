@@ -63,7 +63,7 @@ const Note = (props) => {
                         
                         
                         <div style={{position: "absolute", top: "-20px",right: "-20px"}}>
-                        <Popup contentStyle={{width: "auto"}} trigger={<button style={{visibility:"hidden"}}> <img id="default" src={props.item.avatar} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible", border: props.item.block ? "2px solid rgb(255, 77, 77)" : "" }}/></button>} position="right center" >
+                        <Popup contentStyle={{width: "auto"}} trigger={<button style={{visibility:"hidden"}}><div><img id="default" src={props.item.avatar} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40, position: "relative", visibility: "visible"}}/><div className={props.item.block ? "warning" : "warninghide"}></div></div></button>} position="right center" >
                             <div style={{textAlign: "center"}}>
                                 Choose avatar<br/>
                                 <button onClick={()=>handleClick(Ricky)} style={{visibility:"hidden"}}> <img src={Ricky} style={{cursor: "pointer" ,borderRadius:50+"%", width:40,height:40,visibility:"visible"}}/>   </button>
