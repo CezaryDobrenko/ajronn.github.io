@@ -9,8 +9,9 @@ import ParkingOpen from "../img/parkingopen.png"
 import ParkingClose from "../img/parkingclose.png"
 import SwimlaneIcon from '../img/swimlane.png'
 import "../css/kanban.css"
-
 import ParkingLot from "./ParkingLot"
+
+
 class Kanban extends React.Component{
     state = {
         slideMenuActive: false,
@@ -377,7 +378,9 @@ class Kanban extends React.Component{
         }
     }
 
+    
     hoverMenu(){
+
         this.setState({slideMenuActive: !this.state.slideMenuActive})
 
     }
@@ -414,7 +417,7 @@ class Kanban extends React.Component{
                     
 
                     <div>
-                        <div className="steericon" onClick= {() => this.hoverMenu()}><img src={!this.state.slideMenuActive ? ParkingClose : ParkingOpen} height="40"/>
+                        <div className="steericon box" onClick= {() => this.hoverMenu()}><img src={!this.state.slideMenuActive ? ParkingClose : ParkingOpen} height="40"/>
                             <div style={{position: "absolute", zIndex: "10", bottom: "0", left: "37px", color: "#33adff", fontWeight: "700"}}>{this.state.columns[0].notes.length}</div>
                         </div>
 
