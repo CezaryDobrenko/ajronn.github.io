@@ -1,6 +1,6 @@
 import React from "react"
 import Enter from "../img/enter.png"
-
+import '../css/addcolumninput.css'
 export default class AddColumnInput extends React.Component {
     
     _handleKeyDown = (e) => {
@@ -12,7 +12,7 @@ export default class AddColumnInput extends React.Component {
   
     render() {
       return(
-        <div style={{width: "200px", marginLeft: "2px"}}>
+        <div className="addcolumn" style={{width: "200px", marginLeft: "2px"}}>
           <input style={{width: "60%", display: "inline-block",
           marginLeft: "20px",fontFamily: "'Courgette', cursive",
           color: "white", fontSize: "15px", textAlign: "center"}} type="text" placeholder="Add column" onKeyDown={this._handleKeyDown} />

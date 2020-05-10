@@ -1,0 +1,24 @@
+.addcolumn:hover > img{
+
+    animation: point 1.5s infinite;
+}
+
+@keyframes point{
+    0%{
+        transform: rotate(0deg);
+
+    }
+
+    50%{
+        transform: translateX(-5px);
+    }
+
+    100%{
+        transform: translateX(0);
+    }
+
+
+
+
+
+}
