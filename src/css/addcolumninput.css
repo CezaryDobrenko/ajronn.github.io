@@ -1,7 +1,10 @@
-.addcolumn:hover > img{
+.addcolumn:hover > img,
+input:focus + img{
 
     animation: point 1.5s infinite;
 }
+
+
 
 @keyframes point{
     0%{
