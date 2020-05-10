@@ -183,7 +183,32 @@ class Kanban extends React.Component{
     }
 
 
-    removeColumn(columnid){
+    removeColumn(columnid, swimlaneid){  
+        let kanban = []
+        this.state.swimlanes.map(e => {
+            kanban.push({id: e.id, columns: []})
+        })
+        kanban.map(e => {
+            let cols = []
+            this.state.columns.map(c => {
+                if(c.swimlaneid == e.id){
+                    cols.push(c.id)
+                }
+            })
+            e.columns = cols;
+        })
+        let i = kanban[0].columns.indexOf(columnid);
+        let columnsToRemove = [];
+        kanban.map(e => {
+            columnsToRemove.push(e.columns[i]);
+        })
+
+        columnsToRemove.map(e => {
+            this.removeColumnFromAllSwimlanes(e);
+        })
+    }
+
+    removeColumnFromAllSwimlanes(columnid){
         const copyOfColumns = this.state.columns
 
         var columnindex

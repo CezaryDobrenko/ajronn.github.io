@@ -36,7 +36,7 @@ class Column extends React.Component{
                     <input placeholder="WIP limit" style={{width: "130px", marginLeft: "auto", marginRight: "auto", display: "block"}} maxLength="3" type="text" onChange={(event) => this.props.changeColumnWIPLimit(this.props.element.id,event.target.value)}/>
                     
                </Popup>
-               <div className="xbutton" onClick={() => this.props.removeColumn(this.props.element.id)}></div>
+               <div className="xbutton" onClick={() => this.props.removeColumn(this.props.element.id, this.props.element.swimlaneid)}></div>
                <div>
                     
                     <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px", fontFamily: "'Courgette', cursive", color: "white", fontSize: "20px", textAlign: "center"}} defaultValue={this.props.title} onChange={this.changeTitle} />
