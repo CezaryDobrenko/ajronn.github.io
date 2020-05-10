@@ -57,8 +57,6 @@
 
 .infofield:hover{
     animation: pulse 0.8s infinite;
-    
-
 }
 
 @keyframes pulse {
