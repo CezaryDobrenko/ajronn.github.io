@@ -1,0 +1,69 @@
+.checkbox{
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 35px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tasktext{
+    font-family: 'Comic Neue', cursive;
+    font-size: 22px;
+    display: inline-block;
+    height: 22px;
+}
+
+.modal{
+  position: fixed; /* Stay in place */
+  z-index: 20; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  min-height: 100%; /* Full height */
+  background-color: black;
+  background-color: rgba(0,0,0,0.4); 
+  overflow: hidden;
+
+}
+
+.checklist{
+    z-index: 30;
+    background-color: #f4ef72;
+    margin: 15% auto; /* 15% from the top and centered */
+    width: 500px; /* Could be more or less, depending on screen size */
+    border: 15px solid rgb(70,83,98);
+    min-height: 500px;
+}
+
+.checklistheader{
+    width: 297px;
+    height: 187px;
+    background-image: url('../img/checklistheader.png');
+    position: absolute;
+    top: -120px;
+    left: 85px;
+    
+    
+}
+
+.closechecklist{
+    width: 20px;
+    height: 20px;
+    background-image: url("../img/x.png");
+    background-repeat:no-repeat;
+    background-size: 20px 20px;
+    position: absolute;
+    top: 2px;
+    left: calc(100% - 22px);
+    cursor: pointer;
+}
+
+.underline{
+    width: 75%;
+    border-bottom: 1px solid black;
+    margin: 5px auto;
+
+}

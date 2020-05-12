@@ -13,8 +13,6 @@ class Column extends React.Component{
         minHeight: "100px",
     }
 
-    
-
     changeTitle = (e) => {
         this.props.changeColumnTitle(this.props.element.id,e.target.value)
     }
@@ -24,7 +22,11 @@ class Column extends React.Component{
 
             const elements = this.props.element.notes
             .map((e,index) => {
-            return <Note changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit} changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={this.props.reloadNotesState}/>
+            return <Note changeTaskStatus={this.props.changeTaskStatus}
+            changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit} 
+            changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} 
+            changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} 
+            reloadNotesState={this.props.reloadNotesState}/>
         })
         
 
@@ -40,7 +42,7 @@ class Column extends React.Component{
                <div>
                     
                     <input style={{width: "70%", display: "block", marginLeft: "auto", marginRight: "auto", paddingTop: "10px", fontFamily: "'Courgette', cursive", color: "white", fontSize: "20px", textAlign: "center"}} defaultValue={this.props.title} onChange={this.changeTitle} />
-                    <DropBox height= "100px" notes = {elements} columnid={this.props.element.id}></DropBox>
+                    <DropBox height= "70px" notes = {elements} columnid={this.props.element.id}></DropBox>
                </div>
 
                <div className="addnotebutton" onClick={() => this.props.addNote(this.props.element.id)}>

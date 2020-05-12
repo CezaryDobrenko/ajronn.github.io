@@ -12,12 +12,14 @@ import Trash from '../img/trash.png'
 import Disable from '../img/disable.png'
 import Enable from '../img/enable.png'
 import ColorPicker from '../img/colorpicker.png'
+import ChecklistIcon from '../img/checklist.png'
+import Modal from 'react-modal';
+import Checklist from "./Checklist"
 
 const Note = (props) => {
     //let [avatar,setAvatar] = useState(props.item);  moze sie przyda na pozniej
+    const [openModal, setOpenModal] = React.useState(false);
 
-    
-    
     const handleClick=(name)=>{
         props.item.avatar = name;
         props.reloadNotesState()
@@ -27,6 +29,10 @@ const Note = (props) => {
     const handleText=(e)=>{
         props.item.contents = e.target.value;
         props.reloadNotesState()
+    }
+
+    const closeModal = () => {
+        setOpenModal(false)
     }
 
 
@@ -80,7 +86,6 @@ const Note = (props) => {
                         
                         <Progressbar progress={props.item.progress} changeProgress={changeProgress}/>
                         
-                        
                     </div>
                     
                     
@@ -105,15 +110,18 @@ const Note = (props) => {
                 <div className="colorcircle g" onClick={() => props.changeColor(props.item.id,"green")}/>
             </MenuItem>
             
+            <MenuItem onClick={setOpenModal}>
+                <img src={ChecklistIcon} height="20" style={{verticalAlign: "middle"}}></img> Checklist
+            </MenuItem>
                     
-
+        </ContextMenu>
+        <Checklist closeModal={closeModal} tasks={props.item.tasks} changeTaskStatus={props.changeTaskStatus} isOpen={openModal}/>
             
             
 
-            
-            
 
-        </ContextMenu></div>
+        
+        </div>
         
     )
 }

@@ -23,25 +23,45 @@ class Kanban extends React.Component{
         noteid: 4,
         columnid: 2,
         swimlaneid: 1,
+        taskid: 2,
         swimlanes: [
             {id: 'swimlane0', title: 'John'}
         ],
         
         columns: [
             {id: "parkinglot", swimlaneid:"parkinglot",title: "",wiplimit: 0,info: "", notes: [
-                {id: "note3", columnid: "parkinglot",avatar:Ricky,contents: "Send Cory to work", progress: 0, color: "yellow", block: false, enable: true}
+                {id: "note3", columnid: "parkinglot",avatar:Ricky,contents: "Send Cory to work", progress: 0, color: "yellow", block: false, enable: true, tasks: [
+                    {id: "task0",noteid: "note3", checked: false, contents: "Find Cory"},
+                    {id: "task1",noteid: "note3", checked: false, contents: "Tell Cory to go to work"}
+                ]}
             ]},
             {id: "column0", swimlaneid:"swimlane0",title: "Backlog",wiplimit: 0,info: "None",
             notes: [
-                {id: "note1", columnid: "column0",avatar:Ricky,contents: "Recover my car!", progress: 0, color: "yellow", block: false, enable: true},
-                {id: "note2", columnid: "column0",avatar:Julian,contents: "Make drink", progress: 0, color: "yellow", block: false, enable: true}
+                {id: "note1", columnid: "column0",avatar:Ricky,contents: "Recover my car!", progress: 0, color: "yellow", block: false, enable: true, tasks: []},
+                {id: "note2", columnid: "column0",avatar:Julian,contents: "Make drink", progress: 0, color: "yellow", block: false, enable: true, tasks: []}
             ]},
             {id: "column1", swimlaneid:"swimlane0",title: "In progress",wiplimit: 3,info: "Start task",
             notes: [
-                {id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true},
+                {id: "note0", columnid: "column0",avatar:Bubbles,contents: "Feed kitties", progress: 10, color: "yellow", block: false, enable: true, tasks: []},
             ]}
         ]
 
+    }
+
+    changeTaskStatus(taskid){
+        console.log(taskid)
+        let copyOfColumns = this.state.columns;
+        copyOfColumns.map(c => {
+            c.notes.map(n => {
+                n.tasks.map(t => {
+                    if(t.id == taskid){
+                        t.checked = !t.checked
+                    }
+                })
+            })
+        })
+
+        this.setState({columns: copyOfColumns})
     }
 
     changeNoteStatus(noteid){
@@ -93,7 +113,6 @@ class Kanban extends React.Component{
                 const copyOfColumns = this.state.columns
                 copyOfColumns.map(e => {
                     e.notes.map(e => {
-                        console.log(e.avatar)
                         if(e.avatar === user && counter > limit && e.columnid != "parkinglot"){
                             e.block = true;
                         }
@@ -332,7 +351,8 @@ class Kanban extends React.Component{
             progress: 0,
             color: "yellow",
             block: false,
-            enable: true
+            enable: true,
+            tasks: []
         }
 
         const copyOfColumns = this.state.columns
@@ -421,7 +441,7 @@ class Kanban extends React.Component{
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
                     changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
                     changeColumnInfo={this.changeColumnInfo.bind(this) } changeColor={this.changeColor.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)}
-                    changeNoteStatus={this.changeNoteStatus.bind(this)} />
+                    changeNoteStatus={this.changeNoteStatus.bind(this)} changeTaskStatus={this.changeTaskStatus.bind(this)}/>
                 </div>
             )
         })
@@ -435,7 +455,7 @@ class Kanban extends React.Component{
     <ParkingLot slideMenuActive={this.state.slideMenuActive} notes = {this.state.columns[0].notes} changeNoteStatus={this.changeNoteStatus.bind(this)} 
     checkUserLimit={this.checkUserLimit.bind(this)} changeColor={this.changeColor.bind(this)} 
     removeNote={this.removeNote.bind(this)} changeProgress={this.changeProgress.bind(this)}
-    reloadNotesState={this.reloadNotesState.bind(this)}/>
+    reloadNotesState={this.reloadNotesState.bind(this)} changeTaskStatus={this.changeTaskStatus.bind(this)}/>
     
     
     <div className={this.state.slideMenuActive ? "content pushed" : "content"}>
