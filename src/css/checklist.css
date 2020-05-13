@@ -9,6 +9,77 @@
     cursor: pointer;
 }
 
+.checkbox:hover{
+    animation: jump 0.4s infinite;
+}
+
+@keyframes jump{
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+    
+}
+
+.removetask{
+    position: relative;
+    left: 10px;
+    top: -7px;
+    width: 15px;
+    height: 15px;
+    background-image: url("../img/xtask.png");
+    background-size: 15px 15px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.checklist input:focus{
+    animation: jump 0.8s infinite;
+}
+
+.removetask:hover{
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+
+    }
+    
+    20% {
+        transform: scale(1.05);
+    }
+
+    40%{
+        transform: scale(1.1);
+    }
+
+    60%{
+        transform: scale(1.2) rotate(90deg);
+
+    }
+
+    80%{
+        transform: scale(1.1);
+    }
+
+	100% {
+		transform: scale(1.05);
+
+	}
+
+}
+
 .tasktext{
     font-family: 'Comic Neue', cursive;
     font-size: 22px;
@@ -67,3 +138,18 @@
     margin: 5px auto;
 
 }
+
+.checklist ::placeholder { /* Firefox, Chrome, Opera */ 
+    color: black; 
+    font-weight: 500;
+} 
+  
+.checklist  :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+    color: black; 
+    font-weight: 500;
+} 
+  
+.checklist  ::-ms-input-placeholder { /* Microsoft Edge */ 
+    color: black; 
+    font-weight: 500;
+} 

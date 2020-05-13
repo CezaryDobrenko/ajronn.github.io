@@ -14,16 +14,19 @@ class Swimlane extends React.Component{
         .map((e,index) => {
             return(
                 <div key = {e.id}>
-                    <Column changeTaskStatus={this.props.changeTaskStatus}
+                    <Column addTask={this.props.addTask} changeTaskStatus={this.props.changeTaskStatus}
                     changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit}
                     changeColor={this.props.changeColor} changeColumnInfo={this.props.changeColumnInfo}
                     changeColumnWIPLimit={this.props.changeColumnWIPLimit} removeNote={this.props.removeNote}
                     removeColumn={this.props.removeColumn} changeProgress={this.props.changeProgress} 
                     changeColumnTitle={this.props.changeColumnTitle} element={e} index={index} 
-                    title={e.title} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}/>
+                    title={e.title} addNote={this.props.addNote} reloadNotesState={this.props.reloadNotesState}
+                    removeTask={this.props.removeTask}/>
                 </div>
             )
         })
+        let widthOfWindow = (window.innerWidth/2)-300;
+        widthOfWindow += "px"
         let w = 0;
         this.props.columns.map(e => {
             if(e.swimlaneid == this.props.element.id){
@@ -38,7 +41,7 @@ class Swimlane extends React.Component{
                 <div>
                 
                     <div className="steericon" onClick={() => this.props.removeSwimlane(this.props.element)}><img src={SwimlaneIcon} height="30"/></div><p className="text">Remove swimlane</p>
-                    <input type="text" style={{all:"initial",width: "200px",marginLeft:"30%",backgroundColor:"transparent",textAlign:"center",border:"3px solid rgb(70,83,98)",borderRadius:"10px",height:"30px",fontFamily: "'Comic Neue', cursive",marginBottom:"20px"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
+                    <input type="text" style={{all:"initial",width: "200px",marginLeft: widthOfWindow,backgroundColor:"transparent",textAlign:"center",border:"3px solid rgb(70,83,98)",borderRadius:"10px",height:"30px",fontFamily: "'Comic Neue', cursive",marginBottom:"20px"}} defaultValue={this.props.element.title} onChange={(event) => this.props.changeSwimlaneTitle(this.props.element, event.target.value)} /></div>
                         <div className="columnfield" style={{width: w}}>
 
                             {elements}

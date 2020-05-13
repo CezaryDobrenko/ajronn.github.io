@@ -13,7 +13,6 @@ import Disable from '../img/disable.png'
 import Enable from '../img/enable.png'
 import ColorPicker from '../img/colorpicker.png'
 import ChecklistIcon from '../img/checklist.png'
-import Modal from 'react-modal';
 import Checklist from "./Checklist"
 
 const Note = (props) => {
@@ -115,7 +114,9 @@ const Note = (props) => {
             </MenuItem>
                     
         </ContextMenu>
-        <Checklist closeModal={closeModal} tasks={props.item.tasks} changeTaskStatus={props.changeTaskStatus} isOpen={openModal}/>
+        <Checklist closeModal={closeModal} tasks={props.item.tasks} 
+        changeTaskStatus={props.changeTaskStatus} id={props.item.id} isOpen={openModal}
+        addTask={props.addTask} removeTask={props.removeTask}/>
             
             
 

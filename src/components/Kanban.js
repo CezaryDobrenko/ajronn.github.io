@@ -48,6 +48,47 @@ class Kanban extends React.Component{
 
     }
 
+    removeTask(noteid, task){
+        //let copyOfColumns = [...this.state.columns]
+        const copyOfColumns = this.state.columns
+        copyOfColumns.map(c => {
+            c.notes.map(n => {
+                if(n.id == noteid){
+
+                    n.tasks = n.tasks.filter(function(t){
+                        return t != task
+                    })
+                    console.log(n.tasks)
+                    
+                }
+            })
+        })
+        
+        this.setState({columns: copyOfColumns})
+    }
+
+    addTask(noteid, contents){
+        let task = {
+            id: "task"+this.state.taskid,
+            noteid: noteid,
+            checked: false,
+            contents: contents
+        }
+
+        let copyOfColumns = this.state.columns
+        copyOfColumns.map(c => {
+            c.notes.map(n => {
+                if(n.id == noteid){
+                    n.tasks.push(task)
+                }
+            })
+        })
+        this.setState({columns: copyOfColumns})
+        this.setState({taskid: this.state.taskid+1})
+
+
+    }
+
     changeTaskStatus(taskid){
         console.log(taskid)
         let copyOfColumns = this.state.columns;
@@ -441,7 +482,8 @@ class Kanban extends React.Component{
                     changeProgress={this.changeProgress.bind(this)} removeColumn={this.removeColumn.bind(this)} removeNote={this.removeNote.bind(this)}
                     changeColumnWIPLimit={this.changeColumnWIPLimit.bind(this)} changeSwimlaneTitle={this.changeSwimlaneTitle.bind(this)}
                     changeColumnInfo={this.changeColumnInfo.bind(this) } changeColor={this.changeColor.bind(this)} checkUserLimit={this.checkUserLimit.bind(this)}
-                    changeNoteStatus={this.changeNoteStatus.bind(this)} changeTaskStatus={this.changeTaskStatus.bind(this)}/>
+                    changeNoteStatus={this.changeNoteStatus.bind(this)} changeTaskStatus={this.changeTaskStatus.bind(this)}
+                    addTask={this.addTask.bind(this)} removeTask={this.removeTask.bind(this)} />
                 </div>
             )
         })
@@ -452,7 +494,8 @@ class Kanban extends React.Component{
 <div>
 <DragDropContext onDragEnd={result => this.onDragEnd(result)} >
 
-    <ParkingLot slideMenuActive={this.state.slideMenuActive} notes = {this.state.columns[0].notes} changeNoteStatus={this.changeNoteStatus.bind(this)} 
+    <ParkingLot removeTask={this.removeTask.bind(this)} addTask={this.addTask.bind(this)} slideMenuActive={this.state.slideMenuActive} 
+    notes = {this.state.columns[0].notes} changeNoteStatus={this.changeNoteStatus.bind(this)} 
     checkUserLimit={this.checkUserLimit.bind(this)} changeColor={this.changeColor.bind(this)} 
     removeNote={this.removeNote.bind(this)} changeProgress={this.changeProgress.bind(this)}
     reloadNotesState={this.reloadNotesState.bind(this)} changeTaskStatus={this.changeTaskStatus.bind(this)}/>

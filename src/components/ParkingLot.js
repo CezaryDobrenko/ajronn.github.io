@@ -10,7 +10,7 @@ const ParkingLot = (props) =>{
 
     const ournotes = props.notes.map((e,index) => {
         return(
-            <Note changeTaskStatus={props.changeTaskStatus} changeNoteStatus={props.changeNoteStatus} checkUserLimit={props.checkUserLimit}
+            <Note removeTask={props.removeTask} addTask={props.addTask} changeTaskStatus={props.changeTaskStatus} changeNoteStatus={props.changeNoteStatus} checkUserLimit={props.checkUserLimit}
             changeColor={props.changeColor} color={e.color} removeNote={props.removeNote}
             changeProgress={props.changeProgress} index={index} key={e.id} item={e} reloadNotesState={props.reloadNotesState}/>
         )

@@ -17,13 +17,12 @@
     position: absolute;
     top: -5px;
     left: calc(100% - 20px);
-
+    cursor: pointer;
 }
 
 .xbutton:hover{
     transform: rotate(180deg);
     transition-duration: 1s;
-    cursor: pointer;
 }
 
 .wiplimitfield{

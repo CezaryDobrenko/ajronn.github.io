@@ -26,7 +26,7 @@ class Column extends React.Component{
             changeNoteStatus={this.props.changeNoteStatus} checkUserLimit={this.props.checkUserLimit} 
             changeColor={this.props.changeColor} color={e.color} removeNote={this.props.removeNote} 
             changeProgress={this.props.changeProgress} index={index} key={e.id} item={e} 
-            reloadNotesState={this.props.reloadNotesState}/>
+            reloadNotesState={this.props.reloadNotesState} addTask={this.props.addTask} removeTask={this.props.removeTask}/>
         })
         
 
